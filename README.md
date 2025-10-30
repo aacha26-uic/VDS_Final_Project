@@ -3,6 +3,7 @@
 **Credits:** This repository is built upon starter code provided by Andrew Wentzel, a member of the Electronic Visualization Laboratory at UIC.
 
 ## Project Overview
+
 **Client:** Dr. Natalie Parde  
 **Project Title:** Visualizing Speech and Biomarker Correlations in Alzheimer's Disease
 
@@ -53,3 +54,16 @@ The project will work with the SLaCAD (Spoken Language Corpus for Alzheimer's Di
 ## Project Status
 
 This repository currently contains template code with placeholder visualizations. The actual implementation for the Alzheimer's Disease speech and biomarker visualization will be developed as part of this project.
+
+## Dev Tools
+
+### Frontend
+
+- **React.js** - UI framework for building interactive components
+- **D3.js** - 2D data visualization library for charts, graphs, and custom visualizations
+
+### Preprocessing
+
+- **Python** - Data preprocessing and feature extraction
+- **NLP Libraries** - Natural language preprocessing for linguistic feature analysis (BERT models)
+- **Machine Learning Libraries** - Statistical analysis and biomarker correlation modeling

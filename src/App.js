@@ -4,6 +4,7 @@ import Whitehat from "./Whitehat";
 import WhiteHatStats from "./WhiteHatStats";
 import Blackhat from "./Blackhat";
 import BlackHatStats from "./BlackHatStats";
+import Project from "./Project";
 import * as d3 from "d3";
 
 function App() {
@@ -189,26 +190,7 @@ function App() {
     } else if (viewToggle === "blackhat") {
       return makeBlackHat();
     } else if (viewToggle === "project") {
-      return (
-        <div
-          style={{
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div style={{ width: "50%", textAlign: "center" }}>
-            <h2>{"Project"}</h2>
-            <p>
-              {
-                "Placeholder view for the Project tab. No instructions or logic here."
-              }
-            </p>
-          </div>
-        </div>
-      );
+      return <Project />;
     } else {
       return makeBlackHat();
     }
@@ -216,7 +198,21 @@ function App() {
 
   return (
     <div className="App">
-      <div className={"header"} style={{ height: "2em", width: "100vw" }}>
+      <div
+        className={"header"}
+        style={{
+          height: "2em",
+          width: "100vw",
+          background:
+            "radial-gradient(circle at 20% 20%, #0f172a 0%, #1e293b 60%, #0a0a0a 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.1)",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5em",
+          padding: "0 0.5em",
+          boxSizing: "border-box",
+        }}
+      >
         <button
           onClick={() => setViewToggle("whitehat")}
           className={
