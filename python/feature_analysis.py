@@ -304,8 +304,8 @@ def main():
     print("\nAvailable columns:")
     print(merged_data.columns.tolist())
     
-    # TODO: Specify your target column here
-    target_col = 'AD_status'  # CHANGE THIS to your actual column name
+    # Target column: DX1 contains diagnosis (Normal, Prob AD, MCI variants)
+    target_col = 'DX1'
     
     if target_col not in merged_data.columns:
         print(f"\n⚠ WARNING: '{target_col}' not found in data!")
@@ -322,16 +322,46 @@ def main():
     X = merged_data.drop(columns=[target_col])
     y = merged_data[target_col]
     
-    # Encode target if categorical
-    if y.dtype == 'object':
-        le = LabelEncoder()
-        y = le.fit_transform(y)
-        print(f"\n✓ Target encoded: {le.classes_}")
+    # Display original class distribution
+    print(f"\n✓ Original class distribution:")
+    print(y.value_counts())
+    
+    # Convert to binary classification: Normal vs Impaired (AD/MCI)
+    # This handles the class imbalance issue (81 Normal vs only 3 Prob AD)
+    print("\n⚠ Converting to binary classification: Normal vs Impaired (AD/MCI)")
+    y_binary = y.apply(lambda x: 'Normal' if x == 'Normal' else 'Impaired')
+    print(f"\n✓ Binary class distribution:")
+    print(y_binary.value_counts())
+    
+    # Encode target
+    le = LabelEncoder()
+    y = le.fit_transform(y_binary)
+    print(f"✓ Target encoded: {le.classes_} → {[0, 1]}")
     
     # Select only numeric features
     X = X.select_dtypes(include=[np.number])
-    print(f"\n✓ Feature matrix: {X.shape}")
-    print(f"✓ Target distribution: {pd.Series(y).value_counts().to_dict()}")
+    
+    # CRITICAL: Remove any remaining columns with NaN/inf values
+    # Check for NaN values
+    cols_with_nan = X.columns[X.isnull().any()].tolist()
+    if cols_with_nan:
+        print(f"\n⚠ Removing {len(cols_with_nan)} columns with NaN values")
+        X = X.drop(columns=cols_with_nan)
+    
+    # Check for infinite values
+    cols_with_inf = X.columns[np.isinf(X).any()].tolist()
+    if cols_with_inf:
+        print(f"⚠ Removing {len(cols_with_inf)} columns with infinite values")
+        X = X.drop(columns=cols_with_inf)
+    
+    # Final safety: fill any remaining NaN with 0
+    X = X.fillna(0)
+    
+    # Replace any remaining inf with large numbers
+    X = X.replace([np.inf, -np.inf], 0)
+    
+    print(f"\n✓ Feature matrix (cleaned): {X.shape}")
+    print(f"✓ Final target distribution: {pd.Series(y).value_counts().to_dict()}")
     
     # Step 4: Identify top features
     top_features, feature_scores = identify_top_features(X, y, n_features=10)
