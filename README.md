@@ -65,6 +65,15 @@ This repository currently contains template code with placeholder visualizations
 - ✅ Achieved 94.7% accuracy in classifying Normal vs Impaired (AD/MCI) participants
 - ✅ Created automated analysis pipeline (`feature_analysis.py`) with comprehensive output files
 
+**November 3, 2025** - Word Cloud NLP Analysis Implementation
+
+- ✅ Developed comprehensive word cloud analysis comparing Normal vs Impaired (AD/MCI) speech patterns
+- ✅ Implemented advanced text preprocessing with extensive stopword filtering for meaningful insights
+- ✅ Applied TF-IDF analysis to identify distinctive vocabulary usage between groups
+- ✅ Discovered 5 key themes using LDA topic modeling (weddings/family, education/career, medical experiences, daily life, social interactions)
+- ✅ Found 12.8× vocabulary richness difference: Normal participants use significantly more diverse vocabulary (4,722 unique words) compared to Impaired group (810 unique words)
+- ✅ Generated 4 visualizations and 5 data files for interactive React integration
+
 ## Installation & Setup
 
 ### Prerequisites
@@ -89,6 +98,8 @@ This repository currently contains template code with placeholder visualizations
    - matplotlib>=3.7.0
    - seaborn>=0.12.0
    - scikit-learn>=1.3.0
+   - wordcloud>=1.9.0
+   - nltk>=3.8.0
    - jupyter>=1.0.0
    - ipykernel>=6.25.0
 
@@ -120,6 +131,32 @@ python feature_analysis.py
 8. CRAFTVRS - Craft story verbal recall
 9. XDOMLAN - Language domain
 10. BigWords - Usage of big words in speech
+
+### Running the Word Cloud Analysis
+
+To generate word cloud visualizations comparing speech patterns:
+
+```bash
+cd python
+python wordcloud_analysis.py
+```
+
+**Output files generated:**
+
+- `wordcloud_analysis.png` - 4-panel comparison (All/Normal/Impaired/TF-IDF)
+- `wordcloud_normal.png` - High-resolution Normal group word cloud
+- `wordcloud_impaired.png` - High-resolution Impaired group word cloud
+- `word_frequency_comparison.png` - Bar chart comparing top words
+- `tfidf_scores_normal.csv` - Distinctive terms for Normal group
+- `tfidf_scores_impaired.csv` - Distinctive terms for Impaired group
+- `word_comparison.csv` - Unique and shared vocabulary analysis
+- `discovered_topics.csv` - LDA topic modeling results (5 themes)
+
+**Key Findings:**
+
+- Normal participants show 12.8× richer vocabulary diversity
+- Top themes: Wedding/family events, education/career, medical experiences, daily life activities
+- Comprehensive stopword filtering ensures meaningful semantic analysis
 
 ### Frontend Setup
 
