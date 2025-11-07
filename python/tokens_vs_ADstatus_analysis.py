@@ -70,9 +70,6 @@ features_expanded = [
     'NUM(participant)',
     'AUX(participant)',
     'CCONJ(participant)',
-    'age',
-    'gender',
-    'educ',
     'AB40_LUMI',
     'AB42_LUMI',
     'P_TAU_LUMI',
@@ -83,7 +80,6 @@ features_expanded = [
 ]
 
 X_exp = df[features_expanded].copy()
-X_exp = pd.get_dummies(X_exp, columns=['gender'], drop_first=True)
 X_exp_scaled = scaler.fit_transform(X_exp)
 
 # split for training and testing
@@ -118,3 +114,42 @@ print("\nTokens coefficient (simple model):")
 print(coef_df_s[['tokens(participant)']])
 print("Tokens coefficient (expanded model):")
 print(coef_df_e[['tokens(participant)']])
+
+# predicting probability
+token_min = int(df['tokens(participant)'].min())
+token_max = int(df['tokens(participant)'].max())
+token_range = np.linspace(token_min, token_max, num=100)
+
+typical_vals = {
+    'uniquetokens(participant)': df['uniquetokens(participant)'].median(),
+    'TTR(participant)': df['TTR(participant)'].median(),
+    'MATTR(participant)': df['MATTR(participant)'].median(),
+    'VERB(participant)': df['VERB(participant)'].median(),
+    'PROPN(participant)': df['PROPN(participant)'].median(),
+    'NUM(participant)': df['NUM(participant)'].median(),
+    'AUX(participant)': df['AUX(participant)'].median(),
+    'CCONJ(participant)': df['CCONJ(participant)'].median(),
+    'AB40_LUMI': df['AB40_LUMI'].median(),
+    'AB42_LUMI': df['AB42_LUMI'].median(),
+    'P_TAU_LUMI': df['P_TAU_LUMI'].median(),
+    'T_TAU_LUMI': df['T_TAU_LUMI'].median(),
+    'AB42_AB40Ratio': df['AB42_AB40Ratio'].median(),
+    'tTau_AB42Ratio': df['tTau_AB42Ratio'].median(),
+    'pTau_AB42Ratio': df['pTau_AB42Ratio'].median()
+}
+
+pred_rows = []
+for t in token_range:
+    row = {feat: typical_vals[feat] for feat in typical_vals}
+    row['tokens(participant)'] = t
+    pred_rows.append(row)
+pred_df = pd.DataFrame(pred_rows)
+
+pred_scaled = scaler.transform(pred_df[features_expanded])
+
+probs = model_expanded.predict_proba(pred_scaled) 
+probs_df = pd.DataFrame(probs, columns=model_expanded.classes_)
+probs_df['tokens(participant)'] = token_range
+
+# testing
+print(probs_df.head())
