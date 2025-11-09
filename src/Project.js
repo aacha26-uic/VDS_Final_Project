@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
+import WordCloudViz from "./WordCloudViz";
+import CorrelationMatrix from "./CorrelationMatrix";
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
@@ -203,20 +205,32 @@ function Project() {
               overflow: "hidden",
             }}
           >
-            <h4
-              style={{ margin: "0.5em 0", color: "#bfdbfe", fontWeight: 600 }}
-            >
-              ☁️ Word Clouds
-            </h4>
-            <p
-              style={{
-                margin: "0.25em 0",
-                fontSize: "0.9em",
-                color: "#dbeafe",
-              }}
-            >
-              Topic Distribution by AD Group
-            </p>
+            <div style={{ width: "100%", height: "100%" }}>
+              <h4
+                style={{ margin: "0.5em 0", color: "#bfdbfe", fontWeight: 600 }}
+              >
+                ☁️ Word Clouds
+              </h4>
+              <p
+                style={{
+                  margin: "0.25em 0",
+                  fontSize: "0.9em",
+                  color: "#dbeafe",
+                }}
+              >
+                Topic Distribution by AD Group
+              </p>
+              <div
+                style={{
+                  flex: 1,
+                  width: "100%",
+                  height: "calc(100% - 56px)",
+                  paddingTop: "0.5em",
+                }}
+              >
+                <WordCloudViz />
+              </div>
+            </div>
           </div>
 
           {/* Correlation Matrix Card */}
@@ -236,20 +250,32 @@ function Project() {
               overflow: "hidden",
             }}
           >
-            <h4
-              style={{ margin: "0.5em 0", color: "#c084fc", fontWeight: 600 }}
-            >
-              📊 Correlation Matrix
-            </h4>
-            <p
-              style={{
-                margin: "0.25em 0",
-                fontSize: "0.9em",
-                color: "#e9d5ff",
-              }}
-            >
-              Feature-Biomarker Trends
-            </p>
+            <div style={{ width: "100%", height: "100%" }}>
+              <h4
+                style={{ margin: "0.5em 0", color: "#c084fc", fontWeight: 600 }}
+              >
+                📊 Correlation Matrix
+              </h4>
+              <p
+                style={{
+                  margin: "0.25em 0",
+                  fontSize: "0.9em",
+                  color: "#e9d5ff",
+                }}
+              >
+                Feature-Biomarker Trends
+              </p>
+              <div
+                style={{
+                  flex: 1,
+                  width: "100%",
+                  height: "calc(100% - 56px)",
+                  paddingTop: "0.5em",
+                }}
+              >
+                <CorrelationMatrix />
+              </div>
+            </div>
           </div>
         </div>
       </div>
