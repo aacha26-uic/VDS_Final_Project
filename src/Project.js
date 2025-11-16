@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./project.css"; 
+import Blob from "./components/blob";
+import BlobTutorial from "./components/blobTutorial";
+import { Canvas } from "@react-three/fiber";
+
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
@@ -99,7 +103,11 @@ function Project() {
             with Sliders and MoCA Score Visual Aspects[this is where the sliders will go]
           </p>
         </div>
-        <div className="blob"> TODO: This is where the blob will go </div>
+        <div className="blob"> <p>TODO: This is where the blob will go</p> 
+          <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
+            <BlobTutorial score = {25}/>
+          </Canvas>
+        </div>
       </div>
 
       {/* Right section - Brain/Stats top and 3 cards bottom */}
@@ -116,20 +124,7 @@ function Project() {
       >
         {/* Top - Brain and Stats */}
         {showTopSection && (
-          <div
-            style={{
-              height: "45%",
-              width: "100%",
-              borderRadius: "25px",
-              background:
-                "linear-gradient(120deg, rgba(30,64,175,0.4), rgba(147,51,234,0.3))",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-           className="brains_and_dials" >
+          <div className="brains_and_dials" >
             <div className="brains">
               <div className="brain1">TODO: This is where brain #1 will go</div>
               <div className="brain2">TODO: This is where brain #2 will go</div>

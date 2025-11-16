@@ -12,15 +12,43 @@
 }
 
 .blob {
-        background-color: aqua; /*Just tempororary*/
+        background-color: rgb(169, 173, 173); /*Just tempororary*/
+
+        /* temp code */
+        border: 2px solid red;
+        width: 100%;
+        height: 250px;  
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 }
 
-.brains_and_dial {
-        background-color: rgb(255, 255, 255); /*Just tempororary*/
+
+.brains_and_dials {
+        /* moved aditya's code from js file to here */
+        height: 45%;
+        width: 100%;
+        border-radius: 25px;
+        background: linear-gradient(120deg, rgba(30,64,175,0.4), rgba(147,51,234,0.3));
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        align-items: center;
+        justify-content: center;
+
+        /* added code to make divs stack vertically */
+        display: flex;
+        flex-direction: column;  
+        
 }
 
 .brains {
         background-color: violet; /*Just tempororary*/
+
+        /* stack divs horizontally*/
+        display: flex;
+        flex-direction: row;  
 }
 
 .brain1 {
