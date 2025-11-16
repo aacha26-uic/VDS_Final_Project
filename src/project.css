@@ -1,0 +1,41 @@
+
+.correlationHeatmaps {
+        background-color: rgb(255, 255, 255); 
+}
+
+.heatmap {
+        background-color: violet; /*Just tempororary*/
+}
+
+.heatmap_sliders {
+        background-color: rgb(212, 184, 40); /*Just tempororary*/
+}
+
+.blob {
+        background-color: aqua; /*Just tempororary*/
+}
+
+.brains_and_dial {
+        background-color: rgb(255, 255, 255); /*Just tempororary*/
+}
+
+.brains {
+        background-color: violet; /*Just tempororary*/
+}
+
+.brain1 {
+        background-color: rgb(255, 0, 0); /*Just tempororary*/
+}
+
+.brain2 {
+        background-color: rgb(43, 212, 40); /*Just tempororary*/
+}
+
+.brain3 {
+        background-color: rgb(70, 165, 206); /*Just tempororary*/
+}
+
+.dial {
+        background-color: rgb(158, 156, 15); /*Just tempororary*/
+}
+

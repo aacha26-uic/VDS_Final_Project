@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "./project.css"; 
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
@@ -86,9 +87,9 @@ function Project() {
           position: "relative",
           zIndex: 2,
         }}
-      >
-        <div> This is where the heatmap will go </div>
-        <div style={{ textAlign: "center" }}>
+        className="correlationHeatmaps">
+        <div className="heatmap"> This is where the heatmap will go </div>
+        <div style={{ textAlign: "center" }} className = "heatmap_sliders">
           <h3
             style={{ color: "#93c5fd", fontWeight: 600, marginBottom: "0.5em" }}
           >
@@ -98,7 +99,7 @@ function Project() {
             with Sliders and MoCA Score Visual Aspects[this is where the sliders will go]
           </p>
         </div>
-        <div> TODO: This is where the blob will go </div>
+        <div className="blob"> TODO: This is where the blob will go </div>
       </div>
 
       {/* Right section - Brain/Stats top and 3 cards bottom */}
@@ -128,13 +129,13 @@ function Project() {
               alignItems: "center",
               justifyContent: "center",
             }}
-          >
-            <div>
-              <div>TODO: This is where brain #1 will go</div>
-              <div>TODO: This is where brain #2 will go</div>
-              <div>TODO: This is where brain #3 will go</div>
+           className="brains_and_dials" >
+            <div className="brains">
+              <div className="brain1">TODO: This is where brain #1 will go</div>
+              <div className="brain2">TODO: This is where brain #2 will go</div>
+              <div className="brain3">TODO: This is where brain #3 will go</div>
             </div>
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" }} className="dial">
               <h3
                 style={{
                   color: "#bfdbfe",
