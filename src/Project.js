@@ -133,6 +133,9 @@ function Project() {
             <div className="brains">
               <div className="brain1">
                 <BrainIcon className="brain1" />
+                <div className= "brain1-prob">
+                  <p >20%</p>
+                </div>
                 <div>
                   <p>AD Status: HC</p>
                   <p>MoCA Range: 20-30</p>
@@ -141,6 +144,9 @@ function Project() {
               </div>
               <div className="brain2">
                 <BrainIcon className="brain2" />
+                <div className= "brain2-prob">
+                  <p >50%</p>
+                </div>
                 <div>
                   <p>AD Status: MCI </p>
                   <p>MoCA Range:10-20</p>
@@ -148,6 +154,9 @@ function Project() {
               </div>
               <div className="brain3">
                 <BrainIcon className="brain3" />
+                <div className= "brain3-prob">
+                  <p>30%</p>
+                </div>
                 <div>
                   <p>AD Status: AD</p>
                   <p>MoCA Range: 0-10</p>

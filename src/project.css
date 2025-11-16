@@ -76,16 +76,27 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;   
-    padding: 0rem 1rem;    
+    padding: 0rem 1rem;   
+    position: relative; 
 }
 
 .brain1 p, .brain2 p, .brain3 p {
         line-height: 0.2rem;
 }
 
+.brain1-prob, .brain2-prob, .brain3-prob {
+        color: rgb(255, 255, 255);
+        /* background-color: aquamarine; */
+        font-size: 3rem;
+        position: absolute;
+        top: 35%;
+        left: 52%;
+        transform: translate(-50%, -50%);
+}
+
 .brain1 {
         /* background-color: rgb(219, 189, 231);  */
-        fill: #63C8FF;
+        fill: #7cbadc;
 }
 
 .brain2 {
