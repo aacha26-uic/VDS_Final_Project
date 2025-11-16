@@ -3,6 +3,7 @@
         background-color: rgb(255, 255, 255); 
 }
 
+
 .heatmap {
         background-color: violet; /*Just tempororary*/
 }
@@ -40,27 +41,52 @@
         /* added code to make divs stack vertically */
         display: flex;
         flex-direction: column;  
+        overflow: hidden; 
         
 }
+
 
 .brains {
         background-color: violet; /*Just tempororary*/
 
         /* stack divs horizontally*/
         display: flex;
-        flex-direction: row;  
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0 2rem;   
+        
+}
+
+
+/* css styles that will be applied to all 3 brains */
+.brain1, .brain2, .brain3 { 
+    width: auto;
+    height: 20rem;
+    display: flex; 
+    flex-direction: column;      
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+
+
+    
 }
 
 .brain1 {
-        background-color: rgb(255, 0, 0); /*Just tempororary*/
+        background-color: rgb(184, 229, 237); /*Just tempororary*/
+        fill: #63C8FF;
 }
 
 .brain2 {
         background-color: rgb(43, 212, 40); /*Just tempororary*/
+        fill:#4585c1;
 }
 
 .brain3 {
         background-color: rgb(70, 165, 206); /*Just tempororary*/
+        fill: #5459AC
 }
 
 .dial {

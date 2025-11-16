@@ -1,9 +1,11 @@
+
 import React, { useState } from "react";
 import "./App.css";
 import "./project.css"; 
 import Blob from "./components/blob";
 import BlobTutorial from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
+import { ReactComponent as BrainIcon } from './resources/brain.svg';
 
 
 function Project() {
@@ -126,24 +128,21 @@ function Project() {
         {showTopSection && (
           <div className="brains_and_dials" >
             <div className="brains">
-              <div className="brain1">TODO: This is where brain #1 will go</div>
-              <div className="brain2">TODO: This is where brain #2 will go</div>
-              <div className="brain3">TODO: This is where brain #3 will go</div>
+              <div className="brain1">
+                TODO: This is where brain #1 will go
+                <BrainIcon className="brain1" />
+              </div>
+              <div className="brain2">
+                TODO: This is where brain #2 will go
+                <BrainIcon className="brain2" />
+              </div>
+              <div className="brain3">
+                TODO: This is where brain #3 will go
+                <BrainIcon className="brain3" />
+              </div>
+              <div className="dial"> This is where the dial will go</div>
             </div>
-            <div style={{ textAlign: "center" }} className="dial">
-              <h3
-                style={{
-                  color: "#bfdbfe",
-                  fontWeight: 600,
-                  marginBottom: "0.3em",
-                }}
-              >
-                🧠 Brain Encoding Dials [TODO: This is where the dial will go]
-              </h3>
-              <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
-                Linguistic Features vs AD Status
-              </p>
-            </div>
+            <div>This is where the legend will go</div>
           </div>
         )}
 

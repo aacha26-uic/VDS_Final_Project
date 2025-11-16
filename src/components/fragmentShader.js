@@ -13,9 +13,9 @@ void main() {
     // vec3 color = vec3(abs(vUv - 0.5) * 2.0  * (1.0 - distort), 1.0);
 
     // New code to make blob solid color
-    vec3 light_blue = vec3(0.388, 0.784, 1); // 63C8FF
-    vec3 blue = vec3(0.392, 0.553, 0.702);            // 648DB3
-    vec3 purple = vec3(0.329, 0.349, 0.675);      // 5459AC
+    vec3 light_blue = vec3(0.388, 0.784, 1); // #63C8FF
+    vec3 blue = vec3(0.271, 0.522, 0.757);            // #4585c1
+    vec3 purple = vec3(0.329, 0.349, 0.675);      // #5459AC
 
     vec3 color;
     if(moca_score <= 0.5){
