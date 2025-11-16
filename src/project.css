@@ -32,7 +32,8 @@
         height: 45%;
         width: 100%;
         border-radius: 25px;
-        background: linear-gradient(120deg, rgba(30,64,175,0.4), rgba(147,51,234,0.3));
+        background: #e3e3e3;
+        /* background: linear-gradient(120deg, rgba(30,64,175,0.4), rgba(147,51,234,0.3)); */
         border: 1px solid rgba(255,255,255,0.1);
         box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         align-items: center;
@@ -42,12 +43,19 @@
         display: flex;
         flex-direction: column;  
         overflow: hidden; 
+
+        /*text*/
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border-color: rgb(57, 107, 207);
+        border-radius: 0.2rem;
+        border-width: 0.3rem;
         
 }
 
 
 .brains {
-        background-color: violet; /*Just tempororary*/
+        /* background-color: violet; Just tempororary */
 
         /* stack divs horizontally*/
         display: flex;
@@ -55,41 +63,44 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 0 2rem;   
-        
 }
+
 
 
 /* css styles that will be applied to all 3 brains */
 .brain1, .brain2, .brain3 { 
-    width: auto;
-    height: 20rem;
+    width: 20rem;
+    height: auto;
     display: flex; 
     flex-direction: column;      
     justify-content: center;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden;   
+    padding: 0rem 1rem;    
+}
 
-
-    
+.brain1 p, .brain2 p, .brain3 p {
+        line-height: 0.2rem;
 }
 
 .brain1 {
-        background-color: rgb(184, 229, 237); /*Just tempororary*/
+        /* background-color: rgb(219, 189, 231);  */
         fill: #63C8FF;
 }
 
 .brain2 {
-        background-color: rgb(43, 212, 40); /*Just tempororary*/
+       /* background-color: rgb(193, 235, 193); */
         fill:#4585c1;
 }
 
 .brain3 {
-        background-color: rgb(70, 165, 206); /*Just tempororary*/
+        /* background-color: rgb(194, 232, 248);  */
         fill: #5459AC
 }
 
 .dial {
-        background-color: rgb(158, 156, 15); /*Just tempororary*/
+       background-color: rgb(158, 156, 15);
+       width: 20rem;
+       height: auto;
 }
 

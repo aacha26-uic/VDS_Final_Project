@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./project.css"; 
-import Blob from "./components/blob";
 import BlobTutorial from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
 import { ReactComponent as BrainIcon } from './resources/brain.svg';
@@ -107,7 +106,7 @@ function Project() {
         </div>
         <div className="blob"> <p>TODO: This is where the blob will go</p> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <BlobTutorial score = {25}/>
+            <BlobTutorial score = {20}/>
           </Canvas>
         </div>
       </div>
@@ -127,22 +126,35 @@ function Project() {
         {/* Top - Brain and Stats */}
         {showTopSection && (
           <div className="brains_and_dials" >
+            <div>
+              <h1>Relationship Between Conversation Length and AD Status</h1>
+            </div>
+
             <div className="brains">
               <div className="brain1">
-                TODO: This is where brain #1 will go
                 <BrainIcon className="brain1" />
+                <div>
+                  <p>AD Status: HC</p>
+                  <p>MoCA Range: 20-30</p>
+                </div>
+                
               </div>
               <div className="brain2">
-                TODO: This is where brain #2 will go
                 <BrainIcon className="brain2" />
+                <div>
+                  <p>AD Status: MCI </p>
+                  <p>MoCA Range:10-20</p>
+                </div>
               </div>
               <div className="brain3">
-                TODO: This is where brain #3 will go
                 <BrainIcon className="brain3" />
+                <div>
+                  <p>AD Status: AD</p>
+                  <p>MoCA Range: 0-10</p>
+                </div>
               </div>
               <div className="dial"> This is where the dial will go</div>
             </div>
-            <div>This is where the legend will go</div>
           </div>
         )}
 
