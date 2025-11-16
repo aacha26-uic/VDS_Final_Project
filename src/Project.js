@@ -87,16 +87,18 @@ function Project() {
           zIndex: 2,
         }}
       >
+        <div> This is where the heatmap will go </div>
         <div style={{ textAlign: "center" }}>
           <h3
             style={{ color: "#93c5fd", fontWeight: 600, marginBottom: "0.5em" }}
           >
-            🔥 Correlation Heatmaps
+            🔥 Correlation Heatmaps 
           </h3>
           <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
-            with Sliders and MoCA Score Visual Aspects
+            with Sliders and MoCA Score Visual Aspects[this is where the sliders will go]
           </p>
         </div>
+        <div> TODO: This is where the blob will go </div>
       </div>
 
       {/* Right section - Brain/Stats top and 3 cards bottom */}
@@ -127,6 +129,11 @@ function Project() {
               justifyContent: "center",
             }}
           >
+            <div>
+              <div>TODO: This is where brain #1 will go</div>
+              <div>TODO: This is where brain #2 will go</div>
+              <div>TODO: This is where brain #3 will go</div>
+            </div>
             <div style={{ textAlign: "center" }}>
               <h3
                 style={{
@@ -135,7 +142,7 @@ function Project() {
                   marginBottom: "0.3em",
                 }}
               >
-                🧠 Brain Encoding Dials
+                🧠 Brain Encoding Dials [TODO: This is where the dial will go]
               </h3>
               <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
                 Linguistic Features vs AD Status
