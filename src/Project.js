@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import PatientProfile from "./components/PatientProfile";
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
@@ -158,8 +159,7 @@ function Project() {
             style={{
               flex: 1,
               borderRadius: "25px",
-              background:
-                "linear-gradient(120deg, rgba(22,163,74,0.35), rgba(34,197,94,0.2))",
+              background: "#ffffff",
               border: "1px solid rgba(255,255,255,0.1)",
               boxShadow: "0 10px 20px rgba(0,0,0,0.25)",
               display: "flex",
@@ -170,20 +170,8 @@ function Project() {
               overflow: "hidden",
             }}
           >
-            <h4
-              style={{ margin: "0.5em 0", color: "#bbf7d0", fontWeight: 600 }}
-            >
-              👤 Participant Profile
-            </h4>
-            <p
-              style={{
-                margin: "0.25em 0",
-                fontSize: "0.9em",
-                color: "#d1fae5",
-              }}
-            >
-              Linguistic Features
-            </p>
+            <h4 style={{color: "black"}}>PATIENT PROFILE</h4>
+            <PatientProfile/>
           </div>
 
           {/* Word Clouds Card */}
