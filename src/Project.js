@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./project.css"; 
-import BlobTutorial from "./components/blobTutorial";
+import Blob from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
 import { ReactComponent as BrainIcon } from './resources/brain.svg';
+import lowADBlob from './resources/low_ad_blob.png';
+import medADBlob from './resources/med_ad_blob.png';
+import highADBlob from './resources/high_ad_blob.png';
 
 
 function Project() {
@@ -94,20 +97,16 @@ function Project() {
         }}
         className="correlationHeatmaps">
         <div className="heatmap"> This is where the heatmap will go </div>
-        <div style={{ textAlign: "center" }} className = "heatmap_sliders">
-          <h3
-            style={{ color: "#93c5fd", fontWeight: 600, marginBottom: "0.5em" }}
-          >
-            🔥 Correlation Heatmaps 
-          </h3>
-          <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
-            with Sliders and MoCA Score Visual Aspects[this is where the sliders will go]
-          </p>
-        </div>
-        <div className="blob"> <p>TODO: This is where the blob will go</p> 
+        <div style={{ textAlign: "center" }} className = "heatmap_sliders">This is where the sliders will go</div>
+        <div className="blob"> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <BlobTutorial score = {20}/>
+            <Blob score = {29}/>
           </Canvas>
+          <div className= "blobLegend">
+            <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
+            <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
+            <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+          </div>
         </div>
       </div>
 

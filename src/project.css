@@ -13,28 +13,42 @@
 }
 
 .blob {
-        background-color: rgb(169, 173, 173); /*Just tempororary*/
-
-        /* temp code */
-        border: 2px solid red;
+        background: #e3e3e3;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
         width: 100%;
         height: 250px;  
-        position: relative;
+        /* position: relative; */
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.blobLegend {
+        width: 20rem;
+        height: auto;
+}
+
+.blobLegend1, .blobLegend2, .blobLegend3 {
+        display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
 }
 
+.blobLegend1 img, .blobLegend2 img, .blobLegend3 img {
+        height: 2rem;
+        padding: 0rem 1rem;
+}
 
 .brains_and_dials {
         /* moved aditya's code from js file to here */
         height: 45%;
         width: 100%;
-        border-radius: 25px;
         background: #e3e3e3;
-        /* background: linear-gradient(120deg, rgba(30,64,175,0.4), rgba(147,51,234,0.3)); */
-        border: 1px solid rgba(255,255,255,0.1);
         box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         align-items: center;
         justify-content: center;
@@ -47,16 +61,14 @@
         /*text*/
         color: rgb(48, 45, 45);
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        border-color: rgb(57, 107, 207);
+
+        /* borders */
+        border: 0.3rem solid rgb(57, 107, 207);
         border-radius: 0.2rem;
-        border-width: 0.3rem;
         
 }
 
-
 .brains {
-        /* background-color: violet; Just tempororary */
-
         /* stack divs horizontally*/
         display: flex;
         flex-direction: row;
@@ -64,8 +76,6 @@
         align-items: center;
         width: 100%;
 }
-
-
 
 /* css styles that will be applied to all 3 brains */
 .brain1, .brain2, .brain3 { 

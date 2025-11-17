@@ -9,13 +9,11 @@ import { MathUtils } from "three";
 
 const Blob = (props) => {
   const mesh = useRef();
-  const hover = useRef(false);
-  const uniforms = useMemo(() => {
-    return {
-      u_time: { value: 0 },
-      u_intensity: { value: 0.3 },
-      moca_score: {value: ((props.score) / 30)}
-    };
+//   const hover = useRef(false);
+  const uniforms = useRef({
+        u_time: { value: 0 },
+        u_intensity: { value: 0.3 },
+        moca_score: { value: props.score / 30 }
   });
 
   useFrame((state) => {
@@ -28,6 +26,7 @@ const Blob = (props) => {
         targetIntensity,
         0.02
       );
+      uniforms.current.moca_score.value = props.score / 30;
     }
   });
 
@@ -36,14 +35,14 @@ const Blob = (props) => {
       ref={mesh}
       scale={1.5}
       position={[0, 0, 0]}
-      onPointerOver={() => (hover.current = true)}
-      onPointerOut={() => (hover.current = false)}
+//       onPointerOver={() => (hover.current = true)}
+//       onPointerOut={() => (hover.current = false)}
     >
       <icosahedronGeometry args={[2, 20]} />  
       <shaderMaterial
         vertexShader={vertexShader}  /* allows us to alter the geometry */
         fragmentShader={fragmentShader} /* allows us to set the color of each geometry*/
-        uniforms={uniforms}
+        uniforms={uniforms.current}
       />
     </mesh>
   );
