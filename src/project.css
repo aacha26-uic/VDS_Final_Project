@@ -1,4 +1,41 @@
 /* ================================== OVERALL STYLING ================================== */
+
+
+
+/* =============================== CORRELATION HEATMAPS =============================== */
+.blob {
+        background: #e3e3e3;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
+        width: 100%;
+        height: 250px;  
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.blobLegend {
+        width: 20rem;
+        height: auto;
+}
+
+.blobLegend1, .blobLegend2, .blobLegend3 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+}
+
+.blobLegend1 img, .blobLegend2 img, .blobLegend3 img {
+        height: 2rem;
+        padding: 0rem 1rem;
+}
+
+
+
 /* =========================== BRAIN ENCODING DIALS SECTION =========================== */
 
 .brains_and_dials {
@@ -71,7 +108,8 @@
        align-items: center;
        line-height: 0.2rem;
 }
-/* =============================== CORRELATION HEATMAPS =============================== */
+
+
 /* ================================ PARTICIPANT PROFILE ================================ */
 /* ==================================== WORD CLOUD  ==================================== */
 /* ================================= CORRELATION MATRIX ================================= */
@@ -91,36 +129,6 @@
         background-color: rgb(212, 184, 40); /*Just tempororary*/
 }
 
-.blob {
-        background: #e3e3e3;
-        border: 0.3rem solid rgb(57, 107, 207);
-        border-radius: 0.2rem;
-        width: 100%;
-        height: 250px;  
-        /* position: relative; */
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        color: rgb(48, 45, 45);
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 
-.blobLegend {
-        width: 20rem;
-        height: auto;
-}
-
-.blobLegend1, .blobLegend2, .blobLegend3 {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-}
-
-.blobLegend1 img, .blobLegend2 img, .blobLegend3 img {
-        height: 2rem;
-        padding: 0rem 1rem;
-}
 
 
