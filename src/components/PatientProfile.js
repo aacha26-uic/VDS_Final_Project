@@ -10,13 +10,13 @@ const linguisticFeatures = [
 
 // decribes the scale for each variable
 const featureDescriptions = {
-    "AUX(participant)": "1",
-    "VERB(participant)": "2",
-    "CCONJ(participant)": "3",
-    "NUM(participant)": "4",
-    "PROPN(participant)": "5",
-    "TTR(participant)": "6",
-    "MATTR(participant)": "7"
+    "AUX(participant)": "Number of auxiliary verbs",
+    "VERB(participant)": "Number of verb tokens",
+    "CCONJ(participant)": "Number of conjunctions",
+    "NUM(participant)": "Tokens associated with numbers",
+    "PROPN(participant)": "Number of proper noun tokens",
+    "TTR(participant)": "Type token ratios: ratio of unique tokens divided by the total number of tokens",
+    "MATTR(participant)": "Moving-average TTR"
 };
 
 // AD groups for filter
@@ -104,6 +104,7 @@ const PatientProfile = () => {
 
                 tooltip
                     .style("opacity", 1)
+                    .style("visibility", "visible")
                     .html(`
                         <b>${d.feature.split("(")[0]}</b><br/>
                         X: ${d.feature}<br/>
@@ -120,8 +121,9 @@ const PatientProfile = () => {
                     .style("transform", "translateX(-50%)");
             })
             .on("mouseout", function () {
-                d3.select(tooltipRef.current).style("opacity", 0);
+                d3.select(tooltipRef.current).style("opacity", 0).style("visibility", "hidden");
             });
+
 
         // x axis
         svg
@@ -131,12 +133,8 @@ const PatientProfile = () => {
                 d3.axisBottom(x).tickFormat((d) => d.split("(")[0])
             )
             .selectAll("text")
-            .style("fill", "black")
             .attr("transform", "rotate(-40)")
             .style("text-anchor", "end");
-            
-        svg.selectAll(".domain").attr("stroke", "black");
-        svg.selectAll(".tick line").attr("stroke", "black");
 
         // y axis
         svg
@@ -144,24 +142,16 @@ const PatientProfile = () => {
             .attr("transform", `translate(${margin.left},0)`)
             .call(d3.axisLeft(y));
 
-        svg.selectAll("text").style("fill", "black");
-        svg.selectAll(".domain").attr("stroke", "black");
-        svg.selectAll(".tick line").attr("stroke", "black");
-
         // labels
         svg.append("text")
             .attr("text-anchor", "middle")
             .attr("x", width / 2)
-            .attr("y", height - 5)
-            .style("fill", "#000000")
-            .style("font-size", "12px")
+            .attr("y", height - 3)
             .text("Linguistic Features");
 
         svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", `translate(15, ${height / 2}) rotate(-90)`)
-            .style("fill", "#000000")
-            .style("font-size", "12px")
             .text("Mean Value");
 
     }, [data, selectedGroup, selectedPatient]);
@@ -185,7 +175,6 @@ const PatientProfile = () => {
                             checked={selectedGroup === g}
                             disabled={selectedPatient !== "ALL"}
                             onChange={() => setSelectedGroup(g)}
-                            style={{ marginRight: "5px" }}
                         />
                         {g}
                     </label>
@@ -195,15 +184,9 @@ const PatientProfile = () => {
             {/* patient selection */}
             <div style={{ marginBottom: "10px", color: "#ffffff" }}>
                 <select
+                className="patient-select"
                     value={selectedPatient}
                     onChange={(e) => setSelectedPatient(e.target.value)}
-                    style={{
-                        padding: "4px 8px",
-                        background: "#0f172a",
-                        color: "#d1fae5",
-                        border: "1px solid #334155",
-                        borderRadius: "6px",
-                    }}
                 >
                     <option value="ALL">All Patients</option>
                     {patientIDs.map((id) => (
@@ -215,18 +198,8 @@ const PatientProfile = () => {
             {/* tooltip */}
             <div
                 ref={tooltipRef}
-                style={{
-                    position: "absolute",
-                    background: "rgba(0,0,0,0.8)",
-                    color: "white",
-                    padding: "6px 10px",
-                    borderRadius: "6px",
-                    pointerEvents: "none",
-                    opacity: 0,
-                    fontSize: "12px",
-                    whiteSpace: "nowrap",
-                    transition: "opacity 0.2s",
-                }}
+                className="tooltip"
+                style={{ opacity: 0 }}
             ></div>
 
             <svg ref={svgRef} id="profile-chart" />

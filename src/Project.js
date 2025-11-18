@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import PatientProfile from "./components/PatientProfile";
+import "./Project.css";
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);

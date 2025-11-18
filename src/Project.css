@@ -1,0 +1,65 @@
+#profile-chart .domain,
+#profile-chart .tick line {
+    stroke: black !important;
+    stroke-width: 0.8 !important;
+}
+
+#profile-chart .tick text {
+    fill: black !important;
+    font-weight: 400 !important;
+    font-size: 10px !important;
+}
+
+.chart-container {
+    position: relative;
+    width: 900px;
+    margin: 20px auto;
+}
+  
+.controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+  
+.control-label {
+    font-weight: 200;
+    color: black;
+}
+  
+.radio-group {
+    display: flex;
+    gap: 10px;
+}
+  
+.radio-item span {
+    color: black;
+    margin-left: 4px;
+}
+  
+.axis-label {
+    fill: black;
+    font-size: 12px;
+    font-weight: 600;
+}
+  
+.tooltip {
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    font-size: 12px;
+    cursor: default;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    visibility: hidden;
+}
+
+.tooltip:hover {
+    visibility: visible;
+    opacity: 1;
+}
