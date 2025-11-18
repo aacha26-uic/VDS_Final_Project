@@ -1,3 +1,4 @@
+/* PatientProfile */
 #profile-chart .domain,
 #profile-chart .tick line {
     stroke: black !important;
@@ -63,3 +64,54 @@
     visibility: visible;
     opacity: 1;
 }
+
+/* CorrealtionBiomarkerAD */
+.correlation-biomarkers {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.slider-title {
+    color: black;
+}
+  
+.slider-columns {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+  
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+  
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: black;
+}
+
+.slider-row label {
+    width: 50px;
+    font-weight: 600;
+    font-size: 10px;
+    color: black;
+}
+  
+.slider-row input[type="range"] {
+    width: 130px;
+    accent-color: orange;
+}
+  
+.slider-row span {
+    width: 25px;
+    text-align: right;
+    font-family: monospace;
+    font-size: 10px;
+}
+  

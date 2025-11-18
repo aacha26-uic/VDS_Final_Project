@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import PatientProfile from "./components/PatientProfile";
+import CorrelationBiomarkerAD from "./components/CorrelationBiomarkerAD";
 import "./Project.css";
 
 function Project() {
@@ -78,27 +79,19 @@ function Project() {
           height: "100%",
           borderRadius: "25px",
           background:
-            "linear-gradient(180deg, rgba(30,58,138,0.4), rgba(17,24,39,0.3))",
+            "#ffffff",
           border: "1px solid rgba(255,255,255,0.1)",
           boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
+          padding: "2px",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ textAlign: "center" }}>
-          <h3
-            style={{ color: "#93c5fd", fontWeight: 600, marginBottom: "0.5em" }}
-          >
-            🔥 Correlation Heatmaps
-          </h3>
-          <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
-            with Sliders and MoCA Score Visual Aspects
-          </p>
-        </div>
+        <h4 style={{color: "black"}}>CORRELATIONS B/W BIOMARKERS & AD STATUS</h4>
+        <CorrelationBiomarkerAD/>
       </div>
 
       {/* Right section - Brain/Stats top and 3 cards bottom */}
