@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./App.css";
 import "./project.css"; 
@@ -8,7 +7,8 @@ import { ReactComponent as BrainIcon } from './resources/brain.svg';
 import lowADBlob from './resources/low_ad_blob.png';
 import medADBlob from './resources/med_ad_blob.png';
 import highADBlob from './resources/high_ad_blob.png';
-
+import KnobSlider from "./components/guage";
+        
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
@@ -161,7 +161,13 @@ function Project() {
                   <p>MoCA Range: 0-10</p>
                 </div>
               </div>
-              <div className="dial"> This is where the dial will go</div>
+              <div className="dial"> 
+                <KnobSlider/>
+                <div>
+                  <p>Number of Tokens</p>
+                </div>
+              </div>
+              
             </div>
           </div>
         )}
