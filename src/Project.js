@@ -76,7 +76,7 @@ function Project() {
       <div
         style={{
           width: "25%",
-          height: "100%",
+          height: "auto",
           borderRadius: "25px",
           background:
             "#ffffff",
@@ -84,14 +84,26 @@ function Project() {
           boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
-          padding: "2px",
+          padding: "0px",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <h4 style={{color: "black"}}>CORRELATIONS B/W BIOMARKERS & AD STATUS</h4>
+        <div style={{ margin: "0px", padding: "10px 0 0 0" }}>
+          <h4
+            style={{
+              color: "black",
+              margin: "0px",          
+              padding: "0px", 
+              lineHeight: "1.2",
+              textAlign: "center"
+            }}
+          >
+            CORRELATIONS B/W BIOMARKERS & AD STATUS
+          </h4>
+        </div>
         <CorrelationBiomarkerAD/>
+        <h2 style ={{color: "red"}}>BLOB</h2>
       </div>
 
       {/* Right section - Brain/Stats top and 3 cards bottom */}
