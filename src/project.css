@@ -1,3 +1,82 @@
+/* ================================== OVERALL STYLING ================================== */
+/* =========================== BRAIN ENCODING DIALS SECTION =========================== */
+
+.brains_and_dials {
+        height: 45%;
+        width: 100%;
+        background: #e3e3e3;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;  
+        overflow: hidden; 
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
+        
+}
+
+.brains {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+}
+
+
+.brain1, .brain2, .brain3 { 
+    width: 20rem;
+    height: auto;
+    display: flex; 
+    flex-direction: column;      
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;   
+    padding: 0rem 1rem;   
+    position: relative; 
+}
+
+.brain1 p, .brain2 p, .brain3 p {
+        line-height: 0.2rem;
+}
+
+.brain1-prob, .brain2-prob, .brain3-prob {
+        color: rgb(255, 255, 255);
+        font-size: 3rem;
+        position: absolute;
+        top: 35%;
+        left: 52%;
+        transform: translate(-50%, -50%);
+}
+
+.brain1 {
+        fill: #7cbadc;
+}
+
+.brain2 {
+        fill:#4585c1;
+}
+
+.brain3 {
+        fill: #5459AC
+}
+
+.dial {
+       width: 20rem;
+       height: 100%;
+       justify-content: center;
+       align-items: center;
+       line-height: 0.2rem;
+}
+/* =============================== CORRELATION HEATMAPS =============================== */
+/* ================================ PARTICIPANT PROFILE ================================ */
+/* ==================================== WORD CLOUD  ==================================== */
+/* ================================= CORRELATION MATRIX ================================= */
+
+
 
 .correlationHeatmaps {
         background-color: rgb(255, 255, 255); 
@@ -44,88 +123,4 @@
         padding: 0rem 1rem;
 }
 
-.brains_and_dials {
-        /* moved aditya's code from js file to here */
-        height: 45%;
-        width: 100%;
-        background: #e3e3e3;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        align-items: center;
-        justify-content: center;
-
-        /* added code to make divs stack vertically */
-        display: flex;
-        flex-direction: column;  
-        overflow: hidden; 
-
-        /*text*/
-        color: rgb(48, 45, 45);
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
-        /* borders */
-        border: 0.3rem solid rgb(57, 107, 207);
-        border-radius: 0.2rem;
-        
-}
-
-.brains {
-        /* stack divs horizontally*/
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        /* background-color: pink; */
-}
-
-/* css styles that will be applied to all 3 brains */
-.brain1, .brain2, .brain3 { 
-    width: 20rem;
-    height: auto;
-    display: flex; 
-    flex-direction: column;      
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;   
-    padding: 0rem 1rem;   
-    position: relative; 
-}
-
-.brain1 p, .brain2 p, .brain3 p {
-        line-height: 0.2rem;
-}
-
-.brain1-prob, .brain2-prob, .brain3-prob {
-        color: rgb(255, 255, 255);
-        /* background-color: aquamarine; */
-        font-size: 3rem;
-        position: absolute;
-        top: 35%;
-        left: 52%;
-        transform: translate(-50%, -50%);
-}
-
-.brain1 {
-        /* background-color: rgb(219, 189, 231);  */
-        fill: #7cbadc;
-}
-
-.brain2 {
-       /* background-color: rgb(193, 235, 193); */
-        fill:#4585c1;
-}
-
-.brain3 {
-        /* background-color: rgb(194, 232, 248);  */
-        fill: #5459AC
-}
-
-.dial {
-       /* background-color: rgb(158, 156, 15); */
-       width: 20rem;
-       height: 100%;
-       justify-content: center;
-       align-items: center;
-       line-height: 0.2rem;
-}
 
