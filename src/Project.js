@@ -39,8 +39,20 @@ function Project() {
 
       {/* Left section - Vertical Heatmap */}
       <div className="left-section">
-        <div className="heatmap"> This is where the heatmap will go </div>
-        <div style={{ textAlign: "center" }} className = "heatmap_sliders">This is where the sliders will go</div>
+        <div style={{ margin: "0px", padding: "10px 0 0 0" }}>
+          <h4
+            style={{
+              color: "black",
+              margin: "0px",          
+              padding: "0px", 
+              lineHeight: "1.2",
+              textAlign: "center"
+            }}
+          >
+            CORRELATIONS B/W BIOMARKERS & AD STATUS
+          </h4>
+        </div>
+        <CorrelationBiomarkerAD/>
         <div className="blob"> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
             <Blob score = {29}/>
