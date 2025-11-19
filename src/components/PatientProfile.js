@@ -167,9 +167,9 @@ const PatientProfile = () => {
             style={{ position: "relative", width: "100%", height: "100%" }}
         >
             {/* AD group selection */}
-            <div style={{ marginBottom: "10px", color: "#000000" }}>
+            <div className="controls radio-group">
                 {groups.map((g) => (
-                    <label key={g}>
+                    <label key={g} className="radio-item">
                         <input
                             type="radio"
                             name="dx-group"
@@ -178,7 +178,7 @@ const PatientProfile = () => {
                             disabled={selectedPatient !== "ALL"}
                             onChange={() => setSelectedGroup(g)}
                         />
-                        {g}
+                        <span>{g}</span>
                     </label>
                 ))}
             </div>

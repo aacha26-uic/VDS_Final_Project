@@ -590,10 +590,10 @@ svg .corr-legend-outline {
 }
 
 
-.participant-profile-card h4 {
-        margin: 0.5em 0; 
+.participant-profile-card h1 {
+        margin-top: 0.3rem;
+        margin-bottom: 0.9rem;
         font-weight: 600;
-        padding-top: 0rem;
         color: "black";
 }
 
@@ -620,30 +620,37 @@ svg .corr-legend-outline {
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-bottom: 5px !important;
+    margin-bottom: 7px !important;
 }
-  
-.control-label {
-    font-size: 15px;
-    font-weight: 200;
-    color: black;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding-top: 5px;
-}
-  
+
 .radio-group {
     display: flex;
-    gap: 10px;
+    gap: 25px;
+    align-items: center;
+}
+
+.controls.radio-group {
+    justify-content: center;
+    width: 100%;  
+    padding-bottom: 0.5rem;       
+}
+
+.radio-item input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
 }
   
 .radio-item span {
+    font-size: 20px;
+    font-weight: 500;
     color: black;
-    margin-left: 4px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
   
 .axis-label {
     fill: black;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: 600;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
