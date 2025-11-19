@@ -8,6 +8,8 @@ import lowADBlob from './resources/low_ad_blob.png';
 import medADBlob from './resources/med_ad_blob.png';
 import highADBlob from './resources/high_ad_blob.png';
 import KnobSlider from "./components/gauge";
+import PatientProfile from "./components/PatientProfile";
+import CorrelationBiomarkerAD from "./components/CorrelationBiomarkerAD";
         
 
 function Project() {
