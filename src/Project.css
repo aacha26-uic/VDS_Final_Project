@@ -1,4 +1,606 @@
-/* PatientProfile */
+/* ================================== 3D INTERACTION STYLES ================================== */
+
+.interactive-3d-wrapper {
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+  position: relative;
+}
+
+.interactive-3d-wrapper svg {
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.35s;
+  will-change: transform;
+  text-rendering: geometricPrecision;
+}
+
+.interactive-mount {
+  animation: popIn 600ms ease-out;
+  transform-origin: center;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================================== WORD CLOUD STYLES ================================== */
+
+/* Word Cloud Container */
+.word-cloud-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Word Cloud Controls */
+.word-cloud-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.word-cloud-slider-label {
+  color: #111;
+  font-size: 0.85em;
+}
+
+.word-cloud-dropdown {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 5;
+}
+
+.word-cloud-dropdown select {
+  padding: 0.3em;
+  border-radius: 8px;
+  appearance: none;
+  background: white
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path d="M6 0L0 8h12z" fill="%23666"/></svg>')
+    no-repeat right 8px center;
+  padding-right: 28px;
+}
+
+.word-cloud-info {
+  position: absolute;
+  left: 8px;
+  right: 180px;
+  bottom: 8px;
+  color: #111;
+  font-size: 0.8em;
+}
+
+/* Word Cloud Legend */
+.word-cloud-legend {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  color: #111;
+  font-size: 0.75em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Word Cloud Radial Elements */
+.radial-segment {
+  transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
+  transform-origin: center;
+  filter: none;
+}
+
+.radial-segment:hover {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+  transform: translateZ(12px) scale(1.03);
+}
+
+.radial-center-word {
+  transition: transform 0.25s ease, fill 0.25s ease;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  filter: none;
+}
+
+.radial-center-word:hover {
+  transform: translateZ(10px) scale(1.12);
+  fill: #ff7a00 !important;
+}
+
+.ring-bg {
+  fill: rgba(0, 0, 0, 0.03);
+  stroke: #e5e7eb;
+  stroke-width: 1;
+}
+
+.ring-label {
+  text-anchor: middle;
+  text-rendering: geometricPrecision;
+  font-size: 16px;
+  font-weight: bold;
+  fill: #111;
+  opacity: 1;
+  paint-order: stroke fill;
+  pointer-events: none;
+}
+
+/* Word Cloud Card Styles */
+.word-cloud-card {
+  flex: 1;
+  border-radius: 25px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  overflow: hidden;
+}
+
+.word-cloud-card-content {
+  width: 100%;
+  height: 100%;
+}
+
+.word-cloud-card-title {
+  margin: 0.5em 0;
+  color: #111;
+  font-weight: 600;
+}
+
+.word-cloud-card-subtitle {
+  margin: 0.25em 0;
+  font-size: 0.9em;
+  color: #111;
+}
+
+.word-cloud-visualization {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 56px);
+  padding-top: 0.5em;
+}
+
+/* ================================== CORRELATION MATRIX STYLES ================================== */
+
+/* Correlation Matrix Container */
+.correlation-matrix-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Correlation Matrix Controls */
+.correlation-matrix-controls {
+  position: absolute;
+  top: 1px;
+  right: 8px;
+  z-index: 1000;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.correlation-matrix-controls select {
+  margin-left: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: #111;
+}
+
+.correlation-matrix-info {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  color: #111;
+  font-size: 0.8em;
+}
+
+/* Correlation Matrix Elements */
+.corr-cell {
+  transition: transform 0.25s ease, filter 0.25s ease;
+  transform-origin: center;
+}
+
+.corr-cell:hover {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+  transform: translateZ(12px) scale(1.05);
+}
+
+.matrix-label {
+  fill: #111;
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.matrix-row-label {
+  fill: #111;
+  font-size: 11px;
+  text-anchor: end;
+}
+
+/* Correlation Matrix Legend */
+svg .corr-legend-outline {
+  stroke: #444;
+  stroke-width: 0.6;
+}
+
+.legend-tick {
+  stroke: #111;
+  stroke-width: 1;
+}
+
+.legend-tick-label {
+  fill: #111;
+  font-size: 10px;
+}
+
+/* Correlation Matrix Card Styles */
+.correlation-matrix-card {
+  flex: 1;
+  border-radius: 25px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  overflow: hidden;
+}
+
+.correlation-matrix-card-content {
+  width: 100%;
+  height: 100%;
+}
+
+.correlation-matrix-card-title {
+  margin: 0.5em 0;
+  color: #111;
+  font-weight: 600;
+}
+
+.correlation-matrix-card-subtitle {
+  margin: 0.25em 0;
+  font-size: 0.9em;
+  color: #111;
+}
+
+.correlation-matrix-visualization {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 56px);
+  padding-top: 0.5em;
+}
+/* ================================== OVERALL STYLING ================================== */
+.full-dv-layout {
+        height: 100%;
+        width: 100%;
+        padding: 0.5em;
+        display: flex;
+        gap: 0.5em;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at 20% 20%, #0f172a 0%, #1e293b 60%, #0a0a0a 100%);
+        color: #f1f5f9;
+        position: relative;
+        overflow: hidden;
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.background-glow {
+        position: absolute;
+        top: -100px;
+        left: 20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%);
+        filter: blur(90px);
+        z-index: 0;
+        animation: pulse 6s infinite alternate;
+}
+
+.left-section {
+        width: 25%;
+        height: 100%;
+        border-radius: 25px;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2 ;
+        background: #ffffff;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
+}
+
+.left-components {
+        width: 100%;
+        background-color: #64dfa0;
+        align-items: center;
+        justify-content: center;
+
+}
+
+.left-section h4 {
+        color: black;
+        margin: 0px ;   
+        padding: 0px;
+        line-height: 1.2;
+        text-align: center;
+        padding: 10px 0 0 0;
+}
+
+.right-section {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        position: relative;
+        z-index: 2;
+}
+
+.toggle-button {
+        position: absolute;
+        top: 0.75em;
+        right: 0.75em;
+        z-index: 10;
+        padding: 0.3em 0.6em;
+        border-radius: 10px;
+        background: linear-gradient(120deg, rgba(59,130,246,0.5), rgba(147,51,234,0.4));
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #bfdbfe;
+        font-weight: 600;
+        font-size: 0.8em;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+}
+
+.bottom-3-cards {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        gap: 0.5em;
+}
+
+
+/* =============================== CORRELATION HEATMAPS =============================== */
+.blob {
+        width: 100%;
+        height: 20rem;  
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: #64dfa0;
+}
+
+.blobLegend {
+        width: 20rem;
+        height: auto;
+}
+
+.blobLegend1, .blobLegend2, .blobLegend3 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+}
+
+.blobLegend1 img, .blobLegend2 img, .blobLegend3 img {
+        height: 2rem;
+        padding: 0rem 1rem;
+}
+
+.correlation-biomarkers {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 0;
+    padding-top: 0;
+    overflow: hidden;
+}
+
+.heatmap {
+    display: block;
+    padding: 1rem;
+    font-size: 12px;
+    background-color: pink;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-columns {
+    display: flex;
+    gap: 5rem;
+    width: 100%;
+    padding: 3rem 1rem;
+    justify-content: center;
+    background-color: rgb(237, 239, 158);
+}
+  
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+  
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: black;
+}
+
+.slider-row label {
+    width: 40px;
+    font-weight: 600;
+    font-size: 10px;
+    color: black;
+}
+  
+.slider-row input[type="range"] {
+    width: 90px;
+    accent-color: #d75f4c;
+}
+  
+.slider-row span {
+    width: 20px;
+    text-align: right;
+    font-family: monospace;
+    font-size: 10px;
+}
+
+
+/* =========================== BRAIN ENCODING DIALS SECTION =========================== */
+
+.brains_and_dials {
+        height: 45%;
+        width: 100%;
+        background: #ffffff;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;  
+        overflow: hidden; 
+        color: rgb(48, 45, 45);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
+        
+}
+
+.brains {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+}
+
+
+.brain1, .brain2, .brain3 { 
+    width: 20rem;
+    height: auto;
+    display: flex; 
+    flex-direction: column;      
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;   
+    padding: 0rem 1rem;   
+    position: relative; 
+}
+
+.brain1 p, .brain2 p, .brain3 p {
+        line-height: 0.2rem;
+}
+
+.brain1-prob, .brain2-prob, .brain3-prob {
+        color: rgb(255, 255, 255);
+        font-size: 3rem;
+        position: absolute;
+        top: 35%;
+        left: 52%;
+        transform: translate(-50%, -50%);
+}
+
+.brain1 {
+        fill: #7cbadc;
+}
+
+.brain2 {
+        fill:#4585c1;
+}
+
+.brain3 {
+        fill: #5459AC
+}
+
+.dial {
+       width: 20rem;
+       height: 100%;
+       justify-content: center;
+       align-items: center;
+       line-height: 0.2rem;
+}
+
+/* ================================ PARTICIPANT PROFILE ================================ */
+.participant-profile-card {
+        flex: 1 ;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5em;
+        overflow: hidden;
+        background: #ffffff;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
+}
+
+
+.participant-profile-card h4 {
+        margin: 0.5em 0; 
+        font-weight: 600;
+        color: "black";
+}
+
+.participant-profile-card p {
+        margin: 0.25em 0;
+        font-size: 0.9em;
+        color: #d1fae5;
+}
+
 #profile-chart .domain,
 #profile-chart .tick line {
     stroke: black !important;
@@ -65,59 +667,69 @@
     opacity: 1;
 }
 
-/* CorrealtionBiomarkerAD */
-.correlation-biomarkers {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    margin-top: 0;
-    padding-top: 0;
-    overflow: hidden;
+
+/* ==================================== WORD CLOUD  ==================================== */
+.word-cloud-card {
+        flex: 1;
+        border-radius: 25px;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5em;
+        overflow: hidden;
+        background: #ffffff;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
 }
 
-.heatmap {
-    display: block;
-    margin: 0 auto 20px auto;
-    padding-top: 0;
-    margin-left: 20px;
-    font-size: 12px;
+.word-cloud-card h4 {
+        margin: 0.5em 0;
+        color: #bfdbfe;
+        font-weight: 600 ;
 }
 
-.slider-columns {
-    display: flex;
-    gap: 5px;
-    width: 100%;
-}
-  
-.column {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-}
-  
-.slider-row {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    color: black;
+.word-cloud-card p {
+        margin: 0.25em 0;
+        font-size: 0.9em;
+        color: #dbeafe;
 }
 
-.slider-row label {
-    width: 40px;
-    font-weight: 600;
-    font-size: 10px;
-    color: black;
+/* ================================= CORRELATION MATRIX ================================= */
+
+.correlation-matrix-card {
+        flex: 1;
+        border-radius: 25px;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5em;
+        overflow: hidden;
+        background: #ffffff;
+        border: 0.3rem solid rgb(57, 107, 207);
+        border-radius: 0.2rem;
+
 }
-  
-.slider-row input[type="range"] {
-    width: 90px;
-    accent-color: orange;
+
+correlation-matrix-card h4 {
+        margin: 0.5em 0;
+        color: #c084fc;
+        font-weight: 600;
 }
-  
-.slider-row span {
-    width: 20px;
-    text-align: right;
-    font-family: monospace;
-    font-size: 10px;
+
+correlation-matrix-card p {
+        margin: 0.25em 0;
+        font-size: 0.9em;
+        color: #e9d5ff;
 }
+
+
+
+
+
+

@@ -179,3 +179,11 @@ The application will open at `http://localhost:3000`
 - **Python** - Data preprocessing and feature extraction
 - **NLP Libraries** - Natural language preprocessing for linguistic feature analysis (BERT models)
 - **Machine Learning Libraries** - Statistical analysis and biomarker correlation modeling
+
+
+
+### Links to Resources Used
+- **Circular Slider Component** - https://primereact.org/knob/
+- **Blob Code Tutorial** - https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
+- **Brain Silhouette** - https://static.vecteezy.com/system/resources/previews/059/555/853/non_2x/black-silhouette-of-a-human-brain-vector.jpg 
+

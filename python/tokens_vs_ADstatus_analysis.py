@@ -87,6 +87,8 @@ X_train_e, X_test_e, y_train_e, y_test_e = train_test_split(
     X_exp_scaled, y, test_size=0.2, stratify=y, random_state=42
 )
 
+# print("this is X_train_e", X_train_e)
+
 # logistic regression
 model_expanded = LogisticRegression(
     multi_class='multinomial',
