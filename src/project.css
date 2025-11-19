@@ -35,6 +35,19 @@
 }
 
 
+.correlationHeatmaps {
+        background-color: rgb(255, 255, 255); 
+}
+
+.heatmap {
+        background-color: violet; /*Just tempororary*/
+}
+
+.heatmap_sliders {
+        background-color: rgb(212, 184, 40); /*Just tempororary*/
+}
+
+
 
 /* =========================== BRAIN ENCODING DIALS SECTION =========================== */
 
@@ -109,25 +122,13 @@
        line-height: 0.2rem;
 }
 
-
 /* ================================ PARTICIPANT PROFILE ================================ */
 /* ==================================== WORD CLOUD  ==================================== */
 /* ================================= CORRELATION MATRIX ================================= */
 
 
 
-.correlationHeatmaps {
-        background-color: rgb(255, 255, 255); 
-}
 
-
-.heatmap {
-        background-color: violet; /*Just tempororary*/
-}
-
-.heatmap_sliders {
-        background-color: rgb(212, 184, 40); /*Just tempororary*/
-}
 
 
 

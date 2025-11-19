@@ -12,6 +12,7 @@ import KnobSlider from "./components/guage";
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
+  const [gaugeValue, setGaugeValue] = useState(60);
 
   return (
     <div
@@ -133,7 +134,7 @@ function Project() {
               <div className="brain1">
                 <BrainIcon className="brain1" />
                 <div className= "brain1-prob">
-                  <p >20%</p>
+                  <p >{Math.round(gaugeValue/0.32)}%</p>
                 </div>
                 <div>
                   <p>AD Status: HC</p>
@@ -144,7 +145,7 @@ function Project() {
               <div className="brain2">
                 <BrainIcon className="brain2" />
                 <div className= "brain2-prob">
-                  <p >50%</p>
+                  <p >{Math.round(gaugeValue/0.43)}%</p>
                 </div>
                 <div>
                   <p>AD Status: MCI </p>
@@ -154,7 +155,7 @@ function Project() {
               <div className="brain3">
                 <BrainIcon className="brain3" />
                 <div className= "brain3-prob">
-                  <p>30%</p>
+                  <p>{Math.round(gaugeValue/0.4)}%</p>
                 </div>
                 <div>
                   <p>AD Status: AD</p>
@@ -162,7 +163,7 @@ function Project() {
                 </div>
               </div>
               <div className="dial"> 
-                <KnobSlider/>
+                <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
                 <div>
                   <p>Number of Tokens</p>
                 </div>
