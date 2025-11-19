@@ -18,42 +18,11 @@ function Project() {
 
   return (
     <div className="full-dv-layout">
-      {/* 💫 Background glow layer */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-100px",
-          left: "20%",
-          width: "600px",
-          height: "600px",
-          background:
-            "radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%)",
-          filter: "blur(90px)",
-          zIndex: 0,
-          animation: "pulse 6s infinite alternate",
-        }}
-      ></div>
-
+      {/* Background glow layer */}
+      <div className="background-glow"></div>
       {/* Toggle Button */}
-      <button
+      <button className="toggle-button"
         onClick={() => setShowTopSection(!showTopSection)}
-        style={{
-          position: "absolute",
-          top: "0.75em",
-          right: "0.75em",
-          zIndex: 10,
-          padding: "0.3em 0.6em",
-          borderRadius: "10px",
-          background:
-            "linear-gradient(120deg, rgba(59,130,246,0.5), rgba(147,51,234,0.4))",
-          border: "1px solid rgba(255,255,255,0.2)",
-          color: "#bfdbfe",
-          fontWeight: 600,
-          fontSize: "0.8em",
-          cursor: "pointer",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-          transition: "all 0.3s ease",
-        }}
         onMouseEnter={(e) => {
           e.target.style.transform = "scale(1.05)";
           e.target.style.boxShadow = "0 6px 15px rgba(59,130,246,0.4)";
