@@ -1,63 +1,31 @@
 import React, { useState } from "react";
 import WordCloudViz from "./components/WordCloudViz";
 import CorrelationMatrix from "./components/CorrelationMatrix";
+import "./project.css"; 
+import Blob from "./components/blobTutorial";
+import { Canvas } from "@react-three/fiber";
+import { ReactComponent as BrainIcon } from './resources/brain.svg';
+import lowADBlob from './resources/low_ad_blob.png';
+import medADBlob from './resources/med_ad_blob.png';
+import highADBlob from './resources/high_ad_blob.png';
+import KnobSlider from "./components/gauge";
+import PatientProfile from "./components/PatientProfile";
+import CorrelationBiomarkerAD from "./components/CorrelationBiomarkerAD";
+        
 
 function Project() {
+  // By fault the topmost section of the data visualization system will be open
   const [showTopSection, setShowTopSection] = useState(true);
+  // By default the guage value will be 60, useState returns a funciton for setGuageValue
+  const [gaugeValue, setGaugeValue] = useState(0); 
 
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        padding: "0.5em",
-        display: "flex",
-        gap: "0.5em",
-        boxSizing: "border-box",
-        fontFamily: "'Poppins', sans-serif",
-        background:
-          "radial-gradient(circle at 20% 20%, #0f172a 0%, #1e293b 60%, #0a0a0a 100%)",
-        color: "#f1f5f9",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* 💫 Background glow layer */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-100px",
-          left: "20%",
-          width: "600px",
-          height: "600px",
-          background:
-            "radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%)",
-          filter: "blur(90px)",
-          zIndex: 0,
-          animation: "pulse 6s infinite alternate",
-        }}
-      ></div>
-
+    <div className="full-dv-layout">
+      {/* Background glow layer */}
+      <div className="background-glow"></div>
       {/* Toggle Button */}
-      <button
+      <button className="toggle-button"
         onClick={() => setShowTopSection(!showTopSection)}
-        style={{
-          position: "absolute",
-          top: "0.75em",
-          right: "0.75em",
-          zIndex: 10,
-          padding: "0.3em 0.6em",
-          borderRadius: "10px",
-          background:
-            "linear-gradient(120deg, rgba(59,130,246,0.5), rgba(147,51,234,0.4))",
-          border: "1px solid rgba(255,255,255,0.2)",
-          color: "#bfdbfe",
-          fontWeight: 600,
-          fontSize: "0.8em",
-          cursor: "pointer",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-          transition: "all 0.3s ease",
-        }}
         onMouseEnter={(e) => {
           e.target.style.transform = "scale(1.05)";
           e.target.style.boxShadow = "0 6px 15px rgba(59,130,246,0.4)";
@@ -71,120 +39,83 @@ function Project() {
       </button>
 
       {/* Left section - Vertical Heatmap */}
-      <div
-        style={{
-          width: "25%",
-          height: "100%",
-          borderRadius: "25px",
-          background:
-            "linear-gradient(180deg, rgba(30,58,138,0.4), rgba(17,24,39,0.3))",
-          border: "1px solid rgba(255,255,255,0.1)",
-          boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <h3
-            style={{ color: "#93c5fd", fontWeight: 600, marginBottom: "0.5em" }}
-          >
-            🔥 Correlation Heatmaps
-          </h3>
-          <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
-            with Sliders and MoCA Score Visual Aspects
-          </p>
+      <div className="left-section">
+        <div>
+          <h1>Correlations Between Biomakers & AD Status</h1>
+        </div>
+        <div className="left-components">
+        <CorrelationBiomarkerAD/>
+        <div className="blob"> 
+          <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
+            <Blob score = {5}/>
+          </Canvas>
+          <div className= "blobLegend">
+            <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
+            <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
+            <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+          </div>
+        </div>
         </div>
       </div>
 
       {/* Right section - Brain/Stats top and 3 cards bottom */}
-      <div
-        style={{
-          flex: 1,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5em",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
+      <div className="right-section">
         {/* Top - Brain and Stats */}
         {showTopSection && (
-          <div
-            style={{
-              height: "45%",
-              width: "100%",
-              borderRadius: "25px",
-              background:
-                "linear-gradient(120deg, rgba(30,64,175,0.4), rgba(147,51,234,0.3))",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div style={{ textAlign: "center" }}>
-              <h3
-                style={{
-                  color: "#bfdbfe",
-                  fontWeight: 600,
-                  marginBottom: "0.3em",
-                }}
-              >
-                🧠 Brain Encoding Dials
-              </h3>
-              <p style={{ color: "#cbd5e1", fontSize: "0.9em" }}>
-                Linguistic Features vs AD Status
-              </p>
+          <div className="brains_and_dials" >
+            <div>
+              <h1>Relationship Between Conversation Length and AD Status</h1>
+            </div>
+
+            <div className="brains">
+              <div className="brain1">
+                <BrainIcon className="brain1" />
+                <div className= "brain1-prob">
+                  <p >{Math.round(gaugeValue/0.32)}%</p>
+                </div>
+                <div>
+                  <p>AD Status: HC</p>
+                  <p>MoCA Range: 20-30</p>
+                </div>
+                
+              </div>
+              <div className="brain2">
+                <BrainIcon className="brain2" />
+                <div className= "brain2-prob">
+                  <p >{Math.round(gaugeValue/0.43)}%</p>
+                </div>
+                <div>
+                  <p>AD Status: MCI </p>
+                  <p>MoCA Range:10-20</p>
+                </div>
+              </div>
+              <div className="brain3">
+                <BrainIcon className="brain3" />
+                <div className= "brain3-prob">
+                  <p>{Math.round(gaugeValue/0.4)}%</p>
+                </div>
+                <div>
+                  <p>AD Status: AD</p>
+                  <p>MoCA Range: 0-10</p>
+                </div>
+              </div>
+              <div className="dial"> 
+                <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
+                <div>
+                  <p>Number of Tokens</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* Bottom - Three cards */}
-        <div
-          style={{
-            flex: 1,
-            width: "100%",
-            display: "flex",
-            gap: "0.5em",
-          }}
-        >
+        <div className="bottom-3-cards">
+
           {/* Participant Profile Card */}
-          <div
-            style={{
-              flex: 1,
-              borderRadius: "25px",
-              background:
-                "linear-gradient(120deg, rgba(22,163,74,0.35), rgba(34,197,94,0.2))",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.25)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.5em",
-              overflow: "hidden",
-            }}
-          >
-            <h4
-              style={{ margin: "0.5em 0", color: "#bbf7d0", fontWeight: 600 }}
-            >
-              👤 Participant Profile
-            </h4>
-            <p
-              style={{
-                margin: "0.25em 0",
-                fontSize: "0.9em",
-                color: "#d1fae5",
-              }}
-            >
-              Linguistic Features
-            </p>
+          <div className="participant-profile-card">
+            <h1>Patient Profile</h1>
+            <PatientProfile/>
           </div>
 
           {/* Word Clouds Card */}
