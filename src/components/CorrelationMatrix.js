@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./App.css";
 import * as d3 from "d3";
 
 function CorrelationMatrix() {
@@ -8,6 +7,8 @@ function CorrelationMatrix() {
   const svgRef = useRef(null);
   const outerRef = useRef(null);
   const [lockedHeight, setLockedHeight] = useState(null);
+  // track if legend animation has already run (only run on first mount / refresh)
+  const legendAnimatedRef = useRef(false);
 
   useEffect(() => {
     fetch("/correlation_matrix_top10.csv")
@@ -32,7 +33,7 @@ function CorrelationMatrix() {
 
     // increase left/top padding to shift matrix right and give room for rotated labels
     // dedicated paddings so horizontal shift doesn't shrink cells
-    const leftPadding = 82; // controls horizontal offset (move matrix right)
+    const leftPadding = 120; // controls horizontal offset (move matrix right)
     const rightPadding = 40; // space on the right
     const topPadding = 100; // space above matrix for rotated labels
     const bottomPadding = 40; // space below matrix
@@ -69,6 +70,7 @@ function CorrelationMatrix() {
         const v = mat[i][j];
         rect.setAttribute("fill", color(v));
         rect.setAttribute("stroke", "rgba(255,255,255,0.03)");
+        rect.setAttribute("class", "corr-cell");
         rect.style.cursor = "default";
         rect.addEventListener("mouseenter", (e) => {
           showTooltip(e, `${header[i]} × ${header[j]}: ${v.toFixed(3)}`);
@@ -87,7 +89,7 @@ function CorrelationMatrix() {
       // position via transform only so rotation pivots around the center
       tx.setAttribute("transform", `translate(${topX}, ${topY}) rotate(-55)`);
       tx.setAttribute("text-anchor", "middle");
-      tx.setAttribute("fill", "#cbd5e1");
+      tx.setAttribute("fill", "#111");
       tx.setAttribute("font-size", "10");
       tx.textContent = header[i];
       svg.appendChild(tx);
@@ -96,11 +98,104 @@ function CorrelationMatrix() {
       ty.setAttribute("x", leftPadding - 18);
       ty.setAttribute("y", topPadding + i * size + size / 2 + 4);
       ty.setAttribute("text-anchor", "end");
-      ty.setAttribute("fill", "#cbd5e1");
+      ty.setAttribute("fill", "#111");
       ty.setAttribute("font-size", "11");
       ty.textContent = header[i];
       svg.appendChild(ty);
     }
+
+    // === Vertical Gradient Legend (RdBu, current colors) ===
+    const gridLeft = cx;
+    const gridTop = topPadding;
+    const gridSize = n * size;
+    const legendMargin = 10;
+    const legendWidth = 12;
+    const legendHeight = gridSize;
+    const legendX = gridLeft + gridSize + legendMargin;
+    const legendY = gridTop;
+
+    const d3svg = d3.select(svg);
+    const defs = d3svg.append("defs");
+    const grad = defs
+      .append("linearGradient")
+      .attr("id", "corrLegend")
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "0%")
+      .attr("y2", "100%");
+
+    // build gradient with current color function (top=+1 blue, bottom=-1 red)
+    d3.range(0, 1.001, 0.05).forEach((p) => {
+      const v = 1 - 2 * p; // map 0..1 -> 1..-1
+      grad
+        .append("stop")
+        .attr("offset", `${p * 100}%`)
+        .attr("stop-color", color(v));
+    });
+
+    // legend bar with clip-path for upward "water fill" animation
+    const clipId = "corrLegendClip";
+    defs
+      .append("clipPath")
+      .attr("id", clipId)
+      .append("rect")
+      .attr("x", legendX)
+      // start with zero height at bottom so it can rise
+      .attr("y", legendY + legendHeight)
+      .attr("width", legendWidth)
+      .attr("height", 0);
+
+    d3svg
+      .append("rect")
+      .attr("x", legendX)
+      .attr("y", legendY)
+      .attr("width", legendWidth)
+      .attr("height", legendHeight)
+      .attr("rx", 2)
+      .attr("fill", "url(#corrLegend)")
+      .attr("stroke", "#333")
+      .attr("stroke-width", 0.5)
+      .attr("clip-path", `url(#${clipId})`);
+
+    // perform animation only once (initial mount / page refresh)
+    if (!legendAnimatedRef.current) {
+      d3svg
+        .select(`#${clipId} rect`)
+        .transition()
+        .duration(1800)
+        .ease(d3.easeCubicOut)
+        .attr("y", legendY)
+        .attr("height", legendHeight)
+        .on("end", () => {
+          legendAnimatedRef.current = true;
+        });
+    } else {
+      // if already animated (e.g., changing n), just set final state immediately
+      d3svg
+        .select(`#${clipId} rect`)
+        .attr("y", legendY)
+        .attr("height", legendHeight);
+    }
+
+    // ticks and labels
+    [1, 0, -1].forEach((val) => {
+      const y = legendY + ((1 - val) / 2) * legendHeight;
+      d3svg
+        .append("line")
+        .attr("x1", legendX + legendWidth)
+        .attr("x2", legendX + legendWidth + 4)
+        .attr("y1", y)
+        .attr("y2", y)
+        .attr("stroke", "#111")
+        .attr("stroke-width", 1);
+      d3svg
+        .append("text")
+        .attr("x", legendX + legendWidth + 6)
+        .attr("y", y + 3)
+        .attr("fill", "#111")
+        .attr("font-size", 10)
+        .text(val);
+    });
   }, [data, n]);
 
   // Capture initial rendered height once (when the card is in its original "card" form)
@@ -197,68 +292,50 @@ function CorrelationMatrix() {
   return (
     <div
       ref={outerRef}
+      className="correlation-matrix-container"
       style={{
-        width: "100%",
         height: lockedHeight ? `${lockedHeight}px` : "100%",
-        position: "relative",
-        overflow: "auto",
       }}
     >
-      <svg
-        ref={svgRef}
-        style={{
-          width: "100%",
-          height: lockedHeight ? `${lockedHeight}px` : "100%",
-          display: "block",
-        }}
-      />
-
-      {/* move controls after svg so they render on top of rotated labels */}
       <div
-        style={{
-          position: "absolute",
-          // position within the container bounds (not outside with negative top)
-          top: 1,
-          right: 8,
-          zIndex: 1000,
-          color: "#cbd5e1",
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          background: "rgba(0,0,0,0.25)",
-          padding: "6px 8px",
-          borderRadius: 10,
-          boxShadow: "0 6px 18px rgba(0,0,0,0.4)",
+        className="interactive-3d-wrapper interactive-mount"
+        onMouseMove={(e) => {
+          const wrapper = e.currentTarget;
+          const rect = wrapper.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const rotX = y * -6;
+          const rotY = x * 6;
+          const svgEl = wrapper.querySelector("svg");
+          if (svgEl)
+            svgEl.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        }}
+        onMouseLeave={(e) => {
+          const svgEl = e.currentTarget.querySelector("svg");
+          if (svgEl) svgEl.style.transform = "rotateX(0deg) rotateY(0deg)";
         }}
       >
-        <span style={{ marginRight: 6, fontSize: 13 }}>Top features:</span>
-        <select
-          value={n}
-          onChange={(e) => setN(parseInt(e.target.value))}
+        <svg
+          ref={svgRef}
           style={{
-            marginLeft: 6,
-            padding: "6px 8px",
-            borderRadius: 8,
-            border: "1px solid rgba(255,255,255,0.12)",
-            background: "#fff",
-            color: "#111",
+            width: "100%",
+            height: lockedHeight ? `${lockedHeight}px` : "100%",
+            display: "block",
           }}
-        >
+        />
+      </div>
+
+      {/* move controls after svg so they render on top of rotated labels */}
+      <div className="correlation-matrix-controls">
+        <span style={{ marginRight: 6, fontSize: 13 }}>Top features:</span>
+        <select value={n} onChange={(e) => setN(parseInt(e.target.value))}>
           <option value={5}>5</option>
           <option value={8}>8</option>
           <option value={10}>10</option>
         </select>
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          left: 8,
-          bottom: 8,
-          color: "#cbd5e1",
-          fontSize: "0.8em",
-        }}
-      >
+      <div className="correlation-matrix-info">
         Hover cells to see correlation value
       </div>
     </div>

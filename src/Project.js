@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "./App.css";
-import WordCloudViz from "./WordCloudViz";
-import CorrelationMatrix from "./CorrelationMatrix";
+import WordCloudViz from "./components/WordCloudViz";
+import CorrelationMatrix from "./components/CorrelationMatrix";
 
 function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
@@ -189,90 +188,28 @@ function Project() {
           </div>
 
           {/* Word Clouds Card */}
-          <div
-            style={{
-              flex: 1,
-              borderRadius: "25px",
-              background:
-                "linear-gradient(120deg, rgba(59,130,246,0.35), rgba(30,64,175,0.25))",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.25)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.5em",
-              overflow: "hidden",
-            }}
-          >
-            <div style={{ width: "100%", height: "100%" }}>
-              <h4
-                style={{ margin: "0.5em 0", color: "#bfdbfe", fontWeight: 600 }}
-              >
-                ☁️ Word Clouds
-              </h4>
-              <p
-                style={{
-                  margin: "0.25em 0",
-                  fontSize: "0.9em",
-                  color: "#dbeafe",
-                }}
-              >
+          <div className="word-cloud-card">
+            <div className="word-cloud-card-content">
+              <h4 className="word-cloud-card-title">☁️ Word Clouds</h4>
+              <p className="word-cloud-card-subtitle">
                 Topic Distribution by AD Group
               </p>
-              <div
-                style={{
-                  flex: 1,
-                  width: "100%",
-                  height: "calc(100% - 56px)",
-                  paddingTop: "0.5em",
-                }}
-              >
+              <div className="word-cloud-visualization">
                 <WordCloudViz />
               </div>
             </div>
           </div>
 
           {/* Correlation Matrix Card */}
-          <div
-            style={{
-              flex: 1,
-              borderRadius: "25px",
-              background:
-                "linear-gradient(120deg, rgba(88,28,135,0.35), rgba(147,51,234,0.25))",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.25)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.5em",
-              overflow: "hidden",
-            }}
-          >
-            <div style={{ width: "100%", height: "100%" }}>
-              <h4
-                style={{ margin: "0.5em 0", color: "#c084fc", fontWeight: 600 }}
-              >
+          <div className="correlation-matrix-card">
+            <div className="correlation-matrix-card-content">
+              <h4 className="correlation-matrix-card-title">
                 📊 Correlation Matrix
               </h4>
-              <p
-                style={{
-                  margin: "0.25em 0",
-                  fontSize: "0.9em",
-                  color: "#e9d5ff",
-                }}
-              >
+              <p className="correlation-matrix-card-subtitle">
                 Feature-Biomarker Trends
               </p>
-              <div
-                style={{
-                  flex: 1,
-                  width: "100%",
-                  height: "calc(100% - 56px)",
-                  paddingTop: "0.5em",
-                }}
-              >
+              <div className="correlation-matrix-visualization">
                 <CorrelationMatrix />
               </div>
             </div>
