@@ -1,6 +1,7 @@
 // Note: The below code is used for the blob. This file takes in data from props and adjusts the shape/color of the blob accordingly
 // The following code tutorial was used to make this: https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
 
+import React, {useRef } from "react";
 import vertexShader from "./vertexShader";
 import fragmentShader from "./fragmentShader";
 import { useFrame } from "@react-three/fiber";

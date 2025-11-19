@@ -7,12 +7,14 @@ import { ReactComponent as BrainIcon } from './resources/brain.svg';
 import lowADBlob from './resources/low_ad_blob.png';
 import medADBlob from './resources/med_ad_blob.png';
 import highADBlob from './resources/high_ad_blob.png';
-import KnobSlider from "./components/guage";
+import KnobSlider from "./components/gauge";
         
 
 function Project() {
+  // By fault the topmost section of the data visualization system will be open
   const [showTopSection, setShowTopSection] = useState(true);
-  const [gaugeValue, setGaugeValue] = useState(60);
+  // By default the guage value will be 60, useState returns a funciton for setGuageValue
+  const [gaugeValue, setGaugeValue] = useState(60); 
 
   return (
     <div
