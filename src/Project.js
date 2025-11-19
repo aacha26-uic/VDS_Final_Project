@@ -16,7 +16,7 @@ function Project() {
   // By fault the topmost section of the data visualization system will be open
   const [showTopSection, setShowTopSection] = useState(true);
   // By default the guage value will be 60, useState returns a funciton for setGuageValue
-  const [gaugeValue, setGaugeValue] = useState(60); 
+  const [gaugeValue, setGaugeValue] = useState(0); 
 
   return (
     <div className="full-dv-layout">
@@ -39,18 +39,8 @@ function Project() {
 
       {/* Left section - Vertical Heatmap */}
       <div className="left-section">
-        <div style={{ margin: "0px", padding: "10px 0 0 0" }}>
-          <h4
-            style={{
-              color: "black",
-              margin: "0px",          
-              padding: "0px", 
-              lineHeight: "1.2",
-              textAlign: "center"
-            }}
-          >
-            CORRELATIONS B/W BIOMARKERS & AD STATUS
-          </h4>
+        <div>
+          <h1>Correlations Between Biomakers & AD Status</h1>
         </div>
         <CorrelationBiomarkerAD/>
         <div className="blob"> 
@@ -121,7 +111,7 @@ function Project() {
 
           {/* Participant Profile Card */}
           <div className="participant-profile-card">
-            <h4 style={{color: "black"}}>PATIENT PROFILE</h4>
+            <h1>Patient Profile</h1>
             <PatientProfile/>
           </div>
 
