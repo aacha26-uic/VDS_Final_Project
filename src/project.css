@@ -1,3 +1,314 @@
+/* ================================== 3D INTERACTION STYLES ================================== */
+
+.interactive-3d-wrapper {
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+  position: relative;
+}
+
+.interactive-3d-wrapper svg {
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.35s;
+  will-change: transform;
+  text-rendering: geometricPrecision;
+}
+
+.interactive-mount {
+  animation: popIn 600ms ease-out;
+  transform-origin: center;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================================== WORD CLOUD STYLES ================================== */
+
+/* Word Cloud Container */
+.word-cloud-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Word Cloud Controls */
+.word-cloud-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.word-cloud-slider-label {
+  color: #111;
+  font-size: 0.85em;
+}
+
+.word-cloud-dropdown {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 5;
+}
+
+.word-cloud-dropdown select {
+  padding: 0.3em;
+  border-radius: 8px;
+  appearance: none;
+  background: white
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path d="M6 0L0 8h12z" fill="%23666"/></svg>')
+    no-repeat right 8px center;
+  padding-right: 28px;
+}
+
+.word-cloud-info {
+  position: absolute;
+  left: 8px;
+  right: 180px;
+  bottom: 8px;
+  color: #111;
+  font-size: 0.8em;
+}
+
+/* Word Cloud Legend */
+.word-cloud-legend {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  color: #111;
+  font-size: 0.75em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Word Cloud Radial Elements */
+.radial-segment {
+  transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
+  transform-origin: center;
+  filter: none;
+}
+
+.radial-segment:hover {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+  transform: translateZ(12px) scale(1.03);
+}
+
+.radial-center-word {
+  transition: transform 0.25s ease, fill 0.25s ease;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  filter: none;
+}
+
+.radial-center-word:hover {
+  transform: translateZ(10px) scale(1.12);
+  fill: #ff7a00 !important;
+}
+
+.ring-bg {
+  fill: rgba(0, 0, 0, 0.03);
+  stroke: #e5e7eb;
+  stroke-width: 1;
+}
+
+.ring-label {
+  text-anchor: middle;
+  text-rendering: geometricPrecision;
+  font-size: 16px;
+  font-weight: bold;
+  fill: #111;
+  opacity: 1;
+  paint-order: stroke fill;
+  pointer-events: none;
+}
+
+/* Word Cloud Card Styles */
+.word-cloud-card {
+  flex: 1;
+  border-radius: 25px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  overflow: hidden;
+}
+
+.word-cloud-card-content {
+  width: 100%;
+  height: 100%;
+}
+
+.word-cloud-card-title {
+  margin: 0.5em 0;
+  color: #111;
+  font-weight: 600;
+}
+
+.word-cloud-card-subtitle {
+  margin: 0.25em 0;
+  font-size: 0.9em;
+  color: #111;
+}
+
+.word-cloud-visualization {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 56px);
+  padding-top: 0.5em;
+}
+
+/* ================================== CORRELATION MATRIX STYLES ================================== */
+
+/* Correlation Matrix Container */
+.correlation-matrix-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Correlation Matrix Controls */
+.correlation-matrix-controls {
+  position: absolute;
+  top: 1px;
+  right: 8px;
+  z-index: 1000;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.correlation-matrix-controls select {
+  margin-left: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: #111;
+}
+
+.correlation-matrix-info {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  color: #111;
+  font-size: 0.8em;
+}
+
+/* Correlation Matrix Elements */
+.corr-cell {
+  transition: transform 0.25s ease, filter 0.25s ease;
+  transform-origin: center;
+}
+
+.corr-cell:hover {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+  transform: translateZ(12px) scale(1.05);
+}
+
+.matrix-label {
+  fill: #111;
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.matrix-row-label {
+  fill: #111;
+  font-size: 11px;
+  text-anchor: end;
+}
+
+/* Correlation Matrix Legend */
+svg .corr-legend-outline {
+  stroke: #444;
+  stroke-width: 0.6;
+}
+
+.legend-tick {
+  stroke: #111;
+  stroke-width: 1;
+}
+
+.legend-tick-label {
+  fill: #111;
+  font-size: 10px;
+}
+
+/* Correlation Matrix Card Styles */
+.correlation-matrix-card {
+  flex: 1;
+  border-radius: 25px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  overflow: hidden;
+}
+
+.correlation-matrix-card-content {
+  width: 100%;
+  height: 100%;
+}
+
+.correlation-matrix-card-title {
+  margin: 0.5em 0;
+  color: #111;
+  font-weight: 600;
+}
+
+.correlation-matrix-card-subtitle {
+  margin: 0.25em 0;
+  font-size: 0.9em;
+  color: #111;
+}
+
+.correlation-matrix-visualization {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 56px);
+  padding-top: 0.5em;
+}
 /* ================================== OVERALL STYLING ================================== */
 .full-dv-layout {
         height: 100%;

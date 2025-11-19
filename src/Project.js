@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./App.css";
+import WordCloudViz from "./components/WordCloudViz";
+import CorrelationMatrix from "./components/CorrelationMatrix";
 import "./project.css"; 
 import Blob from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
@@ -119,14 +120,30 @@ function Project() {
 
           {/* Word Clouds Card */}
           <div className="word-cloud-card">
-            <h4>☁️ Word Clouds</h4>
-            <p>Topic Distribution by AD Group</p>
+            <div className="word-cloud-card-content">
+              <h4 className="word-cloud-card-title">☁️ Word Clouds</h4>
+              <p className="word-cloud-card-subtitle">
+                Topic Distribution by AD Group
+              </p>
+              <div className="word-cloud-visualization">
+                <WordCloudViz />
+              </div>
+            </div>
           </div>
 
           {/* Correlation Matrix Card */}
           <div className="correlation-matrix-card">
-            <h4>📊 Correlation Matrix</h4>
-            <p>Feature-Biomarker Trends</p>
+            <div className="correlation-matrix-card-content">
+              <h4 className="correlation-matrix-card-title">
+                📊 Correlation Matrix
+              </h4>
+              <p className="correlation-matrix-card-subtitle">
+                Feature-Biomarker Trends
+              </p>
+              <div className="correlation-matrix-visualization">
+                <CorrelationMatrix />
+              </div>
+            </div>
           </div>
         </div>
       </div>
