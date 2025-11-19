@@ -44,6 +44,14 @@
         border-radius: 0.2rem;
 }
 
+.left-components {
+        width: 100%;
+        background-color: #64dfa0;
+        align-items: center;
+        justify-content: center;
+
+}
+
 .left-section h4 {
         color: black;
         margin: 0px ;   
@@ -129,21 +137,21 @@
 
 .heatmap {
     display: block;
-    margin: 0 auto 20px auto;
-    padding-top: 0;
-    margin-left: 20px;
+    padding: 1rem;
     font-size: 12px;
     background-color: pink;
     width: 100%;
-    height: 20rem;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
 
 .slider-columns {
     display: flex;
-    gap: 5px;
+    gap: 5rem;
     width: 100%;
+    padding: 3rem 1rem;
+    justify-content: center;
     background-color: rgb(237, 239, 158);
 }
   

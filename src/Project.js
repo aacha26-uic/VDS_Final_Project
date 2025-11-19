@@ -42,6 +42,7 @@ function Project() {
         <div>
           <h1>Correlations Between Biomakers & AD Status</h1>
         </div>
+        <div className="left-components">
         <CorrelationBiomarkerAD/>
         <div className="blob"> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
@@ -52,6 +53,7 @@ function Project() {
             <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
             <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
           </div>
+        </div>
         </div>
       </div>
 
