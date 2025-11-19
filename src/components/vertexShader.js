@@ -1,4 +1,5 @@
-// BLOB TUTORIAL CODE USED: https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
+// Note: The below code is used for the blob. The file is controls the shape of the blob
+// The following code tutorial was used to make this: https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
 
 const vertexShader = `
 uniform float u_intensity;
