@@ -121,8 +121,8 @@ function Project() {
 
           {/* Participant Profile Card */}
           <div className="participant-profile-card">
-            <h4>👤 Participant Profile </h4>
-            <p> Linguistic Features</p>
+            <h4 style={{color: "black"}}>PATIENT PROFILE</h4>
+            <PatientProfile/>
           </div>
 
           {/* Word Clouds Card */}
