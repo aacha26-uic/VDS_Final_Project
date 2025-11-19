@@ -47,7 +47,7 @@ function Project() {
         <CorrelationBiomarkerAD/>
         <div className="blob"> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <Blob score = {29}/>
+            <Blob score = {5}/>
           </Canvas>
           <div className= "blobLegend">
             <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
