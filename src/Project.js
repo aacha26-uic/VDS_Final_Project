@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import "./project.css"; 
+import "./Project.css"; 
 import Blob from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
 import { ReactComponent as BrainIcon } from './resources/brain.svg';
