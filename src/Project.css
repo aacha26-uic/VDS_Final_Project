@@ -447,7 +447,7 @@ svg .corr-legend-outline {
 
 .heatmap {
   display: block;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   width: 100%;
   height: 100%;
@@ -580,8 +580,8 @@ svg .corr-legend-outline {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 0.5em;
+        justify-content: flex-start;
+        padding: 0 !important;
         overflow: hidden;
         background: #ffffff;
         border: 0.3rem solid rgb(57, 107, 207);
@@ -593,14 +593,8 @@ svg .corr-legend-outline {
 .participant-profile-card h4 {
         margin: 0.5em 0; 
         font-weight: 600;
+        padding-top: 0rem;
         color: "black";
-}
-
-.participant-profile-card p {
-        margin: 0.25em 0;
-        font-size: 0.9em;
-        color: #d1fae5;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #profile-chart .domain,
@@ -612,26 +606,29 @@ svg .corr-legend-outline {
 #profile-chart .tick text {
     fill: black !important;
     font-weight: 400 !important;
-    font-size: 10px !important;
+    font-size: 17px !important;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .chart-container {
     position: relative;
-    width: 900px;
-    margin: 20px auto;
+    width: 90%;
+    margin: 0 auto !important;
 }
   
 .controls {
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px !important;
 }
   
 .control-label {
+    font-size: 15px;
     font-weight: 200;
     color: black;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 5px;
 }
   
 .radio-group {
@@ -646,8 +643,26 @@ svg .corr-legend-outline {
   
 .axis-label {
     fill: black;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.main-label {
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    fill: black;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.patient-select {
+    font-size: 18px !important;
+    padding: 8px 14px !important;
+    border-radius: 6px !important;
+    border: 1px solid #000 !important;
+    width: 220px !important;
+    color: black !important;
+    background-color: #f4f4f4 !important;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
   
