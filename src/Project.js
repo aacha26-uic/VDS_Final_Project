@@ -67,23 +67,7 @@ function Project() {
       </button>
 
       {/* Left section - Vertical Heatmap */}
-      <div
-        style={{
-          width: "25%",
-          height: "100%",
-          borderRadius: "25px",
-          background:
-            "linear-gradient(180deg, rgba(30,58,138,0.4), rgba(17,24,39,0.3))",
-          border: "1px solid rgba(255,255,255,0.1)",
-          boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 2,
-        }}
-        className="correlationHeatmaps">
+      <div className="left-section">
         <div className="heatmap"> This is where the heatmap will go </div>
         <div style={{ textAlign: "center" }} className = "heatmap_sliders">This is where the sliders will go</div>
         <div className="blob"> 

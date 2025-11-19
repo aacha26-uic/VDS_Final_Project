@@ -13,6 +13,21 @@
         overflow: hidden;
 }
 
+.left-section {
+        width: 25%;
+        height: 100%;
+        border-radius: 25px;
+        background:linear-gradient(180deg, rgba(30,58,138,0.4), rgba(17,24,39,0.3));
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2 ;
+}
+
 .right-section {
         flex: 1;
         height: 100%;
@@ -63,10 +78,6 @@
         padding: 0rem 1rem;
 }
 
-
-.correlationHeatmaps {
-        background-color: rgb(255, 255, 255); 
-}
 
 .heatmap {
         background-color: violet; /*Just tempororary*/
