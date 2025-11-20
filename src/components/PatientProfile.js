@@ -60,9 +60,9 @@ const PatientProfile = () => {
             value: d3.mean(filtered, (d) => +d[feature]) || 0,
         }));
 
-        const width = 350;
-        const height = 300;
-        const margin = { top: 20, right: 20, bottom: 50, left: 40 };
+        const width = 400;
+        const height = 380;
+        const margin = { top: 20, right: 20, bottom: 80, left: 45 };
 
         const svg = d3
             .select(svgRef.current)
@@ -144,12 +144,14 @@ const PatientProfile = () => {
 
         // labels
         svg.append("text")
+            .attr("class", "main-label")
             .attr("text-anchor", "middle")
             .attr("x", width / 2)
             .attr("y", height - 3)
             .text("Linguistic Features");
 
         svg.append("text")
+            .attr("class", "main-label")
             .attr("text-anchor", "middle")
             .attr("transform", `translate(15, ${height / 2}) rotate(-90)`)
             .text("Mean Value");
@@ -165,9 +167,9 @@ const PatientProfile = () => {
             style={{ position: "relative", width: "100%", height: "100%" }}
         >
             {/* AD group selection */}
-            <div style={{ marginBottom: "10px", color: "#000000" }}>
+            <div className="controls radio-group">
                 {groups.map((g) => (
-                    <label key={g} style={{ marginRight: "15px" }}>
+                    <label key={g} className="radio-item">
                         <input
                             type="radio"
                             name="dx-group"
@@ -176,7 +178,7 @@ const PatientProfile = () => {
                             disabled={selectedPatient !== "ALL"}
                             onChange={() => setSelectedGroup(g)}
                         />
-                        {g}
+                        <span>{g}</span>
                     </label>
                 ))}
             </div>

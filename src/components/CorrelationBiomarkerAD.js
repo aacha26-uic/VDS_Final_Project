@@ -17,12 +17,12 @@ const linguisticFeatures = [
     "PROPN(participant)", "TTR(participant)", "MATTR(participant)"
 ];
 
-const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
+const CorrelationBiomarkerAD = () => {
 
     const heatmapRef = useRef();
 
     const [data, setData] = useState([]);
-    // const [sliderValues, setSliderValues] = useState({});
+    const [sliderValues, setSliderValues] = useState({});
     const [corrMatrix, setCorrMatrix] = useState([]);
 
     useEffect(() => {
@@ -64,32 +64,35 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     useEffect(() => {
         if (!corrMatrix.length) return;
 
-        const svg = d3.select(heatmapRef.current);
-        svg.selectAll("*").remove();
+        const rawSvg = d3.select(heatmapRef.current);
+        rawSvg.selectAll("*").remove();
 
         const width = 400;
-        const height = 250;
-        const cellSize = 80;
-        const paddingX = 63;
-        const paddingY = 21;
+        const height = 300;
+        const cellSize = 100;
 
-        svg.attr("width", width).attr("height", height);
+        const margin = { top: 40, right: 40, bottom: 120, left: 120 };
+
+        const svg = rawSvg
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom);
+
+        const g = svg
+          .append("g")
+          .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const color = d3.scaleLinear()
             .domain([0, 1])
             .range(["#efddff", "#301934"]);
 
-        svg.append("g")
-        .attr("transform", "translate(0,0)")
-
         // cells
-        svg.selectAll(".cell")
+        g.selectAll(".cell")
             .data(corrMatrix)
             .enter()
             .append("rect")
             .attr("class", "cell")
-            .attr("x", d => paddingX + groups.indexOf(d.group) * cellSize)
-            .attr("y", d => paddingY + biomarkers.findIndex(b => b.label === d.biomarker) * cellSize)
+            .attr("x", d => groups.indexOf(d.group) * cellSize)
+            .attr("y", d => biomarkers.findIndex(b => b.label === d.biomarker) * cellSize)
             .attr("width", cellSize)
             .attr("height", cellSize)
             .attr("stroke", "#000")
@@ -97,24 +100,24 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
             .attr("fill", d => color(d.value));
 
         // labels for AD groups
-        svg.selectAll(".groupLabel")
+        g.selectAll(".groupLabel")
             .data(groups)
             .enter()
             .append("text")
             .attr("class", "label")
-            .attr("x", (d, i) => paddingX + i * cellSize + cellSize / 2)
-            .attr("y", paddingY - 10)
+            .attr("x", (d, i) => i * cellSize + cellSize / 2)
+            .attr("y", -10)
             .attr("text-anchor", "middle")
             .text(d => d);
 
         // label for biomarkers
-        svg.selectAll(".bioLabel")
+        g.selectAll(".bioLabel")
             .data(biomarkers)
             .enter()
             .append("text")
             .attr("class", "label")
-            .attr("x", paddingX - 10)
-            .attr("y", (d, i) => paddingY + i * cellSize + cellSize / 2)
+            .attr("x", -15)
+            .attr("y", (d, i) => i * cellSize + cellSize / 2)
             .attr("text-anchor", "end")
             .attr("dominant-baseline", "middle")
             .text(d => d.label);
