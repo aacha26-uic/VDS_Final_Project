@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  opacity: 1 !important;
+  text-align: center;
+  width: auto;
+  max-width: 50vw;
+  height: auto;
+  padding: 10px;
+  font: 12px sans-serif;
+  background: rgb(172, 173, 173);
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  font-size: 0.7em !important;
+}
+
+.d3-component {
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0px !important;
+  margin-top: 2px;
+  padding: 0px;
+  background-color: white;
+  transform-origin: 0, 0;
+  overflow-y: visible !important;
+}
+
+.shadow {
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.25);
+}
+
+.rounded,
+.shadow,
+.shadow > * {
+  border-radius: 1em !important;
+}
+
+button {
+  border: none;
+  color: #f1f5f9;
+  /* padding: 5px 5px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 100%;
+  min-height: 1em;
+  max-height: 2em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.activeButton {
+  background: linear-gradient(
+    120deg,
+    rgba(30, 58, 138, 0.3),
+    rgba(17, 24, 39, 0.4)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+
+.inactiveButton {
+  background: linear-gradient(
+    120deg,
+    rgba(59, 130, 246, 0.5),
+    rgba(147, 51, 234, 0.4)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #bfdbfe;
+}
