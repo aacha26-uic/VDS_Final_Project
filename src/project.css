@@ -357,7 +357,7 @@ svg .corr-legend-outline {
 
 .left-components {
         width: 100%;
-        background-color: #64dfa0;
+        /* background-color: #64dfa0; */
         align-items: center;
         justify-content: center;
 
@@ -417,7 +417,6 @@ svg .corr-legend-outline {
         justify-content: center;
         color: rgb(48, 45, 45);
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        background-color: #64dfa0;
 }
 
 .blobLegend {
@@ -438,65 +437,66 @@ svg .corr-legend-outline {
 }
 
 .correlation-biomarkers {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    margin-top: 0;
-    padding-top: 0;
-    overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  justify-content: center;
+  overflow: visible;
 }
 
 .heatmap {
-    display: block;
-    padding: 1rem;
-    font-size: 12px;
-    background-color: pink;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
+  display: block;
+  font-size: 22px;
+  font-weight: 400;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .slider-columns {
     display: flex;
-    gap: 5rem;
+    gap: 1rem;
     width: 100%;
-    padding: 3rem 1rem;
+    height: 6rem;
+    padding: 1.5rem 0.9rem;
+    padding-left: 1.8rem;
     justify-content: center;
-    background-color: rgb(237, 239, 158);
 }
   
 .column {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     flex: 1;
 }
   
 .slider-row {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     color: black;
 }
 
 .slider-row label {
     width: 40px;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 15px;
     color: black;
 }
   
 .slider-row input[type="range"] {
-    width: 90px;
+    width: 95px;
     accent-color: #d75f4c;
 }
   
 .slider-row span {
-    width: 20px;
+    width: 0.7rem;
     text-align: right;
     font-family: monospace;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 
@@ -580,25 +580,21 @@ svg .corr-legend-outline {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 0.5em;
+        justify-content: flex-start;
+        padding: 0 !important;
         overflow: hidden;
         background: #ffffff;
         border: 0.3rem solid rgb(57, 107, 207);
         border-radius: 0.2rem;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 
-.participant-profile-card h4 {
-        margin: 0.5em 0; 
+.participant-profile-card h1 {
+        margin-top: 0.3rem;
+        margin-bottom: 0.9rem;
         font-weight: 600;
         color: "black";
-}
-
-.participant-profile-card p {
-        margin: 0.25em 0;
-        font-size: 0.9em;
-        color: #d1fae5;
 }
 
 #profile-chart .domain,
@@ -610,41 +606,71 @@ svg .corr-legend-outline {
 #profile-chart .tick text {
     fill: black !important;
     font-weight: 400 !important;
-    font-size: 10px !important;
+    font-size: 17px !important;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .chart-container {
     position: relative;
-    width: 900px;
-    margin: 20px auto;
+    width: 90%;
+    margin: 0 auto !important;
 }
   
 .controls {
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 7px !important;
 }
-  
-.control-label {
-    font-weight: 200;
-    color: black;
-}
-  
+
 .radio-group {
     display: flex;
-    gap: 10px;
+    gap: 25px;
+    align-items: center;
+}
+
+.controls.radio-group {
+    justify-content: center;
+    width: 100%;  
+    padding-bottom: 0.5rem;       
+}
+
+.radio-item input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
 }
   
 .radio-item span {
+    font-size: 20px;
+    font-weight: 500;
     color: black;
-    margin-left: 4px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
   
 .axis-label {
     fill: black;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.main-label {
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    fill: black;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.patient-select {
+    font-size: 18px !important;
+    padding: 8px 14px !important;
+    border-radius: 6px !important;
+    border: 1px solid #000 !important;
+    width: 220px !important;
+    color: black !important;
+    background-color: #f4f4f4 !important;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
   
 .tooltip {
@@ -660,6 +686,7 @@ svg .corr-legend-outline {
     white-space: nowrap;
     transition: opacity 0.2s ease;
     visibility: hidden;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .tooltip:hover {
@@ -727,9 +754,3 @@ correlation-matrix-card p {
         font-size: 0.9em;
         color: #e9d5ff;
 }
-
-
-
-
-
-
