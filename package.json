@@ -19,6 +19,7 @@
     "three": "^0.181.1",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://aacha26-uic.github.io/VDS_Final_Project",
   "scripts": {
     "start": "react-scripts start",
     "dev": "react-scripts start",
