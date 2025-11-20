@@ -17,12 +17,12 @@ const linguisticFeatures = [
     "PROPN(participant)", "TTR(participant)", "MATTR(participant)"
 ];
 
-const CorrelationBiomarkerAD = () => {
+const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
 
     const heatmapRef = useRef();
 
     const [data, setData] = useState([]);
-    const [sliderValues, setSliderValues] = useState({});
+    // const [sliderValues, setSliderValues] = useState({});
     const [corrMatrix, setCorrMatrix] = useState([]);
 
     useEffect(() => {

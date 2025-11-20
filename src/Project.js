@@ -18,6 +18,8 @@ function Project() {
   const [showTopSection, setShowTopSection] = useState(true);
   // By default the guage value will be 60, useState returns a funciton for setGuageValue
   const [gaugeValue, setGaugeValue] = useState(0); 
+  const [sliderValues, setSliderValues] = useState({});
+
 
   return (
     <div className="full-dv-layout">
@@ -44,10 +46,10 @@ function Project() {
           <h1>Correlations Between Biomakers & AD Status</h1>
         </div>
         <div className="left-components">
-        <CorrelationBiomarkerAD/>
+        <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
         <div className="blob"> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <Blob score = {5}/>
+            <Blob score={Object.values(sliderValues).reduce((a, b) => a + b, 0) / 10}/>
           </Canvas>
           <div className= "blobLegend">
             <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
