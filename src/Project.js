@@ -49,7 +49,7 @@ function Project() {
         <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
         <div className="blob"> 
           <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <Blob score={Object.values(sliderValues).reduce((a, b) => a + b, 0) / 10}/>
+            <Blob score={Object.values(sliderValues).reduce((total, arrayValue) => total + arrayValue, 0) / 10}/>
           </Canvas>
           <div className= "blobLegend">
             <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>

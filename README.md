@@ -187,3 +187,4 @@ The application will open at `http://localhost:3000`
 - **Blob Code Tutorial** - https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
 - **Brain Silhouette** - https://static.vecteezy.com/system/resources/previews/059/555/853/non_2x/black-silhouette-of-a-human-brain-vector.jpg 
 
+
