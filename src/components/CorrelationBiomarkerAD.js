@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as d3 from "d3";
 
 // CSF biomarkers (tTau_AB42Ratio, AB42_AB40Ratio) & Plasma (P_TAU_LUMI) biomarker
@@ -25,6 +25,17 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     // const [sliderValues, setSliderValues] = useState({});
     const [corrMatrix, setCorrMatrix] = useState([]);
 
+    // correlation matrix - will change once model is ready
+    const generateCorrMatrix = useCallback(() => {
+        return biomarkers.flatMap((b) =>
+            groups.map((g) => {
+                const sliderEffect = Object.values(sliderValues).reduce((a,v) => a + v, 0) * 0.0005;
+                const value = Math.min(1, Math.max(0, Math.random() * 0.6 + 0.2 + sliderEffect));
+                return { biomarker: b.label, group: g, value };
+            })
+        );
+    }, [sliderValues]);
+
     useEffect(() => {
         d3.csv("/data.csv").then((raw) => {
 
@@ -45,20 +56,14 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
             });
             setSliderValues(initialValues);
 
-            setCorrMatrix(generateCorrMatrix());
+            // setCorrMatrix(generateCorrMatrix());
         })
-    }, []);
+    }, [setSliderValues]);
 
-    // correlation matrix - will change once model is ready
-    const generateCorrMatrix = () => {
-        return biomarkers.flatMap((b) =>
-            groups.map((g) => {
-                const sliderEffect = Object.values(sliderValues).reduce((a,v) => a + v, 0) * 0.0005;
-                const value = Math.min(1, Math.max(0, Math.random() * 0.6 + 0.2 + sliderEffect));
-                return { biomarker: b.label, group: g, value };
-            })
-        );
-    };
+    useEffect(() => {
+        if (!Object.keys(sliderValues).length) return;
+        setCorrMatrix(generateCorrMatrix());
+    }, [generateCorrMatrix, sliderValues]);
 
     // heatmap
     useEffect(() => {
