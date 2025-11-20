@@ -357,7 +357,6 @@ svg .corr-legend-outline {
 
 .left-components {
         width: 100%;
-        /* background-color: #64dfa0; */
         align-items: center;
         justify-content: center;
 
@@ -417,6 +416,7 @@ svg .corr-legend-outline {
         justify-content: center;
         color: rgb(48, 45, 45);
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin-top: 1rem;
 }
 
 .blobLegend {
@@ -460,23 +460,23 @@ svg .corr-legend-outline {
     display: flex;
     gap: 1rem;
     width: 100%;
-    height: 6rem;
-    padding: 1.5rem 0.9rem;
-    padding-left: 1.8rem;
+    height: auto;
+    padding-left: 3rem;
     justify-content: center;
+    padding-bottom: 1rem;
 }
   
 .column {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 1rem;
     flex: 1;
 }
   
 .slider-row {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
     color: black;
 }
 
@@ -485,6 +485,7 @@ svg .corr-legend-outline {
     font-weight: 600;
     font-size: 15px;
     color: black;
+    text-align: left;
 }
   
 .slider-row input[type="range"] {
