@@ -28,7 +28,7 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     useEffect(() => {
         d3.csv("/data.csv").then((raw) => {
 
-            // parsing the strings to numeric: https://observablehq.com/@dakoop/reading-in-data-learn-js-data
+            // parsing the strings to numeric
             const parsedToNumeric  = raw.map(r => {
                 const out = { ...r };
                 biomarkers.forEach(b => { out[b.key] = +r[b.key]; });
@@ -131,7 +131,7 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
         return { min, max };
     };
 
-    // to render a slider: https://d3.workergnome.com/examples/basic_events/?utm_source=chatgpt.com
+    // to render a slider
     const renderSlider = (feature) => {
         const { min, max } = getRange(feature);
         return (
