@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
+import CorrelationOverlay from "./CorrelationOverlay";
 
 function CorrelationMatrix() {
   const [n, setN] = useState(10);
   const [data, setData] = useState(null);
+  const [overlayData, setOverlayData] = useState(null);
   const svgRef = useRef(null);
   const outerRef = useRef(null);
   const [lockedHeight, setLockedHeight] = useState(null);
@@ -71,11 +73,19 @@ function CorrelationMatrix() {
         rect.setAttribute("fill", color(v));
         rect.setAttribute("stroke", "rgba(255,255,255,0.03)");
         rect.setAttribute("class", "corr-cell");
-        rect.style.cursor = "default";
+        rect.style.cursor = "pointer";
         rect.addEventListener("mouseenter", (e) => {
           showTooltip(e, `${header[i]} × ${header[j]}: ${v.toFixed(3)}`);
         });
         rect.addEventListener("mouseleave", hideTooltip);
+        rect.addEventListener("click", () => {
+          setOverlayData({
+            variable1: header[i],
+            variable2: header[j],
+            correlation: v,
+            pValue: null, // We don't have p-values in the current data
+          });
+        });
         svg.appendChild(rect);
       }
     }
@@ -336,8 +346,16 @@ function CorrelationMatrix() {
       </div>
 
       <div className="correlation-matrix-info">
-        Hover cells to see correlation value
+        Click cells for detailed correlation analysis
       </div>
+
+      {/* Correlation Overlay */}
+      {overlayData && (
+        <CorrelationOverlay
+          data={overlayData}
+          onClose={() => setOverlayData(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
+import DetailOverlay from "./DetailOverlay";
 
 // Radial Word Cloud with 3 rings for HC, MCI, AD conditions
 function WordCloudViz() {
   const [showCondition, setShowCondition] = useState("all");
   const [maxWords, setMaxWords] = useState(8);
   const [wordsData, setWordsData] = useState([]);
+  const [overlayData, setOverlayData] = useState(null);
   const svgRef = useRef(null);
   const outerRef = useRef(null);
   const [lockedHeight, setLockedHeight] = useState(null);
@@ -296,19 +298,16 @@ function WordCloudViz() {
     }
 
     function showPersistentInfo(word, condition) {
-      if (condition === "all") {
-        alert(
-          `${word.word}\nHC: ${word.hc.toFixed(4)}\nMCI: ${word.mci.toFixed(
-            4
-          )}\nAD: ${word.ad.toFixed(4)}`
-        );
-      } else {
-        alert(
-          `${word.word} (${condition.toUpperCase()})\nFrequency: ${word[
-            condition
-          ].toFixed(4)}`
-        );
-      }
+      setOverlayData({
+        word: word.word,
+        condition: condition,
+        frequency: condition !== "all" ? word[condition] : null,
+        allFrequencies: {
+          hc: word.hc,
+          mci: word.mci,
+          ad: word.ad,
+        },
+      });
     }
 
     // cleanup on unmount
@@ -438,6 +437,14 @@ function WordCloudViz() {
           <span>AD (Alzheimer's Disease)</span>
         </div>
       </div>
+
+      {/* Detail Overlay */}
+      {overlayData && (
+        <DetailOverlay
+          data={overlayData}
+          onClose={() => setOverlayData(null)}
+        />
+      )}
     </div>
   );
 }
