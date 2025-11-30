@@ -27,7 +27,7 @@ const Blob = (props) => {
         targetIntensity,
         0.1
       ); // Makes the blob smoothly transition to its new state 
-      uniforms.current.moca_score.value = props.score / 30; // update the moca_score with new props data each frame
+      uniforms.current.moca_score.value = props.score / 30; // update the moca_score with new props data each update
     } 
 
   }, [props.score]);
