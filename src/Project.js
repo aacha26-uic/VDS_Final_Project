@@ -16,15 +16,15 @@ function Project() {
   // By fault the topmost section of the data visualization system will be open
   const [showTopSection, setShowTopSection] = useState(true);
   // By default the guage value will be 60, useState returns a funciton for setGuageValue
-  const [gaugeValue, setGaugeValue] = useState(0); 
+  const [gaugeValue, setGaugeValue] = useState(0);
   const [sliderValues, setSliderValues] = useState({});
 
   return (
     <div className="full-dv-layout">
       {/* Background glow layer */}
       <div className="background-glow"></div>
-      {/* Toggle Button */}
-      <button
+      {/* Toggle Button - COMMENTED OUT */}
+      {/* <button
         className="toggle-button"
         onClick={() => setShowTopSection(!showTopSection)}
         onMouseEnter={(e) => {
@@ -37,7 +37,7 @@ function Project() {
         }}
       >
         {showTopSection ? "Hide Analysis ▲" : "Show Analysis ▼"}
-      </button>
+      </button> */}
 
       {/* Left section - Vertical Heatmap */}
       <div className="left-section">
@@ -45,72 +45,43 @@ function Project() {
           <h1>Correlations Between Biomakers & AD Status</h1>
         </div>
         <div className="left-components">
-        <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
-        <div className="blob"> 
-          <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <Blob score={Object.values(sliderValues).reduce((total, arrayValue) => total + arrayValue, 0) / 10}/>
-          </Canvas>
-          <div className= "blobLegend">
-            <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
-            <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
-            <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+          <CorrelationBiomarkerAD
+            sliderValues={sliderValues}
+            setSliderValues={setSliderValues}
+          />
+          <div className="blob">
+            <Canvas camera={{ position: [0.0, 0.0, 8.0] }}>
+              <Blob
+                score={
+                  Object.values(sliderValues).reduce(
+                    (total, arrayValue) => total + arrayValue,
+                    0
+                  ) / 10
+                }
+              />
+            </Canvas>
+            <div className="blobLegend">
+              <div className="blobLegend1">
+                <img src={lowADBlob} />
+                <p>HC</p>
+              </div>
+              <div className="blobLegend2">
+                <img src={medADBlob} />
+                <p>MCI</p>
+              </div>
+              <div className="blobLegend3">
+                <img src={highADBlob} />
+                <p>AD</p>
+              </div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
 
-      {/* Right section - Brain/Stats top and 3 cards bottom */}
+      {/* Right section - 3 cards top and Brain/Stats bottom */}
       <div className="right-section">
-        {/* Top - Brain and Stats */}
-        {showTopSection && (
-          <div className="brains_and_dials">
-            <div>
-              <h1>Relationship Between Conversation Length and AD Status</h1>
-            </div>
-
-            <div className="brains">
-              <div className="brain1">
-                <BrainIcon className="brain1" />
-                <div className="brain1-prob">
-                  <p>{Math.round(gaugeValue / 0.32)}%</p>
-                </div>
-                <div>
-                  <p>AD Status: HC</p>
-                  <p>MoCA Range: 20-30</p>
-                </div>
-              </div>
-              <div className="brain2">
-                <BrainIcon className="brain2" />
-                <div className="brain2-prob">
-                  <p>{Math.round(gaugeValue / 0.43)}%</p>
-                </div>
-                <div>
-                  <p>AD Status: MCI </p>
-                  <p>MoCA Range:10-20</p>
-                </div>
-              </div>
-              <div className="brain3">
-                <BrainIcon className="brain3" />
-                <div className="brain3-prob">
-                  <p>{Math.round(gaugeValue / 0.4)}%</p>
-                </div>
-                <div>
-                  <p>AD Status: AD</p>
-                  <p>MoCA Range: 0-10</p>
-                </div>
-              </div>
-              <div className="dial">
-                <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
-                <div>
-                  <p>Number of Tokens</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Bottom - Three cards */}
-        <div className="bottom-3-cards">
+        {/* Top - Three cards */}
+        <div className="top-3-cards">
           {/* Participant Profile Card */}
           <div className="participant-profile-card">
             <h1>Patient Profile</h1>
@@ -120,7 +91,24 @@ function Project() {
           {/* Word Clouds Card */}
           <div className="word-cloud-card">
             <div className="word-cloud-card-content">
-              <h1 className="word-cloud-card-title"> Word Clouds</h1>
+              <div className="word-cloud-card-header">
+                <h1 className="word-cloud-card-title">Word Clouds</h1>
+                <div className="info-button">
+                  i
+                  <div className="info-tooltip">
+                    <h4>What is TF-IDF?</h4>
+                    <p className="info-tooltip-main">
+                      TF-IDF (Term Frequency-Inverse Document Frequency)
+                      measures how important words are to different groups. It
+                      shows linguistic patterns unique to each condition.
+                    </p>
+                    <p>
+                      Hover over words to see TF-IDF values. Click for more
+                      detailed explanations.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div className="word-cloud-visualization">
                 <WordCloudViz />
               </div>
@@ -130,11 +118,77 @@ function Project() {
           {/* Correlation Matrix Card */}
           <div className="correlation-matrix-card">
             <div className="correlation-matrix-card-content">
-              <h1 className="correlation-matrix-card-title">
-                Correlation Matrix
-              </h1>
+              <div className="correlation-matrix-card-header">
+                <h1 className="correlation-matrix-card-title">
+                  Correlation Matrix
+                </h1>
+                <div className="info-button">
+                  i
+                  <div className="info-tooltip">
+                    <h4>What do these numbers mean?</h4>
+                    <p className="info-tooltip-main">
+                      These numbers show how two things move together. If a
+                      number is close to 1, those two measures tend to increase
+                      together. If it's close to -1, one increases while the
+                      other decreases. If it's near 0, there’s no clear link.
+                      Bigger numbers (closer to 1 or -1) mean a stronger
+                      relationship.
+                    </p>
+                    <p>
+                      Hover over a cell to see its exact value. Click for a
+                      clearer example if you'd like to learn more.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div className="correlation-matrix-visualization">
                 <CorrelationMatrix />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom - Brain and Stats */}
+        <div className="brains_and_dials">
+          <div>
+            <h1>Relationship Between Conversation Length and AD Status</h1>
+          </div>
+
+          <div className="brains">
+            <div className="brain1">
+              <BrainIcon className="brain1" />
+              <div className="brain1-prob">
+                <p>{Math.round(gaugeValue / 0.32)}%</p>
+              </div>
+              <div>
+                <p>AD Status: HC</p>
+                <p>MoCA Range: 20-30</p>
+              </div>
+            </div>
+            <div className="brain2">
+              <BrainIcon className="brain2" />
+              <div className="brain2-prob">
+                <p>{Math.round(gaugeValue / 0.43)}%</p>
+              </div>
+              <div>
+                <p>AD Status: MCI </p>
+                <p>MoCA Range:10-20</p>
+              </div>
+            </div>
+            <div className="brain3">
+              <BrainIcon className="brain3" />
+              <div className="brain3-prob">
+                <p>{Math.round(gaugeValue / 0.4)}%</p>
+              </div>
+              <div>
+                <p>AD Status: AD</p>
+                <p>MoCA Range: 0-10</p>
+              </div>
+            </div>
+            <div className="dial">
+              <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
+              <div>
+                <p>Number of Tokens</p>
               </div>
             </div>
           </div>

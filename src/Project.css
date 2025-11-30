@@ -1,3 +1,8 @@
+
+/* Ensure main TF-IDF tooltip text is white */
+.info-tooltip-main {
+  color: #fff;
+}
 /* ================================== 3D INTERACTION STYLES ================================== */
 
 .interactive-3d-wrapper {
