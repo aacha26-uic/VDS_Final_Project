@@ -35,12 +35,15 @@ const PatientProfile = () => {
     const containerRef = useRef();
 
     const [selectedGroup, setSelectedGroup] = useState("Normal");
-    const [selectedPatient, setSelectedPatient] = useState("ALL");
+    const [selectedPatient, setSelectedPatient] = useState("");
     const [data, setData] = useState([]);
+    const [viewMode, setViewMode] = useState("group");
 
     useEffect(() => {
         d3.csv("/data.csv").then((raw) => {
             setData(raw);
+            const ids = [...new Set(raw.map((d) => d.REGTRYID))];
+            if (ids.length) setSelectedPatient(ids[0]);
         })
     }, []);
 
@@ -49,9 +52,11 @@ const PatientProfile = () => {
 
         let filtered = data;
 
-        if (selectedPatient !== "ALL") {
+        if (viewMode === "individual" && selectedPatient) {
+            // one patient
             filtered = data.filter((d) => d.REGTRYID === selectedPatient);
-        } else {
+          } else {
+            // group view
             filtered = data.filter((d) => d.DX1 === selectedGroup);
         }
 
@@ -93,7 +98,7 @@ const PatientProfile = () => {
             .attr("width", x.bandwidth())
             .attr("height", (d) => y(0) - y(d.value))
             .attr("fill",
-                selectedPatient === "ALL"
+                viewMode === "group"
                     ? groupColors[selectedGroup] // group
                     : "#95B8C7" // single patient
             )
@@ -156,7 +161,7 @@ const PatientProfile = () => {
             .attr("transform", `translate(15, ${height / 2}) rotate(-90)`)
             .text("Mean Value");
 
-    }, [data, selectedGroup, selectedPatient]);
+    }, [data, selectedGroup, selectedPatient, viewMode]);
 
 
     const patientIDs = [...new Set(data.map((d) => d.REGTRYID))];
@@ -165,44 +170,61 @@ const PatientProfile = () => {
         <div
             ref={containerRef}
             style={{ position: "relative", width: "100%", height: "100%" }}
-        >
-            {/* AD group selection */}
-            <div className="controls radio-group">
-                {groups.map((g) => (
-                    <label key={g} className="radio-item">
-                        <input
-                            type="radio"
-                            name="dx-group"
-                            value={g}
-                            checked={selectedGroup === g}
-                            disabled={selectedPatient !== "ALL"}
-                            onChange={() => setSelectedGroup(g)}
-                        />
-                        <span>{g}</span>
-                    </label>
-                ))}
+            >
+            {/* toggle: Group vs Individual */}
+            <div className="view-toggle">
+                <button
+                    className={viewMode === "group" ? "active" : ""}
+                    onClick={() => setViewMode("group")}
+                >
+                    AD Status
+                </button>
+
+                <button
+                    className={viewMode === "individual" ? "active" : ""}
+                    onClick={() => setViewMode("individual")}
+                >
+                    Individual
+                </button>
             </div>
 
-            {/* patient selection */}
-            <div style={{ marginBottom: "10px", color: "#ffffff" }}>
+            {/* AD group selection (only in group mode) */}
+            {viewMode === "group" && (
+                <div className="controls radio-group" style={{ marginBottom: "8px" }}>
+                {groups.map((g) => (
+                    <label key={g} className="radio-item">
+                    <input
+                        type="radio"
+                        name="dx-group"
+                        value={g}
+                        checked={selectedGroup === g}
+                        onChange={() => setSelectedGroup(g)}
+                    />
+                    <span>{g}</span>
+                    </label>
+                ))}
+                </div>
+            )}
+
+            {/* patient selection (only in individual mode) */}
+            {viewMode === "individual" && (
+                <div style={{ marginBottom: "10px", color: "#000" }}>
                 <select
-                className="patient-select"
+                    className="patient-select"
                     value={selectedPatient}
                     onChange={(e) => setSelectedPatient(e.target.value)}
                 >
-                    <option value="ALL">All Patients</option>
                     {patientIDs.map((id) => (
-                        <option key={id} value={id}>{id}</option>
+                    <option key={id} value={id}>
+                        {id}
+                    </option>
                     ))}
                 </select>
-            </div>
+                </div>
+            )}
 
             {/* tooltip */}
-            <div
-                ref={tooltipRef}
-                className="tooltip"
-                style={{ opacity: 0 }}
-            ></div>
+            <div ref={tooltipRef} className="tooltip" style={{ opacity: 0 }} />
 
             <svg ref={svgRef} id="profile-chart" />
         </div>

@@ -1100,7 +1100,7 @@ svg .corr-legend-outline {
   
 .chart-container {
       position: relative;
-      width: 90%;
+      width: 80%;
       margin: 0 auto !important;
 }
   
@@ -1182,6 +1182,37 @@ svg .corr-legend-outline {
     visibility: visible;
     opacity: 1;
 }
+
+.view-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+  
+.view-toggle button {
+    padding: 6px 16px;
+    font-size: 17px;
+    font-weight: 700;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    color: black;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+  
+.view-toggle button:hover {
+    background: #e6e6e6;
+}
+  
+.view-toggle button.active {
+    background: #a018af;
+    color: white;
+    border-color: #a018af;
+}
   
 /* ==================================== WORD CLOUD  ==================================== */
 .word-cloud-card {
@@ -1237,7 +1268,7 @@ correlation-matrix-card h4 {
 }
   
 correlation-matrix-card p {
-    margin: 0.25em 0;
+    margin: 0.25rem 0;
     font-size: 0.9em;
     color: #e9d5ff;
 }
