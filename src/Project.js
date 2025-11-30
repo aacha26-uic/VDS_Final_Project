@@ -11,6 +11,7 @@ import highADBlob from "./resources/high_ad_blob.png";
 import KnobSlider from "./components/gauge";
 import PatientProfile from "./components/PatientProfile";
 import CorrelationBiomarkerAD from "./components/CorrelationBiomarkerAD";
+import InfoOverlay from "./InfoOverlay";
 
 function Project() {
   // By fault the topmost section of the data visualization system will be open
@@ -19,8 +20,22 @@ function Project() {
   const [gaugeValue, setGaugeValue] = useState(0); 
   const [sliderValues, setSliderValues] = useState({});
 
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [infoData, setInfoData] = useState({ title: "", description: "" });
+
+  const openInfo = (title, description) => {
+    setInfoData({ title, description });
+    setInfoOpen(true);
+  };
+
   return (
     <div className="full-dv-layout">
+      <InfoOverlay
+        isOpen={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        title={infoData.title}
+        description={infoData.description}
+      />
       {/* Background glow layer */}
       <div className="background-glow"></div>
       {/* Toggle Button */}
@@ -42,20 +57,28 @@ function Project() {
       {/* Left section - Vertical Heatmap */}
       <div className="left-section">
         <div>
-          <h1>Correlations Between Biomakers & AD Status</h1>
-        </div>
-        <div className="left-components">
-        <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
-        <div className="blob"> 
-          <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-            <Blob score={Object.values(sliderValues).reduce((total, arrayValue) => total + arrayValue, 0) / 10}/>
-          </Canvas>
-          <div className= "blobLegend">
-            <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
-            <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
-            <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+          <div className="info-button"
+              onClick={() =>
+                openInfo(
+                  "Biomarkers & Linguistic Indicators",
+                  "Shows the relationship between blood biomarkers (Plasma, CSF1 & CSF2), linguistic features, and AD status. Blob shape indicates severity. Sliders are used to manipulate both the correlation matrix and the blob."
+                )
+              }
+          >i</div>
+          <h1>Biomarker & Linguistic<br/>Indicators of AD</h1>
           </div>
-        </div>
+          <div className="left-components">
+          <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
+          <div className="blob"> 
+            <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
+              <Blob score={Object.values(sliderValues).reduce((total, arrayValue) => total + arrayValue, 0) / 10}/>
+            </Canvas>
+            <div className= "blobLegend">
+              <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
+              <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
+              <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -113,6 +136,14 @@ function Project() {
         <div className="bottom-3-cards">
           {/* Participant Profile Card */}
           <div className="participant-profile-card">
+            <div className="info-button"
+              onClick={() =>
+                openInfo(
+                  "Patient Profile",
+                  "Shows average feature values based on an AD group or individual participant, based on the toggle."
+                )
+              }
+            >i</div>
             <h1>Patient Profile</h1>
             <PatientProfile />
           </div>
