@@ -1,7 +1,7 @@
 // Note: The below code is used for the blob. This file takes in data from props and adjusts the shape/color of the blob accordingly
 // The following code tutorial was used to make this: https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
 
-import React, {useRef } from "react";
+import React, {useEffect, useRef } from "react";
 import vertexShader from "./vertexShader";
 import fragmentShader from "./fragmentShader";
 import { useFrame } from "@react-three/fiber";
@@ -17,20 +17,20 @@ const Blob = (props) => {
         moca_score: { value: props.score / 30 } // making an empty reference for uniform values
   });
 
-  // This updates the blob with any new values every frame
-  useFrame((state) => {
-    const { clock } = state;
+
+  // This function will change blob every time prop values change
+  useEffect(() => {
     if (mesh.current) {
-      mesh.current.material.uniforms.u_time.value = 0.4 * clock.getElapsedTime();
-      const targetIntensity = ((props.score) / 30) * 1.5; // map the moca_score to something between 0-1.5 (anything more will make blob too violent)
+      const targetIntensity = (props.score / 30) * 1.5; // map the moca_score to something between 0-1.5 (anything more will make blob too violent)
       mesh.current.material.uniforms.u_intensity.value = MathUtils.lerp(
         mesh.current.material.uniforms.u_intensity.value,
         targetIntensity,
-        0.02
+        0.1
       ); // Makes the blob smoothly transition to its new state 
       uniforms.current.moca_score.value = props.score / 30; // update the moca_score with new props data each frame
-    }
-  });
+    } 
+
+  }, [props.score]);
 
   return (
     // assigning 

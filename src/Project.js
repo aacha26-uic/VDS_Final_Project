@@ -155,6 +155,12 @@ function Project() {
           </div>
 
           <div className="brains">
+            <div className="dial">
+              <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
+              <div>
+                <p>Number of Tokens</p>
+              </div>
+            </div>
             <div className="brain1">
               <BrainIcon className="brain1" />
               <div className="brain1-prob">
@@ -183,12 +189,6 @@ function Project() {
               <div>
                 <p>AD Status: AD</p>
                 <p>MoCA Range: 0-10</p>
-              </div>
-            </div>
-            <div className="dial">
-              <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
-              <div>
-                <p>Number of Tokens</p>
               </div>
             </div>
           </div>
