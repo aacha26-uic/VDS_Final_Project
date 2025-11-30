@@ -190,4 +190,4 @@ The application will open at `http://localhost:3000`
 - **Render sliders tutorial**- https://d3.workergnome.com/examples/basic_events/?utm_source=chatgpt.com
 - **Multinomial Logistic Regression** - https://machinelearningmastery.com/multinomial-logistic-regression-with-python/
 - **Fast API** - https://fastapi.tiangolo.com/tutorial/
-
+- **Delpoying an ML Model** - https://www.youtube.com/watch?v=vA0C0k72-b4

@@ -6,8 +6,10 @@ from typing import Dict
 import json
 import pickle
 import numpy as np
+import pandas as pd
 
 model = pickle.load(open("model.pkl", "rb"))
+blob_model = pickle.load(open("linguisticFeatures_vs_ADstatus.pkl", "rb"))
 
 with open("metadata.json", "r") as f:
     meta = json.load(f)
@@ -67,3 +69,27 @@ def predict(input_data: SliderInput):
     probs = compute_probabilities(sliders)
     matrix = correlation_matrix(probs)
     return matrix
+
+
+@app.post("/blob_predict")
+def get_blob_model(input_data: SliderInput):
+    try:
+        # Slider Input is a dictionary of feature names to values (str: float)
+        # blob model predicts whether a person has AD based on linguistic features only. Output is 0, 1, or 2 corresponding to Normal, MCI, Prob AD
+        # The features must be in the same order as the model was trained on
+        feature_order = ['AUX(participant)', 'CCONJ(participant)', 'NUM(participant)',
+                        'PROPN(participant)', 'VERB(participant)', 'TTR(participant)',
+                        'MATTR(participant)']
+        features_df = pd.DataFrame([input_data.sliders], columns=feature_order)
+        # row = [input_data.sliders.get(f, 0) for f in feature_order]  # default 0 if missing
+        # features_df = pd.DataFrame([row], columns=feature_order)
+
+        model_prediction = blob_model.predict(features_df)[0]
+        if model_prediction not in [0, 1, 2]:
+            return {"Error": "Model prediction out of expected range."}
+        prediction = GROUPS[model_prediction] 
+        output = {"prediction": prediction}
+        return output
+    except Exception as e:
+        return {"Error": str(e)}
+
