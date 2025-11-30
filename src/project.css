@@ -1,3 +1,7 @@
+/* Ensure main TF-IDF tooltip text is white */
+.info-tooltip-main {
+  color: #fff;
+}
 /* ================================== 3D INTERACTION STYLES ================================== */
 
 .interactive-3d-wrapper {
@@ -56,7 +60,7 @@
   width: 90%;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border: 2px solid #d0d0d0;
-  overflow: hidden;
+  overflow: visible;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
@@ -282,12 +286,110 @@
 /* Word Cloud Controls */
 .word-cloud-controls {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 0.5rem;
+  right: 0.5rem;
   z-index: 5;
   display: flex;
   gap: 0.5em;
   align-items: center;
+}
+
+/* Info Button Styles */
+.word-cloud-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative; /* allow absolute tooltip positioning relative to header */
+  overflow: visible; /* ensure tooltip is not clipped */
+  z-index: 9999; /* place header and tooltip above transformed visualization elements */
+}
+
+/* Correlation matrix header same style as word-cloud header */
+.correlation-matrix-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative; /* allow absolute tooltip positioning relative to header */
+  overflow: visible; /* ensure tooltip is not clipped */
+  z-index: 9999;
+}
+
+.info-button {
+  background: #374151;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: bold;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.info-button:hover {
+  background: #1f2937;
+  border-color: #f3f4f6;
+  transform: scale(1.1);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.info-tooltip {
+  position: absolute;
+  top: 2.25rem;
+  right: 0;
+  background: #000; /* make fully opaque */
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  width: 16rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: auto; /* allow interacting with tooltip */
+}
+
+.info-button:hover .info-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.info-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -0.25rem;
+  right: 0.75rem;
+  border-left: 0.25rem solid transparent;
+  border-right: 0.25rem solid transparent;
+  border-bottom: 0.25rem solid #000;
+}
+
+.info-tooltip h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.info-tooltip p {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+}
+
+.info-tooltip p:last-child {
+  margin: 0;
+  font-style: italic;
+  color: #fff;
 }
 
 .word-cloud-slider-label {
@@ -297,26 +399,26 @@
 
 .word-cloud-dropdown {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 0.5rem;
+  right: 0.5rem;
   z-index: 5;
 }
 
 .word-cloud-dropdown select {
   padding: 0.3em;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   appearance: none;
   background: white
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path d="M6 0L0 8h12z" fill="%23666"/></svg>')
-    no-repeat right 8px center;
-  padding-right: 28px;
+    no-repeat right 0.5rem center;
+  padding-right: 1.75rem;
 }
 
 .word-cloud-info {
   position: absolute;
-  left: 8px;
-  right: 180px;
-  bottom: 8px;
+  left: 0.5rem;
+  right: 11.25rem;
+  bottom: 0.5rem;
   color: #111;
   font-size: 0.8em;
 }
@@ -324,25 +426,25 @@
 /* Word Cloud Legend */
 .word-cloud-legend {
   position: absolute;
-  left: 8px;
-  top: 8px;
+  left: 0.5rem;
+  top: 0.5rem;
   color: #111;
   font-size: 0.75em;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.375rem;
 }
 
 .legend-color-box {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.125rem;
 }
 
 /* Word Cloud Radial Elements */
@@ -350,6 +452,7 @@
   transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
   transform-origin: center;
   filter: none;
+  z-index: 1; /* keep radial segments below header tooltip */
 }
 
 .radial-segment:hover {
@@ -362,6 +465,7 @@
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   filter: none;
+  z-index: 2;
 }
 
 .radial-center-word:hover {
@@ -378,7 +482,7 @@
 .ring-label {
   text-anchor: middle;
   text-rendering: geometricPrecision;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   fill: #111;
   opacity: 1;
@@ -389,16 +493,16 @@
 /* Word Cloud Card Styles */
 .word-cloud-card {
   flex: 1;
-  border-radius: 25px;
+  border-radius: 1.5625rem;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  border: 0.0625rem solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0.5em;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .word-cloud-card-content {
@@ -422,7 +526,7 @@
 .word-cloud-visualization {
   flex: 1;
   width: 100%;
-  height: calc(100% - 56px);
+  height: calc(100% - 3.5rem);
   padding-top: 0.5em;
 }
 
@@ -663,33 +767,33 @@
 /* Correlation Matrix Controls */
 .correlation-matrix-controls {
   position: absolute;
-  top: 1px;
-  right: 8px;
+  top: 0.0625rem;
+  right: 0.5rem;
   z-index: 1000;
   color: #111;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   background: #fff;
-  padding: 6px 8px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.625rem;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.375rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 .correlation-matrix-controls select {
-  margin-left: 6px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin-left: 0.375rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.12);
   background: #fff;
   color: #111;
 }
 
 .correlation-matrix-info {
   position: absolute;
-  left: 8px;
-  bottom: 8px;
+  left: 0.5rem;
+  bottom: 0.5rem;
   color: #111;
   font-size: 0.8em;
 }
@@ -707,13 +811,13 @@
 
 .matrix-label {
   fill: #111;
-  font-size: 10px;
+  font-size: 0.625rem;
   text-anchor: middle;
 }
 
 .matrix-row-label {
   fill: #111;
-  font-size: 11px;
+  font-size: 0.6875rem;
   text-anchor: end;
 }
 
@@ -730,22 +834,22 @@ svg .corr-legend-outline {
 
 .legend-tick-label {
   fill: #111;
-  font-size: 10px;
+  font-size: 0.625rem;
 }
 
 /* Correlation Matrix Card Styles */
 .correlation-matrix-card {
   flex: 1;
-  border-radius: 25px;
+  border-radius: 1.5625rem;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  border: 0.0625rem solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0.5em;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .correlation-matrix-card-content {
@@ -769,7 +873,7 @@ svg .corr-legend-outline {
 .correlation-matrix-visualization {
   flex: 1;
   width: 100%;
-  height: calc(100% - 56px);
+  height: calc(100% - 3.5rem);
   padding-top: 0.5em;
 }
 /* ================================== OVERALL STYLING ================================== */
@@ -828,10 +932,9 @@ svg .corr-legend-outline {
 }
 
 .left-components {
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .left-section h4 {
@@ -874,8 +977,8 @@ svg .corr-legend-outline {
   transition: all 0.3s ease;
 }
 
-.bottom-3-cards {
-  flex: 1;
+.top-3-cards {
+  height: 55%;
   width: 100%;
   display: flex;
   gap: 0.5em;
@@ -883,15 +986,15 @@ svg .corr-legend-outline {
 
 /* =============================== CORRELATION HEATMAPS =============================== */
 .blob {
-        width: 100%;
-        height: 20rem;  
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        color: rgb(48, 45, 45);
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        margin-top: 1rem;
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: rgb(48, 45, 45);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-top: 1rem;
 }
 
 .blobLegend {
@@ -919,7 +1022,7 @@ svg .corr-legend-outline {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;   
+  align-items: center;
   justify-content: center;
   overflow: visible;
 }
@@ -932,51 +1035,51 @@ svg .corr-legend-outline {
   height: 100%;
   align-items: center;
   justify-content: center;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .slider-columns {
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-    height: auto;
-    padding-left: 3rem;
-    justify-content: center;
-    padding-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  height: auto;
+  padding-left: 3rem;
+  justify-content: center;
+  padding-bottom: 1rem;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
 }
 
 .slider-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: black;
 }
 
 .slider-row label {
-    width: 40px;
-    font-weight: 600;
-    font-size: 15px;
-    color: black;
-    text-align: left;
+  width: 40px;
+  font-weight: 600;
+  font-size: 15px;
+  color: black;
+  text-align: left;
 }
 
 .slider-row input[type="range"] {
-    width: 95px;
-    accent-color: #d75f4c;
+  width: 95px;
+  accent-color: #d75f4c;
 }
 
 .slider-row span {
-    width: 0.7rem;
-    text-align: right;
-    font-family: monospace;
-    font-size: 15px;
+  width: 0.7rem;
+  text-align: right;
+  font-family: monospace;
+  font-size: 15px;
 }
 
 /* =========================== BRAIN ENCODING DIALS SECTION =========================== */
@@ -1058,31 +1161,31 @@ svg .corr-legend-outline {
 
 /* ================================ PARTICIPANT PROFILE ================================ */
 .participant-profile-card {
-        flex: 1 ;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 0 !important;
-        overflow: hidden;
-        background: #ffffff;
-        border: 0.3rem solid rgb(57, 107, 207);
-        border-radius: 0.2rem;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  flex: 1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 !important;
+  overflow: hidden;
+  background: #ffffff;
+  border: 0.3rem solid rgb(57, 107, 207);
+  border-radius: 0.2rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .participant-profile-card h1 {
-        margin-top: 0.3rem;
-        margin-bottom: 0.9rem;
-        font-weight: 600;
-        color: "black";
+  margin-top: 0.3rem;
+  margin-bottom: 0.9rem;
+  font-weight: 600;
+  color: "black";
 }
 
 .participant-profile-card p {
-        margin: 0.25em 0;
-        font-size: 0.9em;
-        color: #d1fae5;
+  margin: 0.25em 0;
+  font-size: 0.9em;
+  color: #d1fae5;
 }
 
 #profile-chart .domain,
@@ -1092,90 +1195,89 @@ svg .corr-legend-outline {
 }
 
 #profile-chart .tick text {
-    fill: black !important;
-    font-weight: 400 !important;
-    font-size: 17px !important;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  fill: black !important;
+  font-weight: 400 !important;
+  font-size: 17px !important;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .chart-container {
-    position: relative;
-    width: 90%;
-    margin: 0 auto !important;
+  position: relative;
+  width: 90%;
+  margin: 0 auto !important;
 }
 
 .controls {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-bottom: 7px !important;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 7px !important;
 }
 
-
 .radio-group {
-    display: flex;
-    gap: 25px;
-    align-items: center;
+  display: flex;
+  gap: 25px;
+  align-items: center;
 }
 
 .controls.radio-group {
-    justify-content: center;
-    width: 100%;  
-    padding-bottom: 0.5rem;       
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 0.5rem;
 }
 
 .radio-item input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
 }
 
 .radio-item span {
-    font-size: 20px;
-    font-weight: 500;
-    color: black;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .axis-label {
-    fill: black;
-    font-size: 10px;
-    font-weight: 600;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  fill: black;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .main-label {
-    font-size: 22px !important;
-    font-weight: 500 !important;
-    fill: black;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  fill: black;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .patient-select {
-    font-size: 18px !important;
-    padding: 8px 14px !important;
-    border-radius: 6px !important;
-    border: 1px solid #000 !important;
-    width: 220px !important;
-    color: black !important;
-    background-color: #f4f4f4 !important;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 18px !important;
+  padding: 8px 14px !important;
+  border-radius: 6px !important;
+  border: 1px solid #000 !important;
+  width: 220px !important;
+  color: black !important;
+  background-color: #f4f4f4 !important;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .tooltip {
-    position: absolute;
-    background: rgba(0,0,0,0.8);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    pointer-events: none;
-    opacity: 0;
-    font-size: 12px;
-    cursor: default;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
-    visibility: hidden;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  font-size: 12px;
+  cursor: default;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  visibility: hidden;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .tooltip:hover {
@@ -1186,9 +1288,9 @@ svg .corr-legend-outline {
 /* ==================================== WORD CLOUD  ==================================== */
 .word-cloud-card {
   flex: 1;
-  border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 1.5625rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1212,13 +1314,29 @@ svg .corr-legend-outline {
   color: #000000;
 }
 
+/* Ensure correlation tooltip text is white and consistent */
+.correlation-matrix-card .info-tooltip,
+.correlation-matrix-card .info-tooltip * {
+  color: #fff !important;
+  font-size: 0.9rem !important;
+  line-height: 1.45 !important;
+}
+
+/* Tooltip overrides (make text white and consistent inside word-cloud tooltip) */
+.word-cloud-card .info-tooltip,
+.word-cloud-card .info-tooltip * {
+  color: #fff !important;
+  font-size: 0.9rem !important;
+  line-height: 1.45 !important;
+}
+
 /* ================================= CORRELATION MATRIX ================================= */
 
 .correlation-matrix-card {
   flex: 1;
-  border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 1.5625rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;

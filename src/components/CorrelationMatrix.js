@@ -100,7 +100,7 @@ function CorrelationMatrix() {
       tx.setAttribute("transform", `translate(${topX}, ${topY}) rotate(-55)`);
       tx.setAttribute("text-anchor", "middle");
       tx.setAttribute("fill", "#111");
-      tx.setAttribute("font-size", "10");
+      tx.setAttribute("font-size", "11");
       tx.textContent = header[i];
       svg.appendChild(tx);
 
@@ -109,7 +109,7 @@ function CorrelationMatrix() {
       ty.setAttribute("y", topPadding + i * size + size / 2 + 4);
       ty.setAttribute("text-anchor", "end");
       ty.setAttribute("fill", "#111");
-      ty.setAttribute("font-size", "11");
+      ty.setAttribute("font-size", "12");
       ty.textContent = header[i];
       svg.appendChild(ty);
     }
@@ -203,7 +203,7 @@ function CorrelationMatrix() {
         .attr("x", legendX + legendWidth + 6)
         .attr("y", y + 3)
         .attr("fill", "#111")
-        .attr("font-size", 10)
+        .attr("font-size", 11)
         .text(val);
     });
   }, [data, n]);
