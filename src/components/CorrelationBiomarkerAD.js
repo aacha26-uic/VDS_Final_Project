@@ -159,7 +159,7 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
                     });
               }}
             />
-            <span>{(sliderValues[feature] ?? 0).toFixed(3)}</span>
+            <span>{(sliderValues[feature] ?? 0).toFixed(2)}</span>
           </div>
         );
       };
