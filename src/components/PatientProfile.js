@@ -65,9 +65,9 @@ const PatientProfile = () => {
             value: d3.mean(filtered, (d) => +d[feature]) || 0,
         }));
 
-        const width = 400;
+        const width = 420
         const height = 380;
-        const margin = { top: 20, right: 20, bottom: 80, left: 45 };
+        const margin = { top: 20, right: 20, bottom: 80, left: 53 };
 
         const svg = d3
             .select(svgRef.current)
@@ -169,7 +169,7 @@ const PatientProfile = () => {
     return (
         <div
             ref={containerRef}
-            style={{ position: "relative", width: "100%", height: "100%" }}
+            style={{ position: "relative", width: "100%", height: "100%"}}
             >
             {/* toggle: Group vs Individual */}
             <div className="view-toggle">

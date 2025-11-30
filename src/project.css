@@ -776,9 +776,9 @@ svg .corr-legend-outline {
 .full-dv-layout {
     height: 100%;
     width: 100%;
-    padding: 0.5em;
+    padding: 0.2em;
     display: flex;
-    gap: 0.5em;
+    gap: 0.25em;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     background: radial-gradient(
@@ -823,7 +823,7 @@ svg .corr-legend-outline {
     position: relative;
     z-index: 2;
     background: #ffffff;
-    border: 0.3rem solid rgb(57, 107, 207);
+    /* border: 0.3rem solid rgb(57, 107, 207); */
     border-radius: 0.2rem;
 }
   
@@ -848,7 +848,7 @@ svg .corr-legend-outline {
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.25em;
     position: relative;
     z-index: 2;
 }
@@ -866,7 +866,7 @@ svg .corr-legend-outline {
       rgba(147, 51, 234, 0.4)
     );
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #bfdbfe;
+    color: #000000;
     font-weight: 600;
     font-size: 0.8em;
     cursor: pointer;
@@ -878,7 +878,7 @@ svg .corr-legend-outline {
     flex: 1;
     width: 100%;
     display: flex;
-    gap: 0.5em;
+    gap: 0.25em;
 }
 
 .participant-profile-card,
@@ -999,7 +999,7 @@ svg .corr-legend-outline {
     overflow: hidden;
     color: rgb(48, 45, 45);
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    border: 0.3rem solid rgb(57, 107, 207);
+    /* border: 0.3rem solid rgb(57, 107, 207); */
     border-radius: 0.2rem;
 }
   
@@ -1073,28 +1073,27 @@ svg .corr-legend-outline {
           padding: 0 !important;
           overflow: hidden;
           background: #ffffff;
-          border: 0.3rem solid rgb(57, 107, 207);
+          /* border: 0.3rem solid rgb(57, 107, 207); */
           border-radius: 0.2rem;
           font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
   
 .participant-profile-card h1 {
-          margin-top: 0.3rem;
-          margin-bottom: 0.9rem;
+          margin-top: 1.4rem;
+          margin-bottom: 1.2rem;
           font-weight: 600;
           color: "black";
-}
-  
-.participant-profile-card p {
-          margin: 0.25em 0;
-          font-size: 0.9em;
-          color: #d1fae5;
 }
   
 #profile-chart .domain,
   #profile-chart .tick line {
     stroke: black !important;
     stroke-width: 0.8 !important;
+}
+
+#profile-chart {
+    height: 80%;
+    width: 90%;
 }
   
 #profile-chart .tick text {
@@ -1192,13 +1191,13 @@ svg .corr-legend-outline {
 .view-toggle {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
     width: 100%;
 }
   
 .view-toggle button {
-    padding: 6px 16px;
+    padding: 6px 20px;
     font-size: 17px;
     font-weight: 700;
     border: 1px solid #ccc;
@@ -1233,7 +1232,7 @@ svg .corr-legend-outline {
     padding: 0.5em;
     overflow: hidden;
     background: #ffffff;
-    border: 0.3rem solid rgb(57, 107, 207);
+    /* border: 0.3rem solid rgb(57, 107, 207); */
     border-radius: 0.2rem;
 }
   
@@ -1263,7 +1262,7 @@ svg .corr-legend-outline {
     padding: 0.5em;
     overflow: hidden;
     background: #ffffff;
-    border: 0.3rem solid rgb(57, 107, 207);
+    /* border: 0.3rem solid rgb(57, 107, 207); */
     border-radius: 0.2rem;
 }
   
