@@ -25,16 +25,16 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     // const [sliderValues, setSliderValues] = useState({});
     const [corrMatrix, setCorrMatrix] = useState([]);
 
-    // correlation matrix - will change once model is ready
-    const generateCorrMatrix = useCallback(() => {
-        return biomarkers.flatMap((b) =>
-            groups.map((g) => {
-                const sliderEffect = Object.values(sliderValues).reduce((a,v) => a + v, 0) * 0.0005;
-                const value = Math.min(1, Math.max(0, Math.random() * 0.6 + 0.2 + sliderEffect));
-                return { biomarker: b.label, group: g, value };
-            })
-        );
-    }, [sliderValues]);
+    // // correlation matrix - will change once model is ready
+    // const generateCorrMatrix = useCallback(() => {
+    //     return biomarkers.flatMap((b) =>
+    //         groups.map((g) => {
+    //             const sliderEffect = Object.values(sliderValues).reduce((a,v) => a + v, 0) * 0.0005;
+    //             const value = Math.min(1, Math.max(0, Math.random() * 0.6 + 0.2 + sliderEffect));
+    //             return { biomarker: b.label, group: g, value };
+    //         })
+    //     );
+    // }, [sliderValues]);
 
     useEffect(() => {
         d3.csv("/data.csv").then((raw) => {
@@ -62,8 +62,17 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
 
     useEffect(() => {
         if (!Object.keys(sliderValues).length) return;
-        setCorrMatrix(generateCorrMatrix());
-    }, [generateCorrMatrix, sliderValues]);
+    
+        fetch("http://127.0.0.1:8000/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sliders: sliderValues })
+        })
+        .then(res => res.json())
+        .then(data => setCorrMatrix(data))
+        .catch(err => console.error("Error:", err));
+    
+    }, [sliderValues]);
 
     // heatmap
     useEffect(() => {
@@ -97,7 +106,7 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
             .append("rect")
             .attr("class", "cell")
             .attr("x", d => groups.indexOf(d.group) * cellSize)
-            .attr("y", d => biomarkers.findIndex(b => b.label === d.biomarker) * cellSize)
+            .attr("y", d => biomarkers.findIndex(b => b.key === d.biomarker) * cellSize)
             .attr("width", cellSize)
             .attr("height", cellSize)
             .attr("stroke", "#000")
@@ -149,15 +158,15 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
               step={(max - min) / 200}
               value={sliderValues[feature] ?? 0}
 
-              // this will change as well
-              onChange={(e) => {
+                // this will change as well
+                onChange={(e) => {
                     const newVal = +e.target.value;
-                    setSliderValues(prev => {
-                        const updated = { ...prev, [feature]: newVal };
-                        setCorrMatrix(generateCorrMatrix());
-                        return updated;
-                    });
-              }}
+
+                    setSliderValues(prev => ({
+                        ...prev,
+                        [feature]: newVal
+                    }));
+                }}
             />
             <span>{(sliderValues[feature] ?? 0).toFixed(2)}</span>
           </div>

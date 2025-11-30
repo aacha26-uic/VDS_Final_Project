@@ -188,4 +188,6 @@ The application will open at `http://localhost:3000`
 - **Brain Silhouette** - https://static.vecteezy.com/system/resources/previews/059/555/853/non_2x/black-silhouette-of-a-human-brain-vector.jpg 
 - **String to numeric** - https://observablehq.com/@dakoop/reading-in-data-learn-js-data
 - **Render sliders tutorial**- https://d3.workergnome.com/examples/basic_events/?utm_source=chatgpt.com
+- **Multinomial Logistic Regression** - https://machinelearningmastery.com/multinomial-logistic-regression-with-python/
+- **Fast API** - https://fastapi.tiangolo.com/tutorial/
 

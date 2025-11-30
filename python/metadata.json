@@ -1,0 +1,33 @@
+{
+  "biomarkers": [
+    "tTau_AB42Ratio",
+    "AB42_AB40Ratio",
+    "P_TAU_LUMI"
+  ],
+  "linguistic": [
+    "AUX(participant)",
+    "VERB(participant)",
+    "CCONJ(participant)",
+    "NUM(participant)",
+    "PROPN(participant)",
+    "TTR(participant)",
+    "MATTR(participant)"
+  ],
+  "label_map": {
+    "Normal": 0,
+    "MCI": 1,
+    "Prob AD": 2
+  },
+  "feature_means": {
+    "tTau_AB42Ratio": 0.5669153430563234,
+    "AB42_AB40Ratio": 0.07847883635788447,
+    "P_TAU_LUMI": 45.53888888888889,
+    "AUX(participant)": 47.732558139534895,
+    "VERB(participant)": 75.8953488372093,
+    "CCONJ(participant)": 37.577777777777776,
+    "NUM(participant)": 10.366666666666667,
+    "PROPN(participant)": 21.677777777777777,
+    "TTR(participant)": 0.41437429145555543,
+    "MATTR(participant)": 0.9891290847222222
+  }
+}
