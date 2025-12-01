@@ -155,3 +155,9 @@ probs_df['tokens(participant)'] = token_range
 
 # testing
 print(probs_df.head())
+
+
+# import pickle
+# pickle.dump(model_expanded, open("tokens_vs_ADstatus_analysis.pkl", "wb"))
+# model = pickle.load(open("tokens_vs_ADstatus_analysis.pkl", "rb"))
+# print(model.feature_names_in_)

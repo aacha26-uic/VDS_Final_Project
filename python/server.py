@@ -85,11 +85,33 @@ def get_blob_model(input_data: SliderInput):
         model_prediction = blob_model.predict(features_df)[0]
         if model_prediction not in [0, 1, 2]:
             return {"Error": "Model prediction out of expected range."}
-        prediction = GROUPS[model_prediction] 
+        
+        if model_prediction == 0:
+            prediction = "Normal" # Normal (Moca: 26+)
+        elif model_prediction == 1:
+            prediction = "Prob AD" # Probably AD? This is a mix of Normal and Moderate AD (Moca: 0-25)
+        elif model_prediction == 2:
+            prediction = "MCI" # Moderate/Severe AD (Moca: < 18)
+
         output = {"prediction": prediction, "prediction_value": int(model_prediction)}
         return output
     except Exception as e:
         return {"Error": str(e)}
 
+@app.post("/brain_predict")
+def get_brain_model(num_tokens: int):
+    try:
+        # This temporary. Swap out with actual model when available.
+        hc = num_tokens * 0.55
+        mci = num_tokens * 0.30
+        ad = num_tokens * 0.15
+        output = {
+            "HC": round(hc, 2),
+            "MCI": round(mci, 2),
+            "AD": round(ad, 2)
+        }
+        return output
+    except Exception as e:
+        return {"Error": str(e)}
 
 

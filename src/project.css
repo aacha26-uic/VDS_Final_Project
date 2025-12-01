@@ -911,7 +911,7 @@ svg .corr-legend-outline {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
   
 .blobLegend1 img,
@@ -1214,9 +1214,9 @@ svg .corr-legend-outline {
 }
   
 .view-toggle button.active {
-    background: #413f41;
+    background: #d75f4c;
     color: white;
-    border-color: #413f41;
+    border-color: #d75f4c;
 }
   
 /* ==================================== WORD CLOUD  ==================================== */

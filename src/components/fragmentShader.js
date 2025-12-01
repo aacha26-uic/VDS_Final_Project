@@ -19,12 +19,14 @@ void main() {
     vec3 purple = vec3(0.329, 0.349, 0.675);      // #5459AC
 
     vec3 color;
-    if(moca_score <= 0.5){
-        float t = moca_score / 0.5;
-        color = mix(light_blue, blue, t);
-    } else {
-        float t = (moca_score - 0.5) / 0.5;
-        color = mix(blue, purple, t);
+    if (moca_score >= 26.0) {
+        color = light_blue;
+    } 
+    else if (moca_score >= 18.0) {
+        color = blue;
+    }
+    else {
+        color = purple;
     }
 
     // Add subtle shading based on geometry

@@ -71,12 +71,12 @@ function Project() {
           <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
           <div className="blob"> 
             <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
-              <Blob score={Object.values(sliderValues).reduce((total, arrayValue) => total + arrayValue, 0) / 10}/>
+              <Blob sliderValues={sliderValues} setSliderValues={setSliderValues}/>
             </Canvas>
             <div className= "blobLegend">
-              <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
-              <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
-              <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+              <div className= "blobLegend1"><img src={lowADBlob}/><p>Normal</p></div>
+              <div className= "blobLegend2"><img src={medADBlob}/><p>Prob AD</p></div>
+              <div className= "blobLegend3"><img src={highADBlob}/><p>MCI</p></div>
             </div>
           </div>
         </div>
@@ -92,13 +92,19 @@ function Project() {
             </div>
 
             <div className="brains">
+              <div className="dial">
+                <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
+                <div>
+                  <p>Number of Tokens</p>
+                </div>
+              </div>
               <div className="brain1">
                 <BrainIcon className="brain1" />
                 <div className="brain1-prob">
                   <p>{Math.round(gaugeValue / 0.32)}%</p>
                 </div>
                 <div>
-                  <p>AD Status: HC</p>
+                  <p>AD Status: Normal</p>
                   <p>MoCA Range: 20-30</p>
                 </div>
               </div>
@@ -108,8 +114,8 @@ function Project() {
                   <p>{Math.round(gaugeValue / 0.43)}%</p>
                 </div>
                 <div>
-                  <p>AD Status: MCI </p>
-                  <p>MoCA Range:10-20</p>
+                  <p>AD Status: Prob AD </p>
+                  <p>MoCA Range:0-30 (Varies)</p>
                 </div>
               </div>
               <div className="brain3">
@@ -118,16 +124,11 @@ function Project() {
                   <p>{Math.round(gaugeValue / 0.4)}%</p>
                 </div>
                 <div>
-                  <p>AD Status: AD</p>
-                  <p>MoCA Range: 0-10</p>
+                  <p>AD Status: MCI</p>
+                  <p>MoCA Range: 0-20</p>
                 </div>
               </div>
-              <div className="dial">
-                <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
-                <div>
-                  <p>Number of Tokens</p>
-                </div>
-              </div>
+              
             </div>
           </div>
         )}
