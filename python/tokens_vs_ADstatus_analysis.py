@@ -15,30 +15,23 @@ data_path = os.path.join(current_dir, 'data.csv')
 df = pd.read_csv(data_path)
 print(df.columns)
 
-# start with simple features
-features_simple = [
-    'tokens(participant)',
-    'age',
-    'gender',
-    'educ'
-]
+# target column and token column
+token_col = "tokens(participant)"
+target_col = "DX1"
 
-X_simple = df[features_simple].copy()
-
-X_simple = pd.get_dummies(X_simple, columns=['gender'], drop_first=True)
-# AD status
-y = df['DX1']
+X = df[[token_col]].copy()
+y = df[[target_col]]
 
 scaler = StandardScaler()
-X_simple_scaled = scaler.fit_transform(X_simple)
+X_scaled = scaler.fit_transform(X)
 
 # split for training and testing
 X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(
-    X_simple_scaled, y, test_size=0.2, stratify=y, random_state=42
+    X_scaled, y, test_size=0.2, stratify=y, random_state=42
 )
 
 # logistic regression 
-model_simple = LogisticRegression(
+model = LogisticRegression(
     multi_class='multinomial',
     solver='lbfgs',
     max_iter=1000,
@@ -47,111 +40,29 @@ model_simple = LogisticRegression(
 )
 
 # model fit
-model_simple.fit(X_train_s, y_train_s)
+model.fit(X_train_s, y_train_s)
 
-y_pred_s = model_simple.predict(X_test_s)
-print("Simple Model")
+y_pred_s = model.predict(X_test_s)
 print("Confusion Matrix:")
 print(confusion_matrix(y_test_s, y_pred_s))
 print("Classification Report:")
 print(classification_report(y_test_s, y_pred_s))
-coef_df_s = pd.DataFrame(model_simple.coef_, columns=X_simple.columns, index=model_simple.classes_)
-print("Coefficients (simple):")
-print(coef_df_s)
+coef_df = pd.DataFrame(model.coef_, columns=X.columns, index=model.classes_)
+print("Coefficients:")
+print(coef_df)
 
-# expand features list to include more features than simple
-features_expanded = [
-    'tokens(participant)',
-    'uniquetokens(participant)',
-    'TTR(participant)',
-    'MATTR(participant)',
-    'VERB(participant)',
-    'PROPN(participant)',
-    'NUM(participant)',
-    'AUX(participant)',
-    'CCONJ(participant)',
-    'AB40_LUMI',
-    'AB42_LUMI',
-    'P_TAU_LUMI',
-    'T_TAU_LUMI',
-    'AB42_AB40Ratio',
-    'tTau_AB42Ratio',
-    'pTau_AB42Ratio'
-]
+token_min = int(df[token_col].min())
+token_max = int(df[token_col].max())
 
-X_exp = df[features_expanded].copy()
-X_exp_scaled = scaler.fit_transform(X_exp)
-
-# split for training and testing
-X_train_e, X_test_e, y_train_e, y_test_e = train_test_split(
-    X_exp_scaled, y, test_size=0.2, stratify=y, random_state=42
-)
-
-# print("this is X_train_e", X_train_e)
-
-# logistic regression
-model_expanded = LogisticRegression(
-    multi_class='multinomial',
-    solver='lbfgs',
-    max_iter=1000,
-    class_weight='balanced',
-    random_state=42
-)
-
-# fit the model
-model_expanded.fit(X_train_e, y_train_e)
-
-y_pred_e = model_expanded.predict(X_test_e)
-print("\nExpanded Model")
-print("Confusion Matrix:")
-print(confusion_matrix(y_test_e, y_pred_e))
-print("Classification Report:")
-print(classification_report(y_test_e, y_pred_e))
-coef_df_e = pd.DataFrame(model_expanded.coef_, columns=X_exp.columns, index=model_expanded.classes_)
-print("Coefficients (expanded):")
-print(coef_df_e)
-
-# final report
-print("\nTokens coefficient (simple model):")
-print(coef_df_s[['tokens(participant)']])
-print("Tokens coefficient (expanded model):")
-print(coef_df_e[['tokens(participant)']])
-
-# predicting probability
-token_min = int(df['tokens(participant)'].min())
-token_max = int(df['tokens(participant)'].max())
 token_range = np.linspace(token_min, token_max, num=100)
 
-typical_vals = {
-    'uniquetokens(participant)': df['uniquetokens(participant)'].median(),
-    'TTR(participant)': df['TTR(participant)'].median(),
-    'MATTR(participant)': df['MATTR(participant)'].median(),
-    'VERB(participant)': df['VERB(participant)'].median(),
-    'PROPN(participant)': df['PROPN(participant)'].median(),
-    'NUM(participant)': df['NUM(participant)'].median(),
-    'AUX(participant)': df['AUX(participant)'].median(),
-    'CCONJ(participant)': df['CCONJ(participant)'].median(),
-    'AB40_LUMI': df['AB40_LUMI'].median(),
-    'AB42_LUMI': df['AB42_LUMI'].median(),
-    'P_TAU_LUMI': df['P_TAU_LUMI'].median(),
-    'T_TAU_LUMI': df['T_TAU_LUMI'].median(),
-    'AB42_AB40Ratio': df['AB42_AB40Ratio'].median(),
-    'tTau_AB42Ratio': df['tTau_AB42Ratio'].median(),
-    'pTau_AB42Ratio': df['pTau_AB42Ratio'].median()
-}
+token_df =  pd.DataFrame({token_col: token_range})
+token_scaled = scaler.transform(token_df[[token_col]])
 
-pred_rows = []
-for t in token_range:
-    row = {feat: typical_vals[feat] for feat in typical_vals}
-    row['tokens(participant)'] = t
-    pred_rows.append(row)
-pred_df = pd.DataFrame(pred_rows)
+probs = model.predict_proba(token_scaled)
 
-pred_scaled = scaler.transform(pred_df[features_expanded])
+probs_df = pd.DataFrame(probs, columns=model.classes_)
+probs_df[token_col] = token_range
 
-probs = model_expanded.predict_proba(pred_scaled) 
-probs_df = pd.DataFrame(probs, columns=model_expanded.classes_)
-probs_df['tokens(participant)'] = token_range
-
-# testing
+print("\nProbability of AD groups based on tokens")
 print(probs_df.head())
