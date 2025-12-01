@@ -74,9 +74,9 @@ function Project() {
               <Blob score={Object.values(sliderValues).reduce((total, arrayValue) => total + arrayValue, 0) / 10}/>
             </Canvas>
             <div className= "blobLegend">
-              <div className= "blobLegend1"><img src={lowADBlob}/><p>HC</p></div>
-              <div className= "blobLegend2"><img src={medADBlob}/><p>MCI</p></div>
-              <div className= "blobLegend3"><img src={highADBlob}/><p>AD</p></div>
+              <div className= "blobLegend1"><img src={lowADBlob} alt="brain hc"/><p>HC</p></div>
+              <div className= "blobLegend2"><img src={medADBlob} alt="brain mci"/><p>MCI</p></div>
+              <div className= "blobLegend3"><img src={highADBlob} alt="brain prob ad"/><p>AD</p></div>
             </div>
           </div>
         </div>
