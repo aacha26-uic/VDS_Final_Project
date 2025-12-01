@@ -52,6 +52,11 @@ function WordCloudViz() {
       mci: "#1E40AF", // dark blue
       ad: "#7C3AED", // purple
     };
+    const conditionLabels = {
+      hc: "Normal (Healthy)",
+      mci: "MCI (Mild Cognitive Impairment)",
+      ad: "AD (Alzheimer's Disease)",
+    };
 
     // Create main group
     const g = svg
@@ -60,7 +65,12 @@ function WordCloudViz() {
 
     // Draw ring backgrounds
     const ringData = [
-      { inner: innerRadius, outer: ring1Radius, condition: "hc", label: "HC" },
+      {
+        inner: innerRadius,
+        outer: ring1Radius,
+        condition: "hc",
+        label: "Normal",
+      },
       {
         inner: ring1Radius,
         outer: ring2Radius,
@@ -154,7 +164,9 @@ function WordCloudViz() {
               d3.select(this).attr("opacity", Math.min(opacity + 0.3, 1));
               showTooltip(
                 event,
-                `${word.word} (${condition.toUpperCase()}): ${freq.toFixed(3)}`
+                `${word.word} (${
+                  conditionLabels[condition] || condition.toUpperCase()
+                }): ${freq.toFixed(3)}`
               );
             })
             .on("mouseleave", function () {
@@ -201,7 +213,7 @@ function WordCloudViz() {
             .attr("fill", "#ff7a00");
           showTooltip(
             event,
-            `${w.word}: HC=${w.hc.toFixed(3)}, MCI=${w.mci.toFixed(
+            `${w.word}: Normal=${w.hc.toFixed(3)}, MCI=${w.mci.toFixed(
               3
             )}, AD=${w.ad.toFixed(3)}`
           );
@@ -374,7 +386,7 @@ function WordCloudViz() {
           onChange={(e) => setShowCondition(e.target.value)}
         >
           <option value="all">All Conditions</option>
-          <option value="hc">HC Only</option>
+          <option value="hc">Normal (Healthy) Only</option>
           <option value="mci">MCI Only</option>
           <option value="ad">AD Only</option>
         </select>
@@ -409,7 +421,9 @@ function WordCloudViz() {
       </div>
 
       <div className="word-cloud-info">
-        <div>Radial rings: HC (light blue) | MCI (dark blue) | AD (purple)</div>
+        <div>
+          Radial rings: Normal (light blue) | MCI (dark blue) | AD (purple)
+        </div>
         <div>Hover segments or center words for details</div>
       </div>
 
@@ -420,7 +434,7 @@ function WordCloudViz() {
             className="legend-color-box"
             style={{ backgroundColor: "#60A5FA" }}
           ></div>
-          <span>HC (Healthy Control)</span>
+          <span>Normal (Healthy)</span>
         </div>
         <div className="legend-item">
           <div

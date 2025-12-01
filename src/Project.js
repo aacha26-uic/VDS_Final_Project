@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import WordCloudViz from "./components/WordCloudViz";
 import CorrelationMatrix from "./components/CorrelationMatrix";
+import InfoOverlay from "./InfoOverlay";
 import "./project.css";
 import Blob from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
@@ -18,9 +19,22 @@ function Project() {
   // By default the guage value will be 60, useState returns a funciton for setGuageValue
   const [gaugeValue, setGaugeValue] = useState(0);
   const [sliderValues, setSliderValues] = useState({});
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [infoData, setInfoData] = useState({ title: "", description: "" });
+
+  const openInfo = (title, description) => {
+    setInfoData({ title, description });
+    setInfoOpen(true);
+  };
 
   return (
     <div className="full-dv-layout">
+      <InfoOverlay
+        isOpen={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        title={infoData.title}
+        description={infoData.description}
+      />
       {/* Background glow layer */}
       <div className="background-glow"></div>
       {/* Toggle Button - COMMENTED OUT */}
@@ -93,20 +107,16 @@ function Project() {
             <div className="word-cloud-card-content">
               <div className="word-cloud-card-header">
                 <h1 className="word-cloud-card-title">Word Clouds</h1>
-                <div className="info-button">
+                <div
+                  className="info-button"
+                  onClick={() =>
+                    openInfo(
+                      "What is TF-IDF?",
+                      "TF-IDF (Term Frequency-Inverse Document Frequency) measures how important words are to different groups. It shows linguistic patterns unique to each condition. Hover over words to see TF-IDF values.\n\nClick for more detailed explanations.\n\nNote: more saturated or darker ring segments indicate higher relative frequency/TF-IDF (stronger signal)."
+                    )
+                  }
+                >
                   i
-                  <div className="info-tooltip">
-                    <h4>What is TF-IDF?</h4>
-                    <p className="info-tooltip-main">
-                      TF-IDF (Term Frequency-Inverse Document Frequency)
-                      measures how important words are to different groups. It
-                      shows linguistic patterns unique to each condition.
-                    </p>
-                    <p>
-                      Hover over words to see TF-IDF values. Click for more
-                      detailed explanations.
-                    </p>
-                  </div>
                 </div>
               </div>
               <div className="word-cloud-visualization">
@@ -122,23 +132,16 @@ function Project() {
                 <h1 className="correlation-matrix-card-title">
                   Correlation Matrix
                 </h1>
-                <div className="info-button">
+                <div
+                  className="info-button"
+                  onClick={() =>
+                    openInfo(
+                      "Correlation Matrix",
+                      "These numbers show how two things move together. If a number is close to 1, those two measures tend to increase together. If it's close to -1, one increases while the other decreases. If it's near 0, there's no clear link. Bigger numbers (closer to 1 or -1) mean a stronger relationship. Hover over a cell to see its exact value.\n\nClick for a clearer example if you'd like to learn more.\n\nNote: deeper or more saturated colors indicate stronger correlations (values closer to -1 or +1)."
+                    )
+                  }
+                >
                   i
-                  <div className="info-tooltip">
-                    <h4>What do these numbers mean?</h4>
-                    <p className="info-tooltip-main">
-                      These numbers show how two things move together. If a
-                      number is close to 1, those two measures tend to increase
-                      together. If it's close to -1, one increases while the
-                      other decreases. If it's near 0, there’s no clear link.
-                      Bigger numbers (closer to 1 or -1) mean a stronger
-                      relationship.
-                    </p>
-                    <p>
-                      Hover over a cell to see its exact value. Click for a
-                      clearer example if you'd like to learn more.
-                    </p>
-                  </div>
                 </div>
               </div>
               <div className="correlation-matrix-visualization">

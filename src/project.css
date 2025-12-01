@@ -317,27 +317,26 @@
 }
 
 .info-button {
-  background: #374151;
-  color: white;
-  border: 2px solid white;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: #cbd1d9;
+  color: #000000;
   border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 0.875rem;
   font-weight: bold;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+  z-index: 10;
 }
 
 .info-button:hover {
-  background: #1f2937;
-  border-color: #f3f4f6;
-  transform: scale(1.1);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.4);
+  background: #cbd5e1;
 }
 
 .info-tooltip {
@@ -875,6 +874,66 @@ svg .corr-legend-outline {
   width: 100%;
   height: calc(100% - 3.5rem);
   padding-top: 0.5em;
+}
+/* ================================= Info Overlay ================================= */
+
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+.info-modal {
+  max-width: 500px;
+  width: 90%;
+  background: #fff;
+  color: #222;
+  padding: 1.25rem;
+  border-radius: 0.875rem;
+  animation: fadeIn 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.info-modal h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 32px;
+}
+
+.info-modal p {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 23px;
+  /* preserve newlines in modal descriptions so they show as line breaks */
+  white-space: pre-line;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+.close-btn {
+  float: right;
+  font-size: 30px;
+  color: #b60606;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 /* ================================== OVERALL STYLING ================================== */
 .full-dv-layout {
