@@ -10,7 +10,7 @@ import os
 
 # load the cleaned dataset
 current_dir = os.path.dirname(__file__)
-data_path = os.path.join(current_dir, 'data.csv')
+data_path = os.path.join(current_dir, 'C:\\Users\\nandi\\CS529\\Final_Project\\VDS_Final_Project\\public\\data.csv')
 
 df = pd.read_csv(data_path)
 print(df.columns)
@@ -69,11 +69,11 @@ print(probs_df.head())
 
 
 # import pickle
-# pickle.dump(model_expanded, open("tokens_vs_ADstatus_analysis.pkl", "wb"))
+# pickle.dump(model, open("tokens_vs_ADstatus_analysis.pkl", "wb"))
 # model = pickle.load(open("tokens_vs_ADstatus_analysis.pkl", "rb"))
 # print(model.feature_names_in_)
 
-
+# print(model.predict_proba([[20]]))
 
 # feature_means_brain_model={
 #     "uniquetokens(participant)": 248.5,

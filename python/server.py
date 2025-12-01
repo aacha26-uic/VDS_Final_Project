@@ -102,19 +102,7 @@ def get_blob_model(input_data: SliderInput):
 @app.post("/brain_predict")
 def get_brain_model(num_tokens: int = Body(..., embed=True)):
     try:
-        # add token value to dictionary
-        FEATURE_MEANS_FOR_BRAIN = meta["feature_means_brain_model"].copy()
-        FEATURE_MEANS_FOR_BRAIN['tokens(participant)'] = num_tokens
-
-        feature_order = ['tokens(participant)', 'uniquetokens(participant)', 'TTR(participant)',
-                        'MATTR(participant)', 'VERB(participant)', 'PROPN(participant)',
-                        'NUM(participant)', 'AUX(participant)', 'CCONJ(participant)',
-                        'AB40_LUMI', 'AB42_LUMI', 'P_TAU_LUMI', 'T_TAU_LUMI',
-                        'AB42_AB40Ratio', 'tTau_AB42Ratio', 'pTau_AB42Ratio']
-        
-
-        features_df = pd.DataFrame([FEATURE_MEANS_FOR_BRAIN], columns=feature_order)
-        model_prediction = brain_model.predict_proba(features_df)[0]
+        model_prediction = brain_model.predict_proba([[num_tokens]])[0]
 
         # output order is [MCI, Normal, Prob AD]
         normal = model_prediction[1] * 100
