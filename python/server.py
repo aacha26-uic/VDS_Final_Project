@@ -117,9 +117,9 @@ def get_brain_model(num_tokens: int = Body(..., embed=True)):
         model_prediction = brain_model.predict_proba(features_df)[0]
 
         # output order is [MCI, Normal, Prob AD]
-        normal = model_prediction[1]
-        prob_ad = model_prediction[2]
-        mci = model_prediction[0]
+        normal = model_prediction[1] * 100
+        prob_ad = model_prediction[2] * 100
+        mci = model_prediction[0] * 100
 
         output = {
             "Normal": round(normal, 2),

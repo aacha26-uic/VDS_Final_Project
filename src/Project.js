@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import WordCloudViz from "./components/WordCloudViz";
 import CorrelationMatrix from "./components/CorrelationMatrix";
 import "./project.css";
@@ -27,6 +27,30 @@ function Project() {
     setInfoData({ title, description });
     setInfoOpen(true);
   };
+
+  const [brain_model_prediction, setBrainModelPrediction] = useState({
+    "Normal": 0,
+    "Prob AD": 0,
+    "MCI": 0
+  });
+
+  useEffect(() => {  
+      if (gaugeValue === null || gaugeValue === undefined) return;
+      fetch("http://127.0.0.1:8000/brain_predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({"num_tokens": gaugeValue })
+      })
+      .then(res => res.json())
+      .then(data => {
+       setBrainModelPrediction({
+        "Normal": data["Normal"],
+        "Prob AD": data["Prob AD"],
+        "MCI": data["MCI"]})
+      })
+      .catch(err => console.error("Error:", err));
+  
+  }, [gaugeValue]);
 
   return (
     <div className="full-dv-layout">
@@ -101,7 +125,7 @@ function Project() {
               <div className="brain1">
                 <BrainIcon className="brain1" />
                 <div className="brain1-prob">
-                  <p>{Math.round(gaugeValue / 0.32)}%</p>
+                  <p>{brain_model_prediction["Normal"]}%</p>
                 </div>
                 <div>
                   <p>AD Status: Normal</p>
@@ -111,7 +135,7 @@ function Project() {
               <div className="brain2">
                 <BrainIcon className="brain2" />
                 <div className="brain2-prob">
-                  <p>{Math.round(gaugeValue / 0.43)}%</p>
+                  <p>{brain_model_prediction["Prob AD"]}%</p>
                 </div>
                 <div>
                   <p>AD Status: Prob AD </p>
@@ -121,7 +145,7 @@ function Project() {
               <div className="brain3">
                 <BrainIcon className="brain3" />
                 <div className="brain3-prob">
-                  <p>{Math.round(gaugeValue / 0.4)}%</p>
+                  <p>{brain_model_prediction["MCI"]}%</p>
                 </div>
                 <div>
                   <p>AD Status: MCI</p>
