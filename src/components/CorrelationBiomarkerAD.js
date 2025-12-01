@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 // CSF biomarkers (tTau_AB42Ratio, AB42_AB40Ratio) & Plasma (P_TAU_LUMI) biomarker
@@ -8,7 +8,7 @@ const biomarkers = [
     { key: "P_TAU_LUMI", label: "Plasma" }
 ];
 // DX1 (Normal, MCI, Prob AD) - AD groups
-const groups = ["Normal", "MCI", "Prob AD"];
+const groups = ["Normal", "Prob AD", "MCI"];
 
 // Linguistic biomarkers for sliders
 const linguisticFeatures = [
@@ -63,7 +63,7 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     useEffect(() => {
         if (!Object.keys(sliderValues).length) return;
     
-        fetch("http://127.0.0.1:8000/predict", {
+        fetch("https://web-production-f093a.up.railway.app/predict", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sliders: sliderValues })
