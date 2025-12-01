@@ -17,7 +17,7 @@ LINGUISTIC = meta["linguistic"]
 FEATURE_MEANS = meta["feature_means"]
 LABEL_MAP = meta["label_map"]
 
-GROUPS = ["Normal", "MCI", "Prob AD"]
+GROUPS = ["Normal", "Prob AD", "MCI"]
 
 app = FastAPI()
 app.add_middleware(
@@ -45,8 +45,8 @@ def compute_probabilities(sliders):
 
     return {
         "Normal": float(probs[0]),
-        "MCI": float(probs[1]),
-        "Prob AD": float(probs[2]),
+        "Prob AD": float(probs[1]),
+        "MCI": float(probs[2]),
     }
 
 

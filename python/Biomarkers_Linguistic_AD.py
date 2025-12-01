@@ -14,8 +14,8 @@ LINGUISTIC = [
     "AUX(participant)", "VERB(participant)", "CCONJ(participant)",
     "NUM(participant)", "PROPN(participant)", "TTR(participant)", "MATTR(participant)"
 ]
-GROUPS = ["Normal", "MCI", "Prob AD"]
-LABEL_MAP = {"Normal": 0, "MCI": 1, "Prob AD": 2}
+GROUPS = ["Normal", "Prob AD", "MCI"]
+LABEL_MAP = {"Normal": 0, "Prob AD": 1, "MCI": 2}
 
 BIOMARKER_KEYS = [b["key"] for b in BIOMARKERS]
 

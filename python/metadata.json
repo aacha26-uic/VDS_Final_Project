@@ -15,8 +15,8 @@
   ],
   "label_map": {
     "Normal": 0,
-    "MCI": 1,
-    "Prob AD": 2
+    "Prob AD": 1,
+    "MCI": 2
   },
   "feature_means": {
     "tTau_AB42Ratio": 0.5669153430563234,

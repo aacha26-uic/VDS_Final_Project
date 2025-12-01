@@ -20,13 +20,13 @@ const featureDescriptions = {
 };
 
 // AD groups for filter
-const groups = ["Normal", "MCI", "Prob AD"];
+const groups = ["Normal", "Prob AD", "MCI"];
 
 // colors for each AD group
 const groupColors = {
     "Normal": "#7cbadc",
-    "MCI": "#4585c1",
-    "Prob AD": "#5459AC"
+    "Prob AD": "#4585c1",
+    "MCI": "#5459AC"
   };
 
 const PatientProfile = () => {
