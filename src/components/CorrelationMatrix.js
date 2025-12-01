@@ -12,15 +12,128 @@ function CorrelationMatrix() {
   // track if legend animation has already run (only run on first mount / refresh)
   const legendAnimatedRef = useRef(false);
 
+  function stripParticipantLabel(s) {
+    try {
+      return String(s).replace(/\s*\(participant\)/gi, "");
+    } catch (err) {
+      return s;
+    }
+  }
+
   useEffect(() => {
-    fetch("/correlation_matrix_top10.csv")
+    // Load the full dataset and compute correlations using data.csv, then pick top features
+    fetch("/data.csv")
       .then((r) => r.text())
       .then((txt) => {
-        const lines = txt.trim().split("\n");
-        const header = lines[0].split(",").slice(1);
-        const rows = lines.slice(1).map((l) => l.split(","));
-        const matrix = rows.map((r) => r.slice(1).map((x) => parseFloat(x)));
-        setData({ header, matrix });
+        const raw = d3.csvParse(txt);
+        if (!raw || raw.length === 0) {
+          setData(null);
+          return;
+        }
+
+        // helper to decide numeric columns
+        const exclude = new Set(["file", "utterance", "DX1", "DX2"]);
+        const allKeys = Object.keys(raw[0]);
+        const candidates = allKeys.filter((k) => !exclude.has(k));
+
+        const numericCols = candidates.filter((col) => {
+          let count = 0;
+          for (let i = 0; i < raw.length; i++) {
+            const v = raw[i][col];
+            if (v == null) continue;
+            const num = parseFloat(v);
+            if (!isNaN(num) && isFinite(num)) count++;
+          }
+          // require at least 75% numeric rows to be considered numeric
+          return count >= raw.length * 0.75;
+        });
+
+        // Collect numeric arrays
+        const numericData = {};
+        numericCols.forEach((c) => {
+          numericData[c] = raw.map((row) => {
+            const v = parseFloat(row[c]);
+            return isNaN(v) ? null : v;
+          });
+        });
+
+        // Pearson correlation for two arrays with possible nulls
+        function pearson(a, b) {
+          const n = a.length;
+          let sumA = 0,
+            sumB = 0,
+            sumAB = 0,
+            sumA2 = 0,
+            sumB2 = 0,
+            count = 0;
+          for (let i = 0; i < n; i++) {
+            const ai = a[i];
+            const bi = b[i];
+            if (ai == null || bi == null) continue;
+            sumA += ai;
+            sumB += bi;
+            sumAB += ai * bi;
+            sumA2 += ai * ai;
+            sumB2 += bi * bi;
+            count++;
+          }
+          if (count <= 1) return 0;
+          const cov = sumAB - (sumA * sumB) / count;
+          const denom = Math.sqrt(
+            (sumA2 - (sumA * sumA) / count) * (sumB2 - (sumB * sumB) / count)
+          );
+          if (denom === 0) return 0;
+          return cov / denom;
+        }
+
+        // if not enough numeric columns, abort
+        if (numericCols.length < 2) {
+          setData(null);
+          return;
+        }
+
+        // Compute full correlation matrix for numeric cols
+        const matrix = [];
+        for (let i = 0; i < numericCols.length; i++) {
+          matrix[i] = [];
+          const a = numericData[numericCols[i]];
+          for (let j = 0; j < numericCols.length; j++) {
+            const b = numericData[numericCols[j]];
+            matrix[i][j] = pearson(a, b);
+          }
+        }
+
+        // compute importance for each column: mean absolute correlation (excluding self)
+        const importance = numericCols.map((col, idx) => {
+          let s = 0;
+          for (let j = 0; j < matrix[idx].length; j++) {
+            if (j === idx) continue;
+            s += Math.abs(matrix[idx][j]);
+          }
+          return { col, idx, score: s / (matrix[idx].length - 1) };
+        });
+
+        // Select top 10 by default by score
+        importance.sort((a, b) => b.score - a.score);
+        const topN = 10;
+        const selected = importance.slice(0, topN).map((d) => d.idx);
+        const header = selected.map((i) => numericCols[i]);
+        const topMatrix = selected.map((i) =>
+          selected.map((j) => matrix[i][j])
+        );
+
+        setData({
+          header,
+          matrix: topMatrix,
+          allNumericCols: numericCols,
+          fullMatrix: matrix,
+        });
+        // ensure the selected `n` doesn't exceed available features
+        setN((prev) => Math.min(prev, header.length));
+      })
+      .catch((err) => {
+        console.error("Failed to load/parse data.csv", err);
+        setData(null);
       });
   }, []);
 
@@ -30,8 +143,9 @@ function CorrelationMatrix() {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     const w = svg.clientWidth;
     const h = svg.clientHeight;
-    const header = data.header.slice(0, n);
-    const mat = data.matrix.slice(0, n).map((r) => r.slice(0, n));
+    const m = Math.min(n, data.header.length);
+    const header = data.header.slice(0, m);
+    const mat = data.matrix.slice(0, m).map((r) => r.slice(0, m));
 
     // increase left/top padding to shift matrix right and give room for rotated labels
     // dedicated paddings so horizontal shift doesn't shrink cells
@@ -45,20 +159,28 @@ function CorrelationMatrix() {
     const reservedLeftForSize = 40;
     const usableWidth = Math.max(100, w - reservedLeftForSize - rightPadding);
     const size = Math.min(
-      usableWidth / n,
-      (h - topPadding - bottomPadding) / n
+      usableWidth / m,
+      (h - topPadding - bottomPadding) / m
     );
     const cx = leftPadding;
 
-    // color scale using d3 interpolate (diverging)
+    // color scale: use RdBu diverging palette (blue=positive, red=negative)
     const color = (v) => {
       const t = (v + 1) / 2; // map -1..1 to 0..1
-      return d3.interpolateRdBu(1 - t); // RdBu reversed so blue=positive red=negative
+      return d3.interpolateRdBu(1 - t);
     };
 
     // draw cells
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < n; j++) {
+    function stripParticipantLabel(s) {
+      try {
+        return String(s).replace(/\s*\(participant\)/gi, "");
+      } catch (err) {
+        return s;
+      }
+    }
+
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < m; j++) {
         const x = cx + j * size;
         const y = topPadding + i * size;
         const rect = document.createElementNS(
@@ -75,7 +197,12 @@ function CorrelationMatrix() {
         rect.setAttribute("class", "corr-cell");
         rect.style.cursor = "pointer";
         rect.addEventListener("mouseenter", (e) => {
-          showTooltip(e, `${header[i]} × ${header[j]}: ${v.toFixed(3)}`);
+          showTooltip(
+            e,
+            `${stripParticipantLabel(header[i])} × ${stripParticipantLabel(
+              header[j]
+            )}: ${v.toFixed(3)}`
+          );
         });
         rect.addEventListener("mouseleave", hideTooltip);
         rect.addEventListener("click", () => {
@@ -91,17 +218,18 @@ function CorrelationMatrix() {
     }
 
     // labels
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < m; i++) {
       const tx = document.createElementNS("http://www.w3.org/2000/svg", "text");
       // top labels - rotated and centered above each column
       const topX = cx + i * size + size / 2;
-      const topY = topPadding - 14; // move labels a bit higher
+      // move labels further up so they don't touch the card title
+      const topY = topPadding - 27; // previously -14
       // position via transform only so rotation pivots around the center
       tx.setAttribute("transform", `translate(${topX}, ${topY}) rotate(-55)`);
       tx.setAttribute("text-anchor", "middle");
       tx.setAttribute("fill", "#111");
       tx.setAttribute("font-size", "11");
-      tx.textContent = header[i];
+      tx.textContent = stripParticipantLabel(header[i]);
       svg.appendChild(tx);
 
       const ty = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -110,14 +238,14 @@ function CorrelationMatrix() {
       ty.setAttribute("text-anchor", "end");
       ty.setAttribute("fill", "#111");
       ty.setAttribute("font-size", "12");
-      ty.textContent = header[i];
+      ty.textContent = stripParticipantLabel(header[i]);
       svg.appendChild(ty);
     }
 
     // === Vertical Gradient Legend (RdBu, current colors) ===
     const gridLeft = cx;
     const gridTop = topPadding;
-    const gridSize = n * size;
+    const gridSize = m * size;
     const legendMargin = 10;
     const legendWidth = 12;
     const legendHeight = gridSize;
@@ -134,7 +262,7 @@ function CorrelationMatrix() {
       .attr("x2", "0%")
       .attr("y2", "100%");
 
-    // build gradient with current color function (top=+1 blue, bottom=-1 red)
+    // build gradient with current color function (top=+1 blue-ish, bottom=-1 purple-ish)
     d3.range(0, 1.001, 0.05).forEach((p) => {
       const v = 1 - 2 * p; // map 0..1 -> 1..-1
       grad
@@ -339,9 +467,13 @@ function CorrelationMatrix() {
       <div className="correlation-matrix-controls">
         <span style={{ marginRight: 6, fontSize: 13 }}>Top features:</span>
         <select value={n} onChange={(e) => setN(parseInt(e.target.value))}>
-          <option value={5}>5</option>
-          <option value={8}>8</option>
-          <option value={10}>10</option>
+          {[5, 8, 10]
+            .filter((opt) => !data || opt <= data.header.length)
+            .map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
         </select>
       </div>
 

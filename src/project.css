@@ -767,7 +767,7 @@
 /* Correlation Matrix Controls */
 .correlation-matrix-controls {
   position: absolute;
-  top: 0.0625rem;
+  top: -0.03rem;
   right: 0.5rem;
   z-index: 1000;
   color: #111;
