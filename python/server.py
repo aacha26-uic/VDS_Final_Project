@@ -1,5 +1,5 @@
 # server.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict
@@ -10,6 +10,7 @@ import pandas as pd
 
 model = pickle.load(open("model.pkl", "rb"))
 blob_model = pickle.load(open("linguisticFeatures_vs_ADstatus.pkl", "rb"))
+brain_model = pickle.load(open("tokens_vs_ADstatus_analysis.pkl", "rb"))
 
 with open("metadata.json", "r") as f:
     meta = json.load(f)
@@ -99,19 +100,38 @@ def get_blob_model(input_data: SliderInput):
         return {"Error": str(e)}
 
 @app.post("/brain_predict")
-def get_brain_model(num_tokens: int):
+def get_brain_model(num_tokens: int = Body(..., embed=True)):
     try:
-        # This temporary. Swap out with actual model when available.
-        hc = num_tokens * 0.55
-        mci = num_tokens * 0.30
-        ad = num_tokens * 0.15
+        # add token value to dictionary
+        FEATURE_MEANS_FOR_BRAIN = meta["feature_means_brain_model"].copy()
+        FEATURE_MEANS_FOR_BRAIN['tokens(participant)'] = num_tokens
+
+        feature_order = ['tokens(participant)', 'uniquetokens(participant)', 'TTR(participant)',
+                        'MATTR(participant)', 'VERB(participant)', 'PROPN(participant)',
+                        'NUM(participant)', 'AUX(participant)', 'CCONJ(participant)',
+                        'AB40_LUMI', 'AB42_LUMI', 'P_TAU_LUMI', 'T_TAU_LUMI',
+                        'AB42_AB40Ratio', 'tTau_AB42Ratio', 'pTau_AB42Ratio']
+        
+
+        features_df = pd.DataFrame([FEATURE_MEANS_FOR_BRAIN], columns=feature_order)
+        model_prediction = brain_model.predict_proba(features_df)[0]
+
+        # output order is [MCI, Normal, Prob AD]
+        normal = model_prediction[1]
+        prob_ad = model_prediction[2]
+        mci = model_prediction[0]
+
         output = {
-            "HC": round(hc, 2),
-            "MCI": round(mci, 2),
-            "AD": round(ad, 2)
+            "Normal": round(normal, 2),
+            "Prob AD": round(prob_ad, 2),
+            "MCI": round(mci, 2) 
         }
+
         return output
+    
     except Exception as e:
-        return {"Error": str(e)}
+        return {
+            "Error": str(e)
+        }
 
 

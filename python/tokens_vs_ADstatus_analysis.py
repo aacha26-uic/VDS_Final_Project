@@ -10,7 +10,7 @@ import os
 
 # load the cleaned dataset
 current_dir = os.path.dirname(__file__)
-data_path = os.path.join(current_dir, 'data.csv')
+data_path = os.path.join(current_dir, 'C:\\Users\\nandi\\CS529\\Final_Project\\VDS_Final_Project\\public\\data.csv')
 
 df = pd.read_csv(data_path)
 print(df.columns)
@@ -140,6 +140,9 @@ typical_vals = {
     'pTau_AB42Ratio': df['pTau_AB42Ratio'].median()
 }
 
+print("Typical values for features (excluding tokens):")
+print(typical_vals)
+
 pred_rows = []
 for t in token_range:
     row = {feat: typical_vals[feat] for feat in typical_vals}
@@ -150,14 +153,41 @@ pred_df = pd.DataFrame(pred_rows)
 pred_scaled = scaler.transform(pred_df[features_expanded])
 
 probs = model_expanded.predict_proba(pred_scaled) 
+# print("This is the output of model_expanded.predict_proba(pred_scaled):", probs)
 probs_df = pd.DataFrame(probs, columns=model_expanded.classes_)
 probs_df['tokens(participant)'] = token_range
+# print("This is the output of model_expanded.predict_proba(pred_scaled):", probs_df)
 
 # testing
-print(probs_df.head())
+# print(probs_df.head())
 
 
 # import pickle
 # pickle.dump(model_expanded, open("tokens_vs_ADstatus_analysis.pkl", "wb"))
 # model = pickle.load(open("tokens_vs_ADstatus_analysis.pkl", "rb"))
 # print(model.feature_names_in_)
+
+
+
+feature_means_brain_model={
+    "tokens(participant)": 632.0,
+    "uniquetokens(participant)": 248.5,
+    "TTR(participant)": 0.371693437, 
+    "MATTR(participant)": 0.9897507465,
+    "VERB(participant)": 75.8953488372093,
+    "PROPN(participant)": 20.0,
+    "NUM(participant)": 10.0,
+    "AUX(participant)": 47.73255813953488,
+    "CCONJ(participant)": 35.0,
+    "AB40_LUMI": 11410.4,
+    "AB42_LUMI": 788.0,
+    "P_TAU_LUMI": 39.25,
+    "T_TAU_LUMI": 316.5, 
+    "AB42_AB40Ratio": 0.0866841479872977,
+    "tTau_AB42Ratio": 0.3271804698034205,
+    "pTau_AB42Ratio": 0.0385401194692728
+  }
+
+model_expanded_prediction = model_expanded.predict_proba(pd.DataFrame([feature_means_brain_model], columns=features_expanded))
+print("Model expanded prediction on mean feature values:")
+print(model_expanded_prediction)
