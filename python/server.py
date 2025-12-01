@@ -81,15 +81,15 @@ def get_blob_model(input_data: SliderInput):
                         'PROPN(participant)', 'VERB(participant)', 'TTR(participant)',
                         'MATTR(participant)']
         features_df = pd.DataFrame([input_data.sliders], columns=feature_order)
-        # row = [input_data.sliders.get(f, 0) for f in feature_order]  # default 0 if missing
-        # features_df = pd.DataFrame([row], columns=feature_order)
 
         model_prediction = blob_model.predict(features_df)[0]
         if model_prediction not in [0, 1, 2]:
             return {"Error": "Model prediction out of expected range."}
         prediction = GROUPS[model_prediction] 
-        output = {"prediction": prediction}
+        output = {"prediction": prediction, "prediction_value": int(model_prediction)}
         return output
     except Exception as e:
         return {"Error": str(e)}
+
+
 
