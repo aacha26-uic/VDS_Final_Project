@@ -76,7 +76,7 @@
   
 .detail-overlay-header h3 {
     margin: 0;
-    font-size: 1.4em;
+    font-size: 1.4rem;
    font-weight: 600;
 }
   
@@ -84,7 +84,7 @@
     background: none;
     border: none;
     color: white;
-    font-size: 2em;
+    font-size: 2rem;
     cursor: pointer;
     padding: 0;
     width: 30px;
@@ -114,7 +114,7 @@
 .detail-section h4 {
     color: #444;
     margin: 0 0 12px 0;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     font-weight: 600;
     border-bottom: 2px solid #60a5fa;
     padding-bottom: 4px;
@@ -176,7 +176,7 @@
   
 .frequency-value {
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     color: #333;
     text-align: right;
 }
@@ -215,7 +215,7 @@
 }
   
 .frequency-value-large {
-    font-size: 2.5em;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #444;
     margin-bottom: 8px;
@@ -223,7 +223,7 @@
   
 .frequency-explanation {
     color: #666;
-    font-size: 0.95em;
+    font-size: 0.95rem;
 }
   
 .comparison-grid {
@@ -243,7 +243,7 @@
     display: block;
     font-weight: 600;
     color: #555;
-    font-size: 0.9em;
+    font-size: 0.9rem;
     margin-bottom: 4px;
 }
   
@@ -251,7 +251,7 @@
     display: block;
     font-weight: 700;
     color: #333;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
   
 .detail-section p {
@@ -290,7 +290,7 @@
   right: 0.5rem;
   z-index: 5;
   display: flex;
-  gap: 0.5em;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -393,7 +393,7 @@
 
 .word-cloud-slider-label {
     color: #111;
-    font-size: 0.85em;
+    font-size: 0.85rem;
 }
   
 .word-cloud-dropdown {
@@ -404,7 +404,7 @@
 }
   
 .word-cloud-dropdown select {
-  padding: 0.3em;
+  padding: 0.3rem;
   border-radius: 0.5rem;
   appearance: none;
   background: white
@@ -419,7 +419,7 @@
   right: 11.25rem;
   bottom: 0.5rem;
   color: #111;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
   
 /* Word Cloud Legend */
@@ -428,7 +428,7 @@
   left: 0.5rem;
   top: 0.5rem;
   color: #111;
-  font-size: 0.75em;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -500,7 +500,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5em;
+  padding: 0.5rem;
   overflow: visible;
 }
   
@@ -510,15 +510,15 @@
 }
   
 .word-cloud-card-title {
-    margin: 0.5em 0;
+    margin: 0.5rem 0;
     color: #333;
     font-weight: 600;
-    font-size: 2em;
+    font-size: 2rem;
 }
   
 .word-cloud-card-subtitle {
-    margin: 0.25em 0;
-    font-size: 0.9em;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
     color: #111;
   }
   
@@ -526,7 +526,7 @@
   flex: 1;
   width: 100%;
   height: calc(100% - 3.5rem);
-  padding-top: 0.5em;
+  padding-top: 0.5rem;
 }
   
 /* ================================== CORRELATION OVERLAY STYLES ================================== */
@@ -569,7 +569,7 @@
   
 .correlation-overlay-header h3 {
     margin: 0;
-    font-size: 1.4em;
+    font-size: 1.4rem;
     font-weight: 600;
 }
   
@@ -577,7 +577,7 @@
     background: none;
     border: none;
     color: white;
-    font-size: 2em;
+    font-size: 2rem;
     cursor: pointer;
     padding: 0;
     width: 30px;
@@ -607,7 +607,7 @@
 .correlation-section h4 {
     color: #444;
     margin: 0 0 12px 0;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     font-weight: 600;
     border-bottom: 2px solid #60a5fa;
     padding-bottom: 4px;
@@ -794,7 +794,7 @@
   left: 0.5rem;
   bottom: 0.5rem;
   color: #111;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
   
 /* Correlation Matrix Elements */
@@ -847,7 +847,7 @@ svg .corr-legend-outline {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5em;
+  padding: 0.5rem;
   overflow: visible;
 }
   
@@ -857,15 +857,15 @@ svg .corr-legend-outline {
 }
   
 .correlation-matrix-card-title {
-    margin: 0.5em 0;
+    margin: 0.5rem 0;
     color: #333;
     font-weight: 600;
-    font-size: 2em;
+    font-size: 2rem;
 }
   
 .correlation-matrix-card-subtitle {
-    margin: 0.25em 0;
-    font-size: 0.9em;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
     color: #111;
 }
   
@@ -873,7 +873,7 @@ svg .corr-legend-outline {
   flex: 1;
   width: 100%;
   height: calc(100% - 3.5rem);
-  padding-top: 0.5em;
+  padding-top: 0.5rem;
 }
 /* ================================= Info Overlay ================================= */
 
@@ -939,9 +939,9 @@ svg .corr-legend-outline {
 .full-dv-layout {
     height: 100%;
     width: 100%;
-    padding: 0.2em;
+    padding: 0.2rem;
     display: flex;
-    gap: 0.25em;
+    gap: 0.25rem;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     background: radial-gradient(
@@ -986,7 +986,6 @@ svg .corr-legend-outline {
     position: relative;
     z-index: 2;
     background: #ffffff;
-    /* border: 0.3rem solid rgb(57, 107, 207); */
     border-radius: 0.2rem;
 }
   
@@ -1011,17 +1010,17 @@ svg .corr-legend-outline {
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.25em;
+    gap: 0.25rem;
     position: relative;
     z-index: 2;
 }
   
 .toggle-button {
     position: absolute;
-    top: 0.75em;
-    right: 0.75em;
+    top: 0.75rem;
+    right: 0.75rem;
     z-index: 10;
-    padding: 0.3em 0.6em;
+    padding: 0.3rem 0.6rem;
     border-radius: 10px;
     background: linear-gradient(
       120deg,
@@ -1031,7 +1030,7 @@ svg .corr-legend-outline {
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #000000;
     font-weight: 600;
-    font-size: 0.8em;
+    font-size: 0.8rem;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -1041,7 +1040,7 @@ svg .corr-legend-outline {
   height: 55%;
   width: 100%;
   display: flex;
-  gap: 0.2em;
+  gap: 0.2rem;
 }
 
 .participant-profile-card,
@@ -1169,7 +1168,6 @@ svg .corr-legend-outline {
     overflow: hidden;
     color: rgb(48, 45, 45);
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    /* border: 0.3rem solid rgb(57, 107, 207); */
     border-radius: 0.2rem;
 }
   
@@ -1243,7 +1241,6 @@ svg .corr-legend-outline {
           padding: 0 !important;
           overflow: hidden;
           background: #ffffff;
-          /* border: 0.3rem solid rgb(57, 107, 207); */
           border-radius: 0.2rem;
           font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -1262,8 +1259,8 @@ svg .corr-legend-outline {
 }
 
 #profile-chart {
-    height: 80%;
-    width: 90%;
+    display: block;
+    margin: 0 auto;
 }
   
 #profile-chart .tick text {
@@ -1275,10 +1272,17 @@ svg .corr-legend-outline {
   
 .chart-container {
       position: relative;
-      width: 80%;
+      width: 90%;
       margin: 0 auto !important;
 }
   
+.chart-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .controls {
       display: flex;
       gap: 20px;
@@ -1399,7 +1403,7 @@ svg .corr-legend-outline {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5em;
+  padding: 0.5rem;
   overflow: hidden;
   background: #ffffff;
   /* border: 0.3rem solid rgb(57, 107, 207); */
@@ -1407,14 +1411,14 @@ svg .corr-legend-outline {
 }
   
 .word-cloud-card h4 {
-    margin: 0.5em 0;
+    margin: 0.5rem 0;
     color: #000000;
     font-weight: 600;
 }
   
 .word-cloud-card p {
-    margin: 0.25em 0;
-    font-size: 0.9em;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
     color: #000000;
 }
 
@@ -1445,22 +1449,21 @@ svg .corr-legend-outline {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5em;
+  padding: 0.5rem;
   overflow: hidden;
   background: #ffffff;
-  /* border: 0.3rem solid rgb(57, 107, 207); */
   border-radius: 0.2rem;
 }
   
 correlation-matrix-card h4 {
-    margin: 0.5em 0;
+    margin: 0.5rem 0;
     color: #c084fc;
     font-weight: 600;
 }
   
 correlation-matrix-card p {
     margin: 0.25rem 0;
-    font-size: 0.9em;
+    font-size: 0.9rem;
     color: #e9d5ff;
 }
 

@@ -65,8 +65,8 @@ const PatientProfile = () => {
             value: d3.mean(filtered, (d) => +d[feature]) || 0,
         }));
 
-        const width = 420
-        const height = 380;
+        const width = 480
+        const height = 415;
         const margin = { top: 20, right: 20, bottom: 80, left: 53 };
 
         const svg = d3
@@ -226,7 +226,9 @@ const PatientProfile = () => {
             {/* tooltip */}
             <div ref={tooltipRef} className="tooltip" style={{ opacity: 0 }} />
 
-            <svg ref={svgRef} id="profile-chart" />
+            <div className="chart-wrapper">
+                <svg ref={svgRef} id="profile-chart" />
+            </div>
         </div>
     );
 

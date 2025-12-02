@@ -25,17 +25,6 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     // const [sliderValues, setSliderValues] = useState({});
     const [corrMatrix, setCorrMatrix] = useState([]);
 
-    // // correlation matrix - will change once model is ready
-    // const generateCorrMatrix = useCallback(() => {
-    //     return biomarkers.flatMap((b) =>
-    //         groups.map((g) => {
-    //             const sliderEffect = Object.values(sliderValues).reduce((a,v) => a + v, 0) * 0.0005;
-    //             const value = Math.min(1, Math.max(0, Math.random() * 0.6 + 0.2 + sliderEffect));
-    //             return { biomarker: b.label, group: g, value };
-    //         })
-    //     );
-    // }, [sliderValues]);
-
     useEffect(() => {
         d3.csv("/data.csv").then((raw) => {
 
@@ -83,7 +72,7 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
 
         const width = 400;
         const height = 300;
-        const cellSize = 100;
+        const cellSize = 125;
 
         const margin = { top: 40, right: 40, bottom: 120, left: 120 };
 
