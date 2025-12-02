@@ -23,7 +23,7 @@ const Blob = ({ sliderValues, setSliderValues }) => {
   useEffect(() => {
       if (!Object.keys(sliderValues).length) return;
   
-      fetch("http://127.0.0.1:8000/blob_predict", {
+      fetch("https://web-production-f093a.up.railway.app/blob_predict", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sliders: sliderValues })

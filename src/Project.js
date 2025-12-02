@@ -38,7 +38,7 @@ function Project() {
   // This will fetch brain model predictions based on the current gauge value
   useEffect(() => {  
       if (gaugeValue === null || gaugeValue === undefined) return;
-      fetch("https://web-production-f093a.up.railway.app/predict", {
+      fetch("https://web-production-f093a.up.railway.app/brain_predict", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({"num_tokens": gaugeValue })
