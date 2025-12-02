@@ -16,6 +16,14 @@ function CorrelationOverlay({ data, onClose }) {
 
   const { variable1, variable2, correlation, pValue } = data;
 
+  function stripParticipantLabel(s) {
+    try {
+      return String(s).replace(/\s*\(participant\)/gi, "");
+    } catch (err) {
+      return s;
+    }
+  }
+
   // Determine correlation strength
   const absCorr = Math.abs(correlation);
   let strength, description, color;
@@ -53,9 +61,9 @@ function CorrelationOverlay({ data, onClose }) {
           <div className="correlation-section">
             <h4>Variables</h4>
             <div className="variable-pair">
-              <div className="variable">{variable1}</div>
+              <div className="variable">{stripParticipantLabel(variable1)}</div>
               <div className="correlation-arrow">↔</div>
-              <div className="variable">{variable2}</div>
+              <div className="variable">{stripParticipantLabel(variable2)}</div>
             </div>
           </div>
 
@@ -78,8 +86,9 @@ function CorrelationOverlay({ data, onClose }) {
             <div className="interpretation">
               <p>
                 This correlation coefficient indicates a{" "}
-                <strong>{description.toLowerCase()}</strong> between {variable1}{" "}
-                and {variable2}.
+                <strong>{description.toLowerCase()}</strong> between{" "}
+                {stripParticipantLabel(variable1)} and{" "}
+                {stripParticipantLabel(variable2)}.
               </p>
               <p>
                 {direction === "Positive"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WordCloudViz from "./components/WordCloudViz";
 import CorrelationMatrix from "./components/CorrelationMatrix";
+import InfoOverlay from "./InfoOverlay";
 import "./project.css";
 import Blob from "./components/blobTutorial";
 import { Canvas } from "@react-three/fiber";
@@ -17,7 +18,7 @@ function Project() {
   // By fault the topmost section of the data visualization system will be open
   const [showTopSection, setShowTopSection] = useState(true);
   // By default the guage value will be 60, useState returns a funciton for setGuageValue
-  const [gaugeValue, setGaugeValue] = useState(0); 
+  const [gaugeValue, setGaugeValue] = useState(0);
   const [sliderValues, setSliderValues] = useState({});
 
   const [infoOpen, setInfoOpen] = useState(false);
@@ -62,10 +63,16 @@ function Project() {
         title={infoData.title}
         description={infoData.description}
       />
+      <InfoOverlay
+        isOpen={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        title={infoData.title}
+        description={infoData.description}
+      />
       {/* Background glow layer */}
       <div className="background-glow"></div>
-      {/* Toggle Button */}
-      <button
+      {/* Toggle Button - COMMENTED OUT */}
+      {/* <button
         className="toggle-button"
         onClick={() => setShowTopSection(!showTopSection)}
         onMouseEnter={(e) => {
@@ -78,7 +85,7 @@ function Project() {
         }}
       >
         {showTopSection ? "Hide Analysis ▲" : "Show Analysis ▼"}
-      </button>
+      </button> */}
 
       {/* Left section - Vertical Heatmap */}
       <div className="left-section">
@@ -109,22 +116,70 @@ function Project() {
         </div>
       </div>
 
-      {/* Right section - Brain/Stats top and 3 cards bottom */}
+      {/* Right section - 3 cards top and Brain/Stats bottom */}
       <div className="right-section">
-        {/* Top - Brain and Stats */}
-        {showTopSection && (
-          <div className="brains_and_dials">
-            <div>
-              <div className="info-button"
-              onClick={() =>
-                openInfo(
-                  "Relationship Between Conversation Length & AD Status",
-                  "This visualization illustrates how the length of a conversation (measured in tokens) affects the predicted likelihood of each Alzheimer’s Disease status: MCI (Mild Cognitive Impairment), Normal, and Prob AD (uncertain/possible AD). Adjust the dial to see how the probability of being classified into each group changes with conversation length."
-                )
-              }
-            >i</div>
-              <h1>Relationship Between Conversation Length and AD Status</h1>
+        {/* Top - Three cards */}
+        <div className="top-3-cards">
+          {/* Participant Profile Card */}
+          <div className="participant-profile-card">
+            <h1>Patient Profile</h1>
+            <PatientProfile />
+          </div>
+
+          {/* Word Clouds Card */}
+          <div className="word-cloud-card">
+            <div className="word-cloud-card-content">
+              <div className="word-cloud-card-header">
+                <h1 className="word-cloud-card-title">Word Clouds</h1>
+                <div
+                  className="info-button"
+                  onClick={() =>
+                    openInfo(
+                      "What is TF-IDF?",
+                      "TF-IDF (Term Frequency-Inverse Document Frequency) measures how important words are to different groups. It shows linguistic patterns unique to each condition. Hover over words to see TF-IDF values.\n\nClick for more detailed explanations.\n\nNote: more saturated or darker ring segments indicate higher relative frequency/TF-IDF (stronger signal)."
+                    )
+                  }
+                >
+                  i
+                </div>
+              </div>
+              <div className="word-cloud-visualization">
+                <WordCloudViz />
+              </div>
             </div>
+          </div>
+
+          {/* Correlation Matrix Card */}
+          <div className="correlation-matrix-card">
+            <div className="correlation-matrix-card-content">
+              <div className="correlation-matrix-card-header">
+                <h1 className="correlation-matrix-card-title">
+                  Correlation Matrix
+                </h1>
+                <div
+                  className="info-button"
+                  onClick={() =>
+                    openInfo(
+                      "Correlation Matrix",
+                      "These numbers show how two things move together. If a number is close to 1, those two measures tend to increase together. If it's close to -1, one increases while the other decreases. If it's near 0, there's no clear link. Bigger numbers (closer to 1 or -1) mean a stronger relationship. Hover over a cell to see its exact value.\n\nClick for a clearer example if you'd like to learn more.\n\nNote: deeper or more saturated colors indicate stronger correlations (values closer to -1 or +1)."
+                    )
+                  }
+                >
+                  i
+                </div>
+              </div>
+              <div className="correlation-matrix-visualization">
+                <CorrelationMatrix />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom - Brain and Stats */}
+        <div className="brains_and_dials">
+          <div>
+            <h1>Relationship Between Conversation Length and AD Status</h1>
+          </div>
 
             <div className="brains">
               <div className="dial">
