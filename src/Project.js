@@ -115,13 +115,13 @@ function Project() {
           <div className="word-cloud-card">
             <div className="word-cloud-card-content">
               <div className="word-cloud-card-header">
-                <h1 className="word-cloud-card-title">Word Clouds</h1>
+                <h1 className="word-cloud-card-title">Word Patterns Across AD Groups</h1>
                 <div
                   className="info-button"
                   onClick={() =>
                     openInfo(
-                      "What is TF-IDF?",
-                      "TF-IDF (Term Frequency-Inverse Document Frequency) measures how important words are to different groups. It shows linguistic patterns unique to each condition. Hover over words to see TF-IDF values.\n\nClick for more detailed explanations.\n\nNote: more saturated or darker ring segments indicate higher relative frequency/TF-IDF (stronger signal)."
+                      "Word Patterns Across AD Groups",
+                      "Each ring represents an AD group (MCI, Normal, Prob AD). Sections show the most common words in that group based on TF-IDF scores. TF-IDF (Term Frequency-Inverse Document Frequency) measures how important words are to different groups. Click a section to view the TF-IDF score for that word. Use the slider to adjust the number of top words displayed."
                     )
                   }
                 >
@@ -139,14 +139,14 @@ function Project() {
             <div className="correlation-matrix-card-content">
               <div className="correlation-matrix-card-header">
                 <h1 className="correlation-matrix-card-title">
-                  Correlation Matrix
+                  Correlation of Top AD Features
                 </h1>
                 <div
                   className="info-button"
                   onClick={() =>
                     openInfo(
                       "Correlation Matrix",
-                      "These numbers show how two things move together. If a number is close to 1, those two measures tend to increase together. If it's close to -1, one increases while the other decreases. If it's near 0, there's no clear link. Bigger numbers (closer to 1 or -1) mean a stronger relationship. Hover over a cell to see its exact value.\n\nClick for a clearer example if you'd like to learn more.\n\nNote: deeper or more saturated colors indicate stronger correlations (values closer to -1 or +1)."
+                      "This matrix shows the correlations between the top 10 features most predictive of Alzheimer’s Disease. Stronger correlations are highlighted, helping identify relationships among key predictive features."
                     )
                   }
                 >
