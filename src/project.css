@@ -1041,7 +1041,7 @@ svg .corr-legend-outline {
   height: 55%;
   width: 100%;
   display: flex;
-  gap: 0.5em;
+  gap: 0.2em;
 }
 
 .participant-profile-card,
