@@ -1043,6 +1043,13 @@ svg .corr-legend-outline {
   display: flex;
   gap: 0.5em;
 }
+
+.participant-profile-card,
+.word-cloud-card,
+.correlation-matrix-card,
+.brains_and_dials {
+  position: relative;
+}
   
 /* =============================== CORRELATION HEATMAPS =============================== */
 .blob {
