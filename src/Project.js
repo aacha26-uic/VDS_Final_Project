@@ -62,30 +62,8 @@ function Project() {
         title={infoData.title}
         description={infoData.description}
       />
-      <InfoOverlay
-        isOpen={infoOpen}
-        onClose={() => setInfoOpen(false)}
-        title={infoData.title}
-        description={infoData.description}
-      />
       {/* Background glow layer */}
       <div className="background-glow"></div>
-      {/* Toggle Button - COMMENTED OUT */}
-      {/* <button
-        className="toggle-button"
-        onClick={() => setShowTopSection(!showTopSection)}
-        onMouseEnter={(e) => {
-          e.target.style.transform = "scale(1.05)";
-          e.target.style.boxShadow = "0 6px 15px rgba(59,130,246,0.4)";
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.transform = "scale(1)";
-          e.target.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-        }}
-      >
-        {showTopSection ? "Hide Analysis ▲" : "Show Analysis ▼"}
-      </button> */}
-
       {/* Left section - Vertical Heatmap */}
       <div className="left-section">
         <div>
@@ -121,7 +99,15 @@ function Project() {
         <div className="top-3-cards">
           {/* Participant Profile Card */}
           <div className="participant-profile-card">
-            <h1>Patient Profile</h1>
+            <div className="info-button"
+              onClick={() =>
+                openInfo(
+                  "Patient Linguistic Feature Profile",
+                  "Displays average linguistic feature values for a selected AD group or an individual participant, depending on the toggle."
+                )
+              }
+            >i</div>
+            <h1>Patient Linguistic <br/> Feature Profile</h1>
             <PatientProfile />
           </div>
 
@@ -177,6 +163,15 @@ function Project() {
         {/* Bottom - Brain and Stats */}
         <div className="brains_and_dials">
           <div>
+            <div className="info-button"
+              onClick={() =>
+                openInfo(
+                  "Relationship Between Conversation Length & AD Status",
+                  "This visualization illustrates how the length of a conversation (measured in tokens) affects the predicted likelihood of each Alzheimer’s Disease status: MCI (Mild Cognitive Impairment), Normal, and Prob AD (uncertain/possible AD). Adjust the dial to see how the probability of being classified into each group changes with conversation length."
+                )
+              }
+            >i</div>
+
             <h1>Relationship Between Conversation Length and AD Status</h1>
           </div>
 
@@ -190,31 +185,31 @@ function Project() {
             <div className="brain1">
               <BrainIcon className="brain1" />
               <div className="brain1-prob">
-                <p>{Math.round(gaugeValue / 0.32)}%</p>
+                <p>{brain_model_prediction["Normal"]}%</p>
               </div>
               <div>
-                <p>AD Status: HC</p>
+                <p>AD Status: Normal</p>
                 <p>MoCA Range: 20-30</p>
               </div>
             </div>
             <div className="brain2">
               <BrainIcon className="brain2" />
               <div className="brain2-prob">
-                <p>{Math.round(gaugeValue / 0.43)}%</p>
+                <p>{brain_model_prediction["Prob AD"]}%</p>
               </div>
               <div>
                 <p>AD Status: MCI </p>
-                <p>MoCA Range:10-20</p>
+                <p>MoCA Range:0-30 (Varies)</p>
               </div>
             </div>
             <div className="brain3">
               <BrainIcon className="brain3" />
               <div className="brain3-prob">
-                <p>{Math.round(gaugeValue / 0.4)}%</p>
+                <p>{brain_model_prediction["MCI"]}%</p>
               </div>
               <div>
-                <p>AD Status: AD</p>
-                <p>MoCA Range: 0-10</p>
+                <p>AD Status: MCI</p>
+                <p>MoCA Range: 0-20</p>
               </div>
             </div>
             
