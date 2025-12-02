@@ -12,7 +12,6 @@ import highADBlob from "./resources/high_ad_blob.png";
 import KnobSlider from "./components/gauge";
 import PatientProfile from "./components/PatientProfile";
 import CorrelationBiomarkerAD from "./components/CorrelationBiomarkerAD";
-import InfoOverlay from "./InfoOverlay";
 
 function Project() {
   // By fault the topmost section of the data visualization system will be open
@@ -221,7 +220,6 @@ function Project() {
               
             </div>
           </div>
-        )}
 
         {/* Bottom - Three cards */}
         <div className="bottom-3-cards">
