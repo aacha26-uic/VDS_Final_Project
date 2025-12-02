@@ -149,7 +149,7 @@ function CorrelationMatrix() {
 
     // increase left/top padding to shift matrix right and give room for rotated labels
     // dedicated paddings so horizontal shift doesn't shrink cells
-    const leftPadding = 120; // controls horizontal offset (move matrix right)
+    const leftPadding = 80; // controls horizontal offset (move matrix right)
     const rightPadding = 40; // space on the right
     const topPadding = 100; // space above matrix for rotated labels
     const bottomPadding = 40; // space below matrix
