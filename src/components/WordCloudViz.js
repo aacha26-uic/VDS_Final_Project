@@ -43,8 +43,8 @@ function WordCloudViz() {
     // Define ring radii (more inner space; equal ring thickness)
     const innerRadius = maxRadius * 0.35; // expand center for word labels
     const ring1Radius = maxRadius * 0.5; // HC ring (same thickness as others)
-    const ring2Radius = maxRadius * 0.65; // MCI ring
-    const ring3Radius = maxRadius * 0.8; // AD ring
+    const ring2Radius = maxRadius * 0.65; // middle ring (Prob AD now)
+    const ring3Radius = maxRadius * 0.8; // outer ring (MCI now)
 
     // Color scheme for white card background: light blue, dark blue, purple
     const colors = {
@@ -52,10 +52,13 @@ function WordCloudViz() {
       mci: "#1E40AF", // dark blue
       ad: "#7C3AED", // purple
     };
+    // WordCloud-specific display labels
     const conditionLabels = {
       hc: "Normal (Healthy)",
-      mci: "MCI (Mild Cognitive Impairment)",
-      ad: "AD (Alzheimer's Disease)",
+      // change display in Word Cloud: mci -> Prob AD
+      mci: "Prob AD",
+      // ad field will be shown as MCI for Word Cloud display
+      ad: "MCI (Mild Cognitive Impairment)",
     };
 
     // Create main group
@@ -75,9 +78,9 @@ function WordCloudViz() {
         inner: ring1Radius,
         outer: ring2Radius,
         condition: "mci",
-        label: "MCI",
+        label: "Prob AD",
       },
-      { inner: ring2Radius, outer: ring3Radius, condition: "ad", label: "AD" },
+      { inner: ring2Radius, outer: ring3Radius, condition: "ad", label: "MCI" },
     ];
 
     // Add ring backgrounds
@@ -213,9 +216,9 @@ function WordCloudViz() {
             .attr("fill", "#ff7a00");
           showTooltip(
             event,
-            `${w.word}: Normal=${w.hc.toFixed(3)}, MCI=${w.mci.toFixed(
+            `${w.word}: Normal=${w.hc.toFixed(3)}, Prob AD=${w.mci.toFixed(
               3
-            )}, AD=${w.ad.toFixed(3)}`
+            )}, MCI=${w.ad.toFixed(3)}`
           );
         })
         .on("mouseleave", function () {
@@ -387,8 +390,8 @@ function WordCloudViz() {
         >
           <option value="all">All Conditions</option>
           <option value="hc">Normal (Healthy) Only</option>
-          <option value="mci">MCI Only</option>
-          <option value="ad">AD Only</option>
+          <option value="mci">Prob AD Only</option>
+          <option value="ad">MCI Only</option>
         </select>
       </div>
 
@@ -422,7 +425,7 @@ function WordCloudViz() {
 
       <div className="word-cloud-info">
         <div>
-          Radial rings: Normal (light blue) | MCI (dark blue) | AD (purple)
+          Radial rings: Normal (light blue) | Prob AD (dark blue) | MCI (purple)
         </div>
         <div>Hover segments or center words for details</div>
       </div>
@@ -441,14 +444,14 @@ function WordCloudViz() {
             className="legend-color-box"
             style={{ backgroundColor: "#1E40AF" }}
           ></div>
-          <span>MCI (Mild Cognitive Impairment)</span>
+          <span>Prob AD</span>
         </div>
         <div className="legend-item">
           <div
             className="legend-color-box"
             style={{ backgroundColor: "#7C3AED" }}
           ></div>
-          <span>AD (Alzheimer's Disease)</span>
+          <span>MCI (Mild Cognitive Impairment)</span>
         </div>
       </div>
 
