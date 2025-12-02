@@ -19,6 +19,7 @@ const Blob = ({ sliderValues, setSliderValues }) => {
   });
 
 
+  // This will fetch the blob's AD status prediction based on the current slider values
   useEffect(() => {
       if (!Object.keys(sliderValues).length) return;
   
