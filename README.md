@@ -74,6 +74,24 @@ This repository currently contains template code with placeholder visualizations
 - ✅ Found 12.8× vocabulary richness difference: Normal participants use significantly more diverse vocabulary (4,722 unique words) compared to Impaired group (810 unique words)
 - ✅ Generated 4 visualizations and 5 data files for interactive React integration
 
+**December 1, 2025** - Beta Release: Usability & Layout Refinement
+
+- ✅ Replaced and standardized labels in the Word Cloud to the correct display names (Normal, Prob AD, MCI) and adjusted legend and tooltips accordingly.
+- ✅ Animated blob behavior reduced: blob animation now only responds when the sliders change (less distracting motion).
+- ✅ Added `i` Info buttons to each card/section (Word Clouds, Correlation Matrix, Patient Profile etc.) that open a shared `InfoOverlay` modal explaining purpose and interpretation.
+- ✅ Reorganized layout: the bottom three cards were swapped with the larger interactive card to better highlight the primary visualizations and interactive controls.
+- ✅ Token control / dial moved to the left and repositioned for a clearer interaction flow.
+- ✅ Increased body & label font sizes for improved readability on larger screens and reduced partition sizes to avoid visual dominance.
+- ✅ Word Cloud radial rings relabeled for clarity (inner=Normal, middle=Prob AD, outer=MCI) — display-only change, underlying data labels unchanged.
+- ✅ Correlation matrix now computes Pearson correlations dynamically from `public/data.csv` and selects the top N features at runtime instead of relying on a precomputed CSV.
+- ✅ Improved tooltips and overlay readability (white text on dark backgrounds, clearer placement) and added multi-line descriptions in the `InfoOverlay` (line breaks preserved with CSS).
+
+**Notes & Next Steps**
+
+- The Beta release focuses primarily on visual and usability improvements requested by the TAs and professor; the app UI should behave consistently across Word Cloud and Correlation Matrix visualizations.
+- We plan to standardize some remaining label inconsistencies across other components (e.g., `DetailOverlay`) in a follow-up release if you want global label updates.
+- Performance: correlation matrix computations currently run on the UI thread; if the dataset grows, we recommend moving the correlation calculation to a Web Worker to avoid blocking the UI.
+
 ## Installation & Setup
 
 ### Prerequisites
@@ -119,18 +137,50 @@ python feature_analysis.py
 - `feature_importance_scores.csv` - Rankings of all 329 features
 - `cleaned_merged_data.csv` - Preprocessed dataset (91 participants)
 
-**Top 10 Identified Features:**
+**Top 10 TF-IDF Terms (Word Cloud)**
 
-1. XDOMMEM - Memory domain score
-2. XDOMEXE - Executive function domain
-3. CRAFTDRE - Craft story delayed recall
-4. COGSTAT - Cognitive status
-5. CRAFTURS - Craft story unit recall
-6. CRAFTDVR - Craft story delayed verbal recall
-7. MOCARECN - MoCA recall score
-8. CRAFTVRS - Craft story verbal recall
-9. XDOMLAN - Language domain
-10. BigWords - Usage of big words in speech
+Normal participants (Top 10 TF-IDF terms):
+
+1. back
+2. remember
+3. didnt
+4. dont
+5. uhm
+6. school
+7. people
+8. wedding
+9. little
+10. college
+
+Impaired participants (Top 10 TF-IDF terms):
+
+1. back
+2. college
+3. thats
+4. house
+5. germany
+6. west
+7. didnt
+8. friends
+9. right
+10. never
+
+## Top 10 Correlation Features (computed from public/data.csv)
+
+The correlation matrix highlights the top 10 most important numeric features identified by mean absolute Pearson correlation (computed dynamically from `public/data.csv`). These features are used in the correlation matrix visualization and are available in `public/correlation_matrix_top10.csv`.
+
+Top 10 correlation features (computed from `public/data.csv`):
+
+1. tokens (participant) — total tokens in a participant's transcript
+2. uniquetokens (participant) — unique token count per participant
+3. VERB (participant) — verb POS count per participant
+4. AUX (participant) — auxiliary verb POS count per participant
+5. CCONJ (participant) — coordinating conjunction count per participant
+6. TTR (participant) — type-token ratio (lexical diversity) per participant
+7. PROPN (participant) — proper noun POS count per participant
+8. NUM (participant) — numeric token count per participant
+9. DATE (participant) — date token count per participant
+10. MOCATOTS — MoCA total score (Montreal Cognitive Assessment)
 
 ### Running the Word Cloud Analysis
 
@@ -180,12 +230,10 @@ The application will open at `http://localhost:3000`
 - **NLP Libraries** - Natural language preprocessing for linguistic feature analysis (BERT models)
 - **Machine Learning Libraries** - Statistical analysis and biomarker correlation modeling
 
-
-
 ### Links to Resources Used
+
 - **Circular Slider Component** - https://primereact.org/knob/
 - **Blob Code Tutorial** - https://www.youtube.com/watch?v=6YJ-2MvDqhc&t=2s
-- **Brain Silhouette** - https://static.vecteezy.com/system/resources/previews/059/555/853/non_2x/black-silhouette-of-a-human-brain-vector.jpg 
+- **Brain Silhouette** - https://static.vecteezy.com/system/resources/previews/059/555/853/non_2x/black-silhouette-of-a-human-brain-vector.jpg
 - **String to numeric** - https://observablehq.com/@dakoop/reading-in-data-learn-js-data
 - **Render sliders tutorial**- https://d3.workergnome.com/examples/basic_events/?utm_source=chatgpt.com
-
