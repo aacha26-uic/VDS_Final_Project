@@ -84,12 +84,12 @@ function Project() {
           <div className="info-button"
               onClick={() =>
                 openInfo(
-                  "Biomarkers & Linguistic Indicators",
-                  "Shows the relationship between blood biomarkers (Plasma, CSF1 & CSF2), linguistic features, and AD status. Blob shape indicates severity. Sliders are used to manipulate both the correlation matrix and the blob."
+                  "Linguistic Feature Impact on Biomarkers and AD Status",
+                  "Use the sliders to adjust linguistic feature values. The heatmap shows how AD statuses relate to biomarker levels, while the blob visualization changes shape and color to reflect AD status based on the selected features."
                 )
               }
           >i</div>
-          <h1>Biomarker & Linguistic<br/>Indicators of AD</h1>
+          <h1>Linguistic Feature Impact<br/>on Biomarkers and AD Status</h1>
           </div>
           <div className="left-components">
           <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
@@ -98,6 +98,7 @@ function Project() {
               <Blob sliderValues={sliderValues} setSliderValues={setSliderValues}/>
             </Canvas>
             <div className= "blobLegend">
+              <div className="blobLegendTitle"><h4>Alzheimer’s Disease Status</h4></div>
               <div className= "blobLegend1"><img src={lowADBlob}/><p>Normal</p></div>
               <div className= "blobLegend2"><img src={medADBlob}/><p>Prob AD</p></div>
               <div className= "blobLegend3"><img src={highADBlob}/><p>MCI</p></div>
@@ -112,6 +113,14 @@ function Project() {
         {showTopSection && (
           <div className="brains_and_dials">
             <div>
+              <div className="info-button"
+              onClick={() =>
+                openInfo(
+                  "Relationship Between Conversation Length & AD Status",
+                  "This visualization illustrates how the length of a conversation (measured in tokens) affects the predicted likelihood of each Alzheimer’s Disease status: MCI (Mild Cognitive Impairment), Normal, and Prob AD (uncertain/possible AD). Adjust the dial to see how the probability of being classified into each group changes with conversation length."
+                )
+              }
+            >i</div>
               <h1>Relationship Between Conversation Length and AD Status</h1>
             </div>
 
@@ -147,7 +156,7 @@ function Project() {
                 <div className="brain3-prob">
                   <p>{brain_model_prediction["MCI"]}%</p>
                 </div>
-                <div>
+                <div>    
                   <p>AD Status: MCI</p>
                   <p>MoCA Range: 0-20</p>
                 </div>
@@ -164,19 +173,19 @@ function Project() {
             <div className="info-button"
               onClick={() =>
                 openInfo(
-                  "Patient Profile",
-                  "Shows average feature values based on an AD group or individual participant, based on the toggle."
+                  "Patient Linguistic Feature Profile",
+                  "Displays average linguistic feature values for a selected AD group or an individual participant, depending on the toggle."
                 )
               }
             >i</div>
-            <h1>Patient Profile</h1>
+            <h1>Patient Linguistic <br/> Feature Profile</h1>
             <PatientProfile />
           </div>
 
           {/* Word Clouds Card */}
           <div className="word-cloud-card">
             <div className="word-cloud-card-content">
-              <h1 className="word-cloud-card-title"> Word Clouds</h1>
+              <h1 className="word-cloud-card-title">Word Patterns Across <br/> AD Groups</h1>
               <div className="word-cloud-visualization">
                 <WordCloudViz />
               </div>
@@ -187,7 +196,7 @@ function Project() {
           <div className="correlation-matrix-card">
             <div className="correlation-matrix-card-content">
               <h1 className="correlation-matrix-card-title">
-                Correlation Matrix
+                Correlation Matrix of <br/> Top AD Features
               </h1>
               <div className="correlation-matrix-visualization">
                 <CorrelationMatrix />

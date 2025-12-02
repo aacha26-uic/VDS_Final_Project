@@ -3,6 +3,7 @@ import "./App.css";
 import "./project.css";
 import Project from "./Project";
 
+
 function App() {
   return (
     <div className="App" style={{ margin: 0, padding: 0 }}>
@@ -16,13 +17,14 @@ function App() {
           borderBottom: "1px solid rgba(255,255,255,0.1)",
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           gap: "0.5em",
           padding: "0 0.5em",
           boxSizing: "border-box",
           margin: 0,
         }}
       >
-        <h2 style={{ color: "white", margin: 0, fontSize: "1.2em" }}>
+        <h2 style={{ color: "white", margin: 0, fontSize: "1.5em", backgroundColor: "rgba(255, 0, 0, 0)" }}>
           Visualizing Speech and Biomarker Correlations in Alzheimer's Disease
         </h2>
       </div>
