@@ -1395,7 +1395,7 @@ svg .corr-legend-outline {
   padding: 0.5em;
   overflow: hidden;
   background: #ffffff;
-  border: 0.3rem solid rgb(57, 107, 207);
+  /* border: 0.3rem solid rgb(57, 107, 207); */
   border-radius: 0.2rem;
 }
   
@@ -1441,7 +1441,7 @@ svg .corr-legend-outline {
   padding: 0.5em;
   overflow: hidden;
   background: #ffffff;
-  border: 0.3rem solid rgb(57, 107, 207);
+  /* border: 0.3rem solid rgb(57, 107, 207); */
   border-radius: 0.2rem;
 }
   
