@@ -28,12 +28,14 @@ function Project() {
     setInfoOpen(true);
   };
 
+  // This what will store the brain model prediction probabilities for different AD statuses
   const [brain_model_prediction, setBrainModelPrediction] = useState({
     "Normal": 0,
     "Prob AD": 0,
     "MCI": 0
   });
 
+  // This will fetch brain model predictions based on the current gauge value
   useEffect(() => {  
       if (gaugeValue === null || gaugeValue === undefined) return;
       fetch("http://127.0.0.1:8000/brain_predict", {
