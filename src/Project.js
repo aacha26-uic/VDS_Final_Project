@@ -180,81 +180,41 @@ function Project() {
             <h1>Relationship Between Conversation Length and AD Status</h1>
           </div>
 
-            <div className="brains">
-              <div className="dial">
-                <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
-                <div>
-                  <p>Number of Tokens</p>
-                </div>
+          <div className="brains">
+            <div className="brain1">
+              <BrainIcon className="brain1" />
+              <div className="brain1-prob">
+                <p>{Math.round(gaugeValue / 0.32)}%</p>
               </div>
-              <div className="brain1">
-                <BrainIcon className="brain1" />
-                <div className="brain1-prob">
-                  <p>{brain_model_prediction["Normal"]}%</p>
-                </div>
-                <div>
-                  <p>AD Status: Normal</p>
-                  <p>MoCA Range: 20-30</p>
-                </div>
-              </div>
-              <div className="brain2">
-                <BrainIcon className="brain2" />
-                <div className="brain2-prob">
-                  <p>{brain_model_prediction["Prob AD"]}%</p>
-                </div>
-                <div>
-                  <p>AD Status: Prob AD </p>
-                  <p>MoCA Range:0-30 (Varies)</p>
-                </div>
-              </div>
-              <div className="brain3">
-                <BrainIcon className="brain3" />
-                <div className="brain3-prob">
-                  <p>{brain_model_prediction["MCI"]}%</p>
-                </div>
-                <div>    
-                  <p>AD Status: MCI</p>
-                  <p>MoCA Range: 0-20</p>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-
-        {/* Bottom - Three cards */}
-        <div className="bottom-3-cards">
-          {/* Participant Profile Card */}
-          <div className="participant-profile-card">
-            <div className="info-button"
-              onClick={() =>
-                openInfo(
-                  "Patient Linguistic Feature Profile",
-                  "Displays average linguistic feature values for a selected AD group or an individual participant, depending on the toggle."
-                )
-              }
-            >i</div>
-            <h1>Patient Linguistic <br/> Feature Profile</h1>
-            <PatientProfile />
-          </div>
-
-          {/* Word Clouds Card */}
-          <div className="word-cloud-card">
-            <div className="word-cloud-card-content">
-              <h1 className="word-cloud-card-title">Word Patterns Across <br/> AD Groups</h1>
-              <div className="word-cloud-visualization">
-                <WordCloudViz />
+              <div>
+                <p>AD Status: HC</p>
+                <p>MoCA Range: 20-30</p>
               </div>
             </div>
-          </div>
-
-          {/* Correlation Matrix Card */}
-          <div className="correlation-matrix-card">
-            <div className="correlation-matrix-card-content">
-              <h1 className="correlation-matrix-card-title">
-                Correlation Matrix of <br/> Top AD Features
-              </h1>
-              <div className="correlation-matrix-visualization">
-                <CorrelationMatrix />
+            <div className="brain2">
+              <BrainIcon className="brain2" />
+              <div className="brain2-prob">
+                <p>{Math.round(gaugeValue / 0.43)}%</p>
+              </div>
+              <div>
+                <p>AD Status: MCI </p>
+                <p>MoCA Range:10-20</p>
+              </div>
+            </div>
+            <div className="brain3">
+              <BrainIcon className="brain3" />
+              <div className="brain3-prob">
+                <p>{Math.round(gaugeValue / 0.4)}%</p>
+              </div>
+              <div>
+                <p>AD Status: AD</p>
+                <p>MoCA Range: 0-10</p>
+              </div>
+            </div>
+            <div className="dial">
+              <KnobSlider value={gaugeValue} onChange={setGaugeValue} />
+              <div>
+                <p>Number of Tokens</p>
               </div>
             </div>
           </div>
