@@ -102,26 +102,7 @@ function WordCloudViz() {
       .attr("stroke", "#e5e7eb")
       .attr("stroke-width", 1);
 
-    // Add ring labels with maximum visibility (original position)
-    g.selectAll(".ring-label")
-      .data(ringData)
-      .enter()
-      .append("text")
-      .attr("class", "ring-label")
-      // original position: centered at the top of each ring
-      .attr("x", 0)
-      .attr("y", (d) => -(d.inner + d.outer) / 2)
-      .attr("text-anchor", "middle")
-      .attr("text-rendering", "geometricPrecision")
-      .attr("font-size", "16px")
-      .attr("font-weight", "bold")
-      .attr("fill", "#111")
-      .attr("stroke", "none")
-      .attr("stroke-width", "0px")
-      .attr("opacity", 1)
-      .style("paint-order", "stroke fill")
-      .style("pointer-events", "none")
-      .text((d) => d.label);
+    // ring labels have been removed from the radial visualization to declutter the graph
 
     // Calculate segments for each word
     const angleStep = (2 * Math.PI) / topWords.length;
@@ -273,14 +254,7 @@ function WordCloudViz() {
       }
     }
 
-    // Ensure ring labels render above any segments so they don't get obscured
-    g.selectAll(".ring-label")
-      .attr("display", (d) =>
-        showCondition === "all" || d.condition === showCondition
-          ? "block"
-          : "none"
-      )
-      .raise();
+    // We intentionally don't render ring labels in the radial chart — the legend explains ring meaning
 
     let tip = null;
     function showTooltip(e, text) {
