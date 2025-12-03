@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "./project.css";
 import Project from "./Project";
-
+import InfoOverlay from "./InfoOverlay";
 
 function App() {
+
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [infoData, setInfoData] = useState({ title: "", description: "" });
+
+  const openInfo = (title, description) => {
+    setInfoData({ title, description });
+    setInfoOpen(true);
+  };
+
+
   return (
     <div className="App" style={{ margin: 0, padding: 0 }}>
+      <InfoOverlay
+        isOpen={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        title={infoData.title}
+        description={infoData.description}
+      />
       <div
         className={"header"}
         style={{
@@ -24,6 +40,14 @@ function App() {
           margin: 0,
         }}
       >
+        <div className="main-info-button"
+              onClick={() =>
+                openInfo(
+                  "Visualizing Speech and Biomarker Correlations in Alzheimer's Disease",
+                  ""
+                )
+              }
+        >Learn More</div>
         <h2 style={{ color: "white", margin: 0, fontSize: "1.5em", backgroundColor: "rgba(255, 0, 0, 0)" }}>
           Visualizing Speech and Biomarker Correlations in Alzheimer's Disease
         </h2>
