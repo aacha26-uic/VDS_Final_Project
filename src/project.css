@@ -1109,6 +1109,24 @@ svg .corr-legend-outline {
     justify-content: center;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.heatmap-wrapper {
+    position: relative;
+}
+
+.heatmap-tooltip {
+    position: absolute;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 22px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 50;
+}
   
 .slider-columns {
       display: flex;

@@ -88,6 +88,13 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
             .domain([0, 1])
             .range(["#efddff", "#301934"]);
 
+        
+        const tooltip = d3.select("#heatmap-tooltip");
+        const getBiomarkerLabel = (key) => {
+            const found = biomarkers.find(b => b.key === key || b.label === key);
+            return found ? found.label : key;
+        };
+
         // cells
         g.selectAll(".cell")
             .data(corrMatrix)
@@ -100,7 +107,23 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
             .attr("height", cellSize)
             .attr("stroke", "#000")
             .attr("stroke-width", 1)
-            .attr("fill", d => color(d.value));
+            .attr("fill", d => color(d.value))
+            .on("mouseover", function (event, d) {
+                tooltip.style("opacity", 0.8);
+        
+                tooltip.html(`
+                    <b>${getBiomarkerLabel(d.biomarker)}</b> × <b>${d.group}</b><br/>
+                    Correlation: <b>${d.value.toFixed(3)}</b>
+                `);
+            })
+            .on("mousemove", function (event) {
+                const [x, y] = d3.pointer(event);
+                tooltip.style("left", `${x + 20}px`);
+                tooltip.style("top", `${y + 20}px`);
+            })
+            .on("mouseout", function () {
+                tooltip.style("opacity", 0);
+            });
 
         // labels for AD groups
         g.selectAll(".groupLabel")
@@ -164,7 +187,10 @@ const CorrelationBiomarkerAD = ({ sliderValues, setSliderValues }) => {
     
     return (
         <div className="correlation-biomarkers">
-            <svg ref={heatmapRef} className="heatmap" />            
+            <div className="heatmap-wrapper">
+                <svg ref={heatmapRef} className="heatmap" />
+                <div className="heatmap-tooltip" id="heatmap-tooltip"></div>
+            </div>            
             <div className="slider-columns">
 
                 {/* Left column */}
