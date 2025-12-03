@@ -44,7 +44,7 @@ function App() {
               onClick={() =>
                 openInfo(
                   "Visualizing Speech and Biomarker Correlations in Alzheimer's Disease",
-                  ""
+                  "Explore the relationships between speech patterns and biomarkers in Alzheimer's Disease through interactive visualizations.\n\n The data is from the SLaCAD (Spoken Language Corpus for Early Alzheimer’s Disease Detection) dataset that was published in the ACL Conference.\n\n Here are important abbreviations used in this data visualization system for Alzheimer Disease (AD) Statuses:\n \t• Normal\n \t• Prob AD (Probably Alzheimer Disease)\n \t• MCI (Mild Cognitive Impairment)\n\n Here are the important abbreviations used for linguistic features:\n \t• tokens: number of words in a participant's transcript\n \t• unique tokens: number of unique words in a participant's transcript\n \t• verb: number of verb tokens\n \t• propn: number of proper noun tokens\n \t• cconj: coordinating conjunction tokens\n \t• aux: auxiliary verb tokens\n \t• ttr: type–token ratio\n \t• mattr: moving-average type–token ratio\n \t• num: tokens associated with numbers\n \t• date: tokens associated with dates\n \t• mocatots: total MoCA score\n",
                 )
               }
         >Learn More</div>

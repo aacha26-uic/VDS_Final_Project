@@ -913,6 +913,7 @@ svg .corr-legend-outline {
   white-space: pre-line;
   margin-top: 0.5rem;
   color: #333;
+  text-align: left;
 }
 
 .close-btn {
