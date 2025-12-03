@@ -4,8 +4,6 @@
 import React, {useEffect, useRef, useState } from "react";
 import vertexShader from "./vertexShader";
 import fragmentShader from "./fragmentShader";
-import { useFrame } from "@react-three/fiber";
-import { MathUtils } from "three";
 
 // This allows us to send in data into component
 // Default values for everything execept moca_score is provided
@@ -34,7 +32,7 @@ const Blob = ({ sliderValues, setSliderValues }) => {
 
       console.log("Fetched blob prediction:", blob_prediction);
   
-  }, [sliderValues]);
+  }, [sliderValues, blob_prediction]);
 
   // This function will change blob every time prop values change
   useEffect(() => {
@@ -44,7 +42,7 @@ const Blob = ({ sliderValues, setSliderValues }) => {
       // console.log("Blob intensity set to:", mesh.current.material.uniforms.u_intensity.value);
 
       var new_blob_value = 0;
-      if (blob_prediction == 0) {
+      if (blob_prediction === 0) {
         new_blob_value = 27; // Normal (Moca > 26)
       } else if (blob_prediction === 1) {
         new_blob_value = 13; // Prob AD - Probably AD? A mix of both Normal and MCI (Moca 0-30) 

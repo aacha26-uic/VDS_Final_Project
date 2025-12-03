@@ -12,14 +12,6 @@ function CorrelationMatrix() {
   // track if legend animation has already run (only run on first mount / refresh)
   const legendAnimatedRef = useRef(false);
 
-  function stripParticipantLabel(s) {
-    try {
-      return String(s).replace(/\s*\(participant\)/gi, "");
-    } catch (err) {
-      return s;
-    }
-  }
-
   useEffect(() => {
     // Load the full dataset and compute correlations using data.csv, then pick top features
     fetch("/data.csv")

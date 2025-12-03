@@ -15,7 +15,6 @@ import CorrelationBiomarkerAD from "./components/CorrelationBiomarkerAD";
 
 function Project() {
   // By fault the topmost section of the data visualization system will be open
-  const [showTopSection, setShowTopSection] = useState(true);
   // By default the guage value will be 60, useState returns a funciton for setGuageValue
   const [gaugeValue, setGaugeValue] = useState(0);
   const [sliderValues, setSliderValues] = useState({});
@@ -83,9 +82,9 @@ function Project() {
             </Canvas>
             <div className= "blobLegend">
               <div className="blobLegendTitle"><h4>Alzheimer’s Disease Status</h4></div>
-              <div className= "blobLegend1"><img src={lowADBlob}/><p>Normal</p></div>
-              <div className= "blobLegend2"><img src={medADBlob}/><p>Prob AD</p></div>
-              <div className= "blobLegend3"><img src={highADBlob}/><p>MCI</p></div>
+              <div className= "blobLegend1"><img src={lowADBlob} alt="normal brain"/><p>Normal</p></div>
+              <div className= "blobLegend2"><img src={medADBlob} alt="prob ad brain"/><p>Prob AD</p></div>
+              <div className= "blobLegend3"><img src={highADBlob} alt="mci brain"/><p>MCI</p></div>
             </div>
           </div>
           <div className="left-components">
