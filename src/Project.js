@@ -77,9 +77,7 @@ function Project() {
           >i</div>
           <h1>Linguistic Feature Impact<br/>on Biomarkers and AD Status</h1>
           </div>
-          <div className="left-components">
-          <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
-          <div className="blob"> 
+            <div className="blob"> 
             <Canvas camera = {{position: [0.0, 0.0, 8.0]}}>
               <Blob sliderValues={sliderValues} setSliderValues={setSliderValues}/>
             </Canvas>
@@ -90,6 +88,9 @@ function Project() {
               <div className= "blobLegend3"><img src={highADBlob}/><p>MCI</p></div>
             </div>
           </div>
+          <div className="left-components">
+          <CorrelationBiomarkerAD sliderValues={sliderValues} setSliderValues={setSliderValues}/>
+
         </div>
       </div>
 
