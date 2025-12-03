@@ -86,11 +86,6 @@ This repository currently contains template code with placeholder visualizations
 - ✅ Correlation matrix now computes Pearson correlations dynamically from `public/data.csv` and selects the top N features at runtime instead of relying on a precomputed CSV.
 - ✅ Improved tooltips and overlay readability (white text on dark backgrounds, clearer placement) and added multi-line descriptions in the `InfoOverlay` (line breaks preserved with CSS).
 
-**Notes & Next Steps**
-
-- The Beta release focuses primarily on visual and usability improvements requested by the TAs and professor; the app UI should behave consistently across Word Cloud and Correlation Matrix visualizations.
-- We plan to standardize some remaining label inconsistencies across other components (e.g., `DetailOverlay`) in a follow-up release if you want global label updates.
-- Performance: correlation matrix computations currently run on the UI thread; if the dataset grows, we recommend moving the correlation calculation to a Web Worker to avoid blocking the UI.
 
 ## Installation & Setup
 
