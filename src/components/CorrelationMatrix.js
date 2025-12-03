@@ -435,24 +435,7 @@ function CorrelationMatrix() {
         height: lockedHeight ? `${lockedHeight}px` : "100%",
       }}
     >
-      <div
-        className="interactive-3d-wrapper interactive-mount"
-        onMouseMove={(e) => {
-          const wrapper = e.currentTarget;
-          const rect = wrapper.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotX = y * -6;
-          const rotY = x * 6;
-          const svgEl = wrapper.querySelector("svg");
-          if (svgEl)
-            svgEl.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-        }}
-        onMouseLeave={(e) => {
-          const svgEl = e.currentTarget.querySelector("svg");
-          if (svgEl) svgEl.style.transform = "rotateX(0deg) rotateY(0deg)";
-        }}
-      >
+      <div className="interactive-3d-wrapper interactive-mount">
         <svg
           ref={svgRef}
           style={{
