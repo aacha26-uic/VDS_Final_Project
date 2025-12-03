@@ -1053,7 +1053,7 @@ svg .corr-legend-outline {
 /* =============================== CORRELATION HEATMAPS =============================== */
 .blob {
           width: 100%;
-          height: 20rem;  
+          height: 25rem;  
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -1066,7 +1066,7 @@ svg .corr-legend-outline {
 .blobLegend {
     width: 20rem;
     height: auto;
-    margin-right: 2rem;
+    margin-right: 3rem;
 }
 
 .blobLegendTitle {
