@@ -990,6 +990,11 @@ svg .corr-legend-outline {
     border-radius: 0.2rem;
 }
   
+.left-section h1{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 .left-components {
           width: 100%;
           align-items: center;
@@ -1061,7 +1066,7 @@ svg .corr-legend-outline {
           justify-content: center;
           color: rgb(48, 45, 45);
           font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-          margin-top: 1rem;
+          margin-top: 0rem;
 }
   
 .blobLegend {
@@ -1134,9 +1139,9 @@ svg .corr-legend-outline {
       gap: 0;
       width: 100%;
       height: auto;
-      padding-left: 2.5rem;
+      padding-left: 3.5rem;
       justify-content: center;
-      padding-bottom: 1rem;
+      padding-bottom: 3rem;
 }
   
 .column {
@@ -1149,28 +1154,21 @@ svg .corr-legend-outline {
 .slider-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 1.3rem;
       color: black;
 }
   
 .slider-row label {
       width: 40px;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 20px;
       color: black;
       text-align: left;
 }
   
 .slider-row input[type="range"] {
-      width: 95px;
+      width: 100px;
       accent-color: #d75f4c;
-}
-  
-.slider-row span {
-      width: 0.7rem;
-      text-align: right;
-      font-family: monospace;
-      font-size: 15px;
 }
   
 /* =========================== BRAIN ENCODING DIALS SECTION =========================== */
